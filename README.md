@@ -1,4 +1,4 @@
-# Lasciami dire
+# Lasciami Dire
 This is a **WIP** Project for a Complete Web Platform intended to ease communication between Child, Parent and Educator in subjects with complex necessities.
 ## Method
 This will be achieved by building on top of the [AAC System](https://en.wikipedia.org/wiki/Augmentative_and_alternative_communication) in an Integrated and Open approach to development meant to give freedom to the end users as well as reliability in a complete system.
