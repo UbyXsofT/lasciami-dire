@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "lasciami-dire",
+    "slug": "lasciami-dire",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "lasciami-dire"
+}
