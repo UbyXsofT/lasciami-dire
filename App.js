@@ -1,11 +1,5 @@
-
-
 import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { FlatList } from 'react-native';
-import PostItem from './PostItem';
-import data from './data';
-import { Container, Header, ThemeButton, ThemeButtonText, TitleText } from './theme.style';
 /** Previous code **/
 import { ThemeProvider } from 'styled-components/native';
 import { darkTheme, lightTheme } from './theme';
@@ -27,7 +21,8 @@ export default function App() {
                         </ThemeButtonText>
                     </ThemeButton>
                 </Header>
-                <FlatList data={data} renderItem={PostItem} keyExtractor={(item) => item.id} />
+         
+         
                 <StatusBar style='auto' />
             </Container>
         </ThemeProvider>
