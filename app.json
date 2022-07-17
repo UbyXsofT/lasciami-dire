@@ -3,9 +3,33 @@
     "name": "lasciami-dire",
     "slug": "lasciami-dire",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/image/icon.png",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#001b33",
+      "translucent": true
+    },
+    "splash": {
+      "image": "./assets/image/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#001b33"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/image/icon.png",
+        "backgroundColor": "#001b33"
+      }
+    },
+    "web": {
+      "favicon": "./assets/image/favicon-96x96.png"
+    }
   },
   "name": "lasciami-dire"
 }
