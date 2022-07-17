@@ -1,6 +1,6 @@
 import Container from "./Container";
 import PressableButton from "./PressableButton";
-import TextMe from "./TextMe";
+import Text from "./Text";
 import MyFontLoader from "./MyFontLoader";
 
-export { Container, MyFontLoader, PressableButton, TextMe };
+export { Container, MyFontLoader, PressableButton, Text };

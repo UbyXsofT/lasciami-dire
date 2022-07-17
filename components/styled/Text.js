@@ -9,6 +9,6 @@ const StyleText = styled.Text`
   font-family: ${style.fontFamily};
 `;
 
-const TextMe = ({ label }) => <StyleText>{label}</StyleText>;
+const Text = ({ txt }) => <StyleText>{txt}</StyleText>;
 
-export default TextMe;
+export default Text;
