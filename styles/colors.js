@@ -6,6 +6,7 @@ const CELADON_BLUE = "#007EA7";
 const GAINSBORO = "#CCDBDC";
 const CULTURED = "#F3F3F3";
 
+const DEFAULT = "#DAE7DD";
 const PRIMARY = "#1b78f4";
 const SECONDARY = "#6c757d";
 const SUCCESS = "#28a745";
@@ -18,6 +19,7 @@ const DARK = "#343a40";
 const WHITE = "#ffffff";
 
 const common = {
+  DEFAULT: DEFAULT,
   PRIMARY: PRIMARY,
   SECONDARY: SECONDARY,
   SUCCESS: SUCCESS,

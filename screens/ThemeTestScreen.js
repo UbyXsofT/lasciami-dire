@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Switch } from "react-native";
 import useTheme from "../components/theme/useTheme";
 import useThemedStyles from "../components/theme/useThemedStyles";
 
-const ThemeTest = () => {
+const ThemeTestScreen = () => {
   const theme = useTheme();
   const style = useThemedStyles(styles);
 
@@ -12,13 +12,13 @@ const ThemeTest = () => {
       <Text style={style.title}>ThemeTest</Text>
       <Text style={style.text}>Buttons</Text>
 
-      <Button onPress={() => {}} title='Default' color={theme.colors.SUCCESS} />
-      <Button onPress={() => {}} title='Primary' color={theme.colors.SUCCESS} />
+      <Button onPress={() => {}} title='Default' color={theme.colors.DEFAULT} />
+      <Button onPress={() => {}} title='Primary' color={theme.colors.PRIMARY} />
       <Button onPress={() => {}} title='Success' color={theme.colors.SUCCESS} />
-      <Button onPress={() => {}} title='Info' color={theme.colors.SUCCESS} />
-      <Button onPress={() => {}} title='Warning' color={theme.colors.SUCCESS} />
-      <Button onPress={() => {}} title='Danger' color={theme.colors.SUCCESS} />
-      <Button onPress={() => {}} title='Link' color={theme.colors.SUCCESS} />
+      <Button onPress={() => {}} title='Info' color={theme.colors.INFO} />
+      <Button onPress={() => {}} title='Warning' color={theme.colors.WARNING} />
+      <Button onPress={() => {}} title='Danger' color={theme.colors.ERROR} />
+      <Button onPress={() => {}} title='Link' color={theme.colors.LINK} />
 
       <Text style={style.referralCode}>3XP4N510</Text>
       <Button onPress={() => {}} title='Accept' color={theme.colors.SUCCESS} />
@@ -31,11 +31,11 @@ const ThemeTest = () => {
 const styles = (theme) =>
   StyleSheet.create({
     body: {
-      // flex: 1,
+      flex: 1,
       backgroundColor: theme.colors.BACKGROUND,
-      // justifyContent: "space-evenly",
-      // alignItems: "center",
-      // padding: 20,
+      justifyContent: "space-evenly",
+      alignItems: "center",
+      padding: 20,
       fontFamily: theme.typography.fontFamily.CANTARELL,
     },
     title: {
@@ -47,7 +47,7 @@ const styles = (theme) =>
     },
     text: {
       color: theme.colors.TEXT,
-      fontSize: theme.typography.size.S,
+      fontSize: theme.typography.size.M,
       letterSpacing: theme.typography.letterSpacing.S,
       textAlign: "justify",
       fontFamily: theme.typography.fontFamily.CANTARELL,
@@ -61,4 +61,4 @@ const styles = (theme) =>
     },
   });
 
-export default ThemeTest;
+export default ThemeTestScreen;

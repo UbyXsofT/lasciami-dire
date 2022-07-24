@@ -2,7 +2,6 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import * as Font from "expo-font";
-import Index from "../screens/Index";
 
 export default function LoadAll() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -43,9 +42,5 @@ export default function LoadAll() {
     return null;
   }
 
-  return (
-    <View onLayout={onLayoutRootView}>
-      <Index />
-    </View>
-  );
+  return <View onLayout={onLayoutRootView}></View>;
 }
