@@ -1,6 +1,6 @@
 import Container from "./Container";
-import PressableButton from "./PressableButton";
-import Text from "./Text";
-import MyFontLoader from "./MyFontLoader";
+//import PressableButton from "./PressableButton";
+//import Text from "./Text";
+//import MyFontLoader from "./MyFontLoader";
 
-export { Container, MyFontLoader, PressableButton, Text };
+export { Container };

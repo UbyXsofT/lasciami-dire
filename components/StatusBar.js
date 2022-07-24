@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 
-const MyStatusBar = ({ theme }) => {
-  return <StatusBar style={theme === "dark" ? "light" : "dark"} />;
+const MyStatusBar = () => {
+  return <StatusBar />;
 };
 
 export default MyStatusBar;
