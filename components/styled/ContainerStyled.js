@@ -3,7 +3,7 @@ import { StyleSheet, SafeAreaView } from "react-native";
 import Constants from "expo-constants";
 import useThemedStyles from "../theme/useThemedStyles";
 
-const Container = ({ children }) => {
+const ContainerStyled = ({ children }) => {
   const style = useThemedStyles(styles);
   return <SafeAreaView style={style.container}>{children}</SafeAreaView>;
 };
@@ -13,11 +13,12 @@ const styles = (theme) =>
     container: {
       flex: 1,
       backgroundColor: theme.colors.BACKGROUND,
-      alignItems: "center",
+      // alignItems: "center",
       justifyContent: "center",
       padding: 20,
       paddingTop: Constants.statusBarHeight,
+      fontFamily: theme.typography.fontFamily.CANTARELL,
     },
   });
 
-export default Container;
+export default ContainerStyled;

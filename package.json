@@ -27,6 +27,7 @@
     "react-native-web": "0.17.7",
     "styled": "^1.0.0",
     "styled-components": "^5.3.5",
+    "styled-system": "^5.1.5",
     "styled-theming": "^2.2.0"
   },
   "devDependencies": {
