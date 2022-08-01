@@ -2,27 +2,40 @@ const fontFamily = {
   CANTARELL: "Cantarell",
 };
 
-import { ScrollView, StatusBar, useWindowDimensions } from "react-native";
-// const { fontScale } = useWindowDimensions(); // import useWindowDimensions()
-// const styles = makeStyles(fontScale); // pass in fontScale to the StyleSheet
-
 // example fontSizes scale as an array
-const fontSizes = [10, 11, 12, 14, 16, 20, 24, 32, 40, 56, 72];
+const fontSizes = [12, 14, 16, 20, 24, 32];
 const fontSize = {
   S: fontSizes[0],
-  M: fontSizes[4],
-  L: fontSizes[6],
-  XL: fontSizes[7],
-  XXL: fontSizes[9],
-  XXXL: fontSizes[10],
+  M: fontSizes[1],
+  L: fontSizes[2],
+  XL: fontSizes[3],
+  XXL: fontSizes[4],
+  XXXL: fontSizes[5],
+};
+
+// example lineHeights scale corrisponede all'indeci del font size
+const lineHeights = [18, 21, 24, 30, 36, 48];
+const lineHeight = {
+  S: lineHeights[0],
+  M: lineHeights[1],
+  L: lineHeights[2],
+  XL: lineHeights[3],
+  XXL: lineHeights[4],
+  XXXL: lineHeights[5],
 };
 
 // example space scale with aliases
-const space = [0, 4, 8, 16, 32];
+const space = [0, 4, 8, 16, 32, 64, 128, 256, 512];
 const letterSpacing = {
-  S: space[1],
-  M: space[2],
-  L: space[3],
+  NONE: space[0],
+  XXS: space[1],
+  XS: space[2],
+  S: space[3],
+  M: space[4],
+  L: space[5],
+  XL: space[6],
+  XXL: space[7],
+  XXXL: space[8],
 };
 
-export const typography = { fontSize, letterSpacing, fontFamily };
+export const typography = { lineHeight, fontSize, letterSpacing, fontFamily };

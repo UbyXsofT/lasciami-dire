@@ -3,27 +3,18 @@ import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import * as Font from "expo-font";
 
-export default function LoadAll() {
+export default function LayoutRootComp({ children }) {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
     async function prepare() {
-      {
-        /* Mantieni visibile la schermata iniziale */
-      }
       await SplashScreen.preventAutoHideAsync();
-      {
-        /* Fai quello che ti serve prima che la schermata iniziale venga nascosta */
-      }
       console.log(
         "Sono un'attività che viene eseguita prima che la schermata iniziale scompaia"
       );
       await Font.loadAsync({
         Cantarell: require("../assets/fonts/Cantarell-VF.otf"),
       });
-      {
-        /* Quindi indica all'applicazione di eseguire il rendering */
-      }
       setAppIsReady(true);
     }
     prepare();
@@ -31,9 +22,6 @@ export default function LoadAll() {
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      {
-        /* Hide the splash screen */
-      }
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
@@ -42,5 +30,5 @@ export default function LoadAll() {
     return null;
   }
 
-  return <View onLayout={onLayoutRootView}></View>;
+  return <View onLayout={onLayoutRootView}>{children}</View>;
 }

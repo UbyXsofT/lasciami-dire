@@ -68,7 +68,7 @@ const OXFORD_BLUE = "#001B33";
 const SLATE_GRAY = "#667b88";
 const CELADON_BLUE = "#007EA7";
 const GAINSBORO = "#CCDBDC";
-const CULTURED = "#F3F3F3";
+const CULTURED = "#EDEDED";
 
 const DEFAULT = "#DAE7DD";
 const PRIMARY = "#1b78f4";
@@ -94,11 +94,14 @@ const common = {
   DARK: DARK,
   WHITE: WHITE,
   GNOME: gnome,
+  BACKGROUND_LIGHT: CULTURED,
+  BACKGROUND_DARK: OXFORD_BLUE,
 };
 
 const light = {
   ...common,
-  BACKGROUND: CULTURED,
+  BACKGROUND: common.BACKGROUND_LIGHT,
+  FOREGROUND: common.BACKGROUND_DARK,
   SEPARATOR: SLATE_GRAY,
   TEXT: OXFORD_BLUE,
   TEXT_SECONDARY: SLATE_GRAY,
@@ -106,7 +109,8 @@ const light = {
 
 const dark = {
   ...common,
-  BACKGROUND: OXFORD_BLUE,
+  BACKGROUND: common.BACKGROUND_DARK,
+  FOREGROUND: common.BACKGROUND_LIGHT,
   SEPARATOR: CULTURED,
   text: {
     "PRIMO": "#ffffff",

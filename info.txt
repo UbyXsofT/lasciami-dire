@@ -1,0 +1,116 @@
+
+
+********* SPACE  UTILITY
+L' spaceutilità può essere aggiunta a qualsiasi componente che accetti il className​​prop.
+
+// example
+import styled from 'styled-component'
+import { space } from 'styled-system'
+
+const Heading = styled.h2(space)
+Quando si utilizza il componente, è possibile regolare il margine e il riempimento in qualsiasi direzione necessaria.
+
+// example usage
+<Heading mt={0} mb={4} pl={0}>
+  Hello
+</Heading>
+********* SPACE  UTILITY
+
+
+///********* DEFAULT PROPS
+Diciamo che hai un componente Card che nove volte su dieci ha un padding specifico, ma ogni tanto devi cambiarlo. Per aggiungere un valore predefinito per qualsiasi prop di sistema in stile, utilizzalo defaultPropssul tuo componente.
+
+// example
+import styled from 'styled-components'
+import { space, color } from 'styled-system'
+
+const Card = styled.div(
+  {
+    borderRadius: '2px',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.125)',
+  },
+  space,
+  color
+)
+
+Card.defaultProps = {
+  p: 2,
+  bg: 'white',
+}
+
+export default Card
+Con gli oggetti di scena predefiniti sopra, il componente della tua carta avrà un'imbottitura e uno sfondo bianco per impostazione predefinita. Puoi sovrascrivere questi stili quando necessario passando un sostegno al componente.
+
+// example overriding default styles
+<Card p={3} bg="lightgray">
+  <Image />
+  <Text />
+</Card>
+///********* DEFAULT PROPS
+
+
+
+Theme Key	CSS Properties
+space =	margin, margin-top, margin-right, margin-bottom, margin-left, padding, padding-top, padding-right, padding-bottom,padding-left, grid-gap, grid-column-gap, grid-row-gap
+fontSizes =	font-size
+colors =	color, background-color, border-color
+fonts =	font-family
+fontWeights =	font-weight
+lineHeights =	line-height
+letterSpacings =	letter-spacing
+sizes =	width, height, min-width, max-width, min-height, max-height
+borders =	border, border-top, border-right, border-bottom, border-left
+borderWidths	border-width
+borderStyles	border-style
+radii =	border-radius
+shadows =	box-shadow, text-shadow
+zIndices =	z-index
+
+/////////////////////////
+
+Per me il problema si verificava durante l'esecuzione su WiFi, poiché gli strumenti utilizzano sempre la tua prima connessione (puoi verificarla eseguendo ipconfig) e la mia prima connessione è stata Internet.
+
+Se questo è il tuo caso, puoi provare questa soluzione alternativa per modificare la priorità delle tue connessioni:
+
+Vai su Pannello di controllo > Rete e Internet > Connessioni di rete
+Fare clic con il pulsante destro del mouse sulla connessione desiderata (Connessione a priorità più alta)
+Fare clic su Proprietà > Protocollo Internet versione 4
+Fare clic su Proprietà > Avanzate
+Deseleziona "Metrica automatica"
+Inserisci 10 in "Metrica interfaccia"
+Fare clic su OK
+
+È passato un po 'di tempo da quando hai posto questa domanda, quindi presumo che tu abbia già capito la risposta. Devi cambiare lo script "start" in package.json in "expo start --tunnel".
+
+  "scripts": {
+    "start": "expo start --tunnel",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
+  },
+
+  ////////////////////////////////////////////
+
+
+
+    function componentToHex(c) {
+    if (c === undefined) {
+      return;
+    }
+    let hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }
+  function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  }
+
+  const myFixColor = (myColor) => {
+    let fixColor = "";
+    if (myColor !== undefined) {
+      fixColor = myColor.substring(5).replace(")", "");
+      myColor = rgbToHex(fixColor);
+    }
+    console.log("@@@@@@@ myFixColor @@@@@@@@", myColor);
+    return myColor;
+  };
