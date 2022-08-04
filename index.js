@@ -6,9 +6,9 @@ Text.defaultProps.maxFontSizeMultiplier = 1; // the maximum amount the font size
 TextInput.defaultProps = Text.defaultProps || {};
 TextInput.defaultProps.maxFontSizeMultiplier = 1; // the maximum amount the font size will scale.
 
-import App from "./App";
+import App from "./src/App";
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
+// registerRootComponent chiama AppRegistry.registerComponent('main', () => App);
+// Garantisce inoltre che, indipendentemente dal caricamento dell'app in Expo Go o in una build nativa,
+// l'ambiente è impostato in modo appropriato
 registerRootComponent(App);

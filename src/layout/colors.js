@@ -124,4 +124,5 @@ const dark = {
   TEXT_SECONDARY: GAINSBORO,
 };
 
-export const colors = { light, dark };
+//export const colors = { light, dark };
+export default { light, dark };

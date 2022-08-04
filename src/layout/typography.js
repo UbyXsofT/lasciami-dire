@@ -38,4 +38,5 @@ const letterSpacing = {
   XXXL: space[8],
 };
 
-export const typography = { lineHeight, fontSize, letterSpacing, fontFamily };
+//export const typography = { lineHeight, fontSize, letterSpacing, fontFamily };
+export default { lineHeight, fontSize, letterSpacing, fontFamily };

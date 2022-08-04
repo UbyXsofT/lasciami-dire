@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, Switch } from "react-native";
-import useTheme from "../components/theme/useTheme";
+//import useTheme from "../components/oldtheme/useTheme";
 const LoginScreen = () => {
   const theme = useTheme();
 

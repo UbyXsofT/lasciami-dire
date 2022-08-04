@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View, Button, Switch } from "react-native";
-import useTheme from "../components/theme/useTheme";
-import useThemedStyles from "../components/theme/useThemedStyles";
+import ThemeContext from "../styles/ThemeContext";
+import SwitchTheme from "../components/SwitchTheme";
 
-const HomeScreen = () => {
-  const theme = useTheme();
-  const style = useThemedStyles(styles);
+const HomeScreen = (theme) => {
+  // Assegna un theme per leggere il contesto del tema corrente.
+  // React troverà il provider del tema più vicino sopra e ne utilizzerà il valore.
+  // il tema corrente.
+  const myContext = useContext(ThemeContext);
+  //console.log("myContext", myContext);
+  theme = myContext.theme;
+  //console.log("theme", theme);
 
   return (
-    <View style={style.body}>
-      <Text style={style.title}>Home Screen</Text>
-      <Text style={style.text}>
+    <View style={styles.body}>
+      <SwitchTheme></SwitchTheme>
+      <Text style={styles.title}>Home Screen</Text>
+      <Text style={styles.text}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae
         lorem enim. Etiam accumsan nibh eu laoreet sollicitudin. Proin
         ultricies, metus nec auctor ultricies, dui metus vulputate odio, id
         hendrerit lectus mauris a ex.
       </Text>
-      <Text style={style.referralCode}>3XP4N510</Text>
+      <Text style={styles.referralCode}>3XP4N510</Text>
       <Button onPress={() => {}} title='Accept' color={theme.colors.SUCCESS} />
       <Button onPress={() => {}} title='Decline' color={theme.colors.ERROR} />
-      <Switch onValueChange={theme.toggleTheme} value={theme.isLightTheme} />
     </View>
   );
 };

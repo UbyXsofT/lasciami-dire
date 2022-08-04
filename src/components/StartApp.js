@@ -2,22 +2,32 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import * as Font from "expo-font";
+import ThemeProvider from "@theme/ThemeProvider";
+const pathFont = "../assets/fonts/Cantarell-VF.otf";
 
-export default function LayoutRootComp({ children }) {
+//@@@ CARICO LE RISORSE NECESSARIE
+export default function StartApp({ children }) {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
+    let mounted = true;
+
     async function prepare() {
       await SplashScreen.preventAutoHideAsync();
       console.log(
         "Sono un'attività che viene eseguita prima che la schermata iniziale scompaia"
       );
       await Font.loadAsync({
-        Cantarell: require("../assets/fonts/Cantarell-VF.otf"),
+        Cantarell: require(pathFont),
       });
       setAppIsReady(true);
     }
+
     prepare();
+
+    return function cleanup() {
+      mounted = false;
+    };
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
@@ -30,5 +40,10 @@ export default function LayoutRootComp({ children }) {
     return null;
   }
 
-  return <View onLayout={onLayoutRootView}>{children}</View>;
+  return (
+    <View onLayout={onLayoutRootView}>
+      {/* @@@ PREPARO IL THEME PROVIDER E CONTEXT */}
+      <ThemeProvider>{children}</ThemeProvider>
+    </View>
+  );
 }

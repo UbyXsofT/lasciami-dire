@@ -8,4 +8,4 @@ const size = {
   XXXL: Sizes[5],
 };
 
-export const components = { size };
+export default { size };

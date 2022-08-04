@@ -92,25 +92,159 @@ Fare clic su OK
 
   ////////////////////////////////////////////
 
+REACT NAVIGATION native
+https://reactnavigation.org/docs/headers
 
+Riassunto:
+navigate e push accetta un secondo argomento facoltativo per consentirti di passare parametri alla rotta verso la quale stai navigando. Ad esempio: navigation.navigate('RouteName', { paramName: 'value' }).
+Puoi leggere i parametri route.paramsall'interno di uno schermo
+Puoi aggiornare i parametri dello schermo connavigation.setParams
+I parametri iniziali possono essere passati tramite il initialParamsprop onScreen
+I parametri dovrebbero contenere i dati minimi richiesti per mostrare uno schermo, niente di più
 
-    function componentToHex(c) {
-    if (c === undefined) {
-      return;
+***************** ESEMPIO CREA POST:
+
+import * as React from 'react';
+import { Text, TextInput, View, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen({ navigation, route }) {
+  React.useEffect(() => {
+    if (route.params?.post) {
+      // Post updated, do something with `route.params.post`
+      // For example, send the post to the server
     }
-    let hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-  }
-  function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-  }
+  }, [route.params?.post]);
 
-  const myFixColor = (myColor) => {
-    let fixColor = "";
-    if (myColor !== undefined) {
-      fixColor = myColor.substring(5).replace(")", "");
-      myColor = rgbToHex(fixColor);
-    }
-    console.log("@@@@@@@ myFixColor @@@@@@@@", myColor);
-    return myColor;
-  };
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        title="Create post"
+        onPress={() => navigation.navigate('CreatePost')}
+      />
+      <Text style={{ margin: 10 }}>Post: {route.params?.post}</Text>
+    </View>
+  );
+}
+
+function CreatePostScreen({ navigation, route }) {
+  const [postText, setPostText] = React.useState('');
+
+  return (
+    <>
+      <TextInput
+        multiline
+        placeholder="What's on your mind?"
+        style={{ height: 200, padding: 10, backgroundColor: 'white' }}
+        value={postText}
+        onChangeText={setPostText}
+      />
+      <Button
+        title="Done"
+        onPress={() => {
+          // Pass and merge params back to home screen
+          navigation.navigate({
+            name: 'Home',
+            params: { post: postText },
+            merge: true,
+          });
+        }}
+      />
+    </>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator mode="modal">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="CreatePost" component={CreatePostScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+//******************************************************************************
+
+
+Riassunto
+Puoi personalizzare l'intestazione all'interno del options supporto dei componenti dello schermo. 
+Leggi l'elenco completo delle opzioni nel riferimento API .
+L' option soggetto di scena può essere un oggetto o una funzione. Quando è una funzione, è dotata di un oggetto con navigatione routeprop.
+È anche possibile specificare condivisa screenOptionsnella configurazione del navigatore dello stack al momento dell'inizializzazione. L'elica ha la precedenza su quella configurazione.
+
+//*************************************************
+Riassunto
+È possibile impostare i pulsanti nell'intestazione tramite le proprietà headerLefte headerRightin options.
+Il pulsante Indietro è completamente personalizzabile con headerLeft, ma se vuoi solo cambiare il titolo o l'immagine, ce ne sono altri optionsper quello — , , e . headerBackTitleheaderBackTitleStyleheaderBackImageSource
+È possibile utilizzare una richiamata per le opzioni prop per accedere navigatione route oggetti.
+
+//******************************************************
+
+Migliori pratiche durante la nidificazione
+
+Si consiglia di ridurre al minimo i navigatori di nidificazione. Cerca di ottenere il comportamento che desideri con il minor numero di annidamento possibile. La nidificazione ha molti aspetti negativi:
+
+Ne risulta una gerarchia di viste profondamente nidificata che può causare problemi di memoria e prestazioni nei dispositivi di fascia bassa
+Annidare lo stesso tipo di navigatori (ad es. schede all'interno delle schede, cassetto all'interno del cassetto ecc.) potrebbe creare confusione nell'esperienza utente
+Con un annidamento eccessivo, il codice diventa difficile da seguire durante la navigazione verso schermate annidate, la configurazione di deep link ecc.
+Pensa all'annidamento dei navigatori come un modo per ottenere l'interfaccia utente che desideri piuttosto che un modo per organizzare il tuo codice. Se si desidera creare un gruppo separato di schermate per l'organizzazione, invece di utilizzare navigatori separati, è possibile utilizzare il Groupcomponente.
+
+<Stack.Navigator>
+  {isLoggedIn ? (
+    // Screens for logged in users
+    <Stack.Group>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Profile" component={Profile} />
+    </Stack.Group>
+  ) : (
+    // Auth screens
+    <Stack.Group screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+    </Stack.Group>
+  )}
+  {/* Common modal screens */}
+  <Stack.Group screenOptions={{ presentation: 'modal' }}>
+    <Stack.Screen name="Help" component={Help} />
+    <Stack.Screen name="Invite" component={Invite} />
+  </Stack.Group>
+</Stack.Navigator>
+
+//**********************************************************************
+
+CICLO DI VITA 
+Riassunto
+Sebbene i metodi del ciclo di vita di React siano ancora validi, React Navigation aggiunge più eventi a cui puoi iscriverti tramite il navigationprop.
+Puoi anche usare i ganci useFocusEffecto .useIsFocused
+
+import { useFocusEffect } from '@react-navigation/native';
+
+function Profile() {
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
+
+  return <ProfileContent />;
+}
+
+////////*******************************
+
+Riassunto : handling-safe-area
+Utilizzare react-native-safe-area-contextinvece di SafeAreaViewdareact-native
+Non avvolgere l'intera app in SafeAreaView, avvolgere invece i contenuti all'interno degli schermi
+Usa l' edgeselica per applicare un'area sicura su lati specifici
+Usa il useSafeAreaInsetsgancio per un maggiore controllo su dove vengono applicati gli inserti
+
+////////*******************************

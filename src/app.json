@@ -8,6 +8,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "backgroundColor": "#000000",
     "userInterfaceStyle": "automatic",
     "androidStatusBar": {
       "barStyle": "light-content",
