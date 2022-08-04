@@ -16,7 +16,7 @@ import {
   TextStyled,
   CardStyled,
   NotifyStyled,
-} from "../components/styled/IndexStyled";
+} from "../../../components/styled/IndexStyled";
 
 const ThemeTestScreen = (theme) => {
   // Assegna un theme per leggere il contesto del tema corrente.

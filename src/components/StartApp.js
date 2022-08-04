@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import * as Font from "expo-font";
 import ThemeProvider from "@theme/ThemeProvider";
-const pathFont = "../assets/fonts/Cantarell-VF.otf";
 
 //@@@ CARICO LE RISORSE NECESSARIE
 export default function StartApp({ children }) {
@@ -18,7 +17,7 @@ export default function StartApp({ children }) {
         "Sono un'attività che viene eseguita prima che la schermata iniziale scompaia"
       );
       await Font.loadAsync({
-        Cantarell: require(pathFont),
+        Cantarell: require("@assets/fonts/Cantarell-VF.otf"),
       });
       setAppIsReady(true);
     }

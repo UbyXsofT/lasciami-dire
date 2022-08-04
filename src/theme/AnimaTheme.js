@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 import ThemeContext from "@contexts/ThemeContext";
-import { StyleSheet, StatusBar as StatusBarNative, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  StatusBar as StatusBarNative,
+  Text,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import SwitchTheme from "./SwitchTheme";
 
@@ -11,6 +16,9 @@ import Animated, {
   useSharedValue,
   withTiming,
   runOnJS,
+  LightSpeedInLeft,
+  LightSpeedOutRight,
+  Layout,
 } from "react-native-reanimated";
 
 // @@@ GESTISCO L'ATEZZA DELLA BARRA SUPERIORE
@@ -20,7 +28,7 @@ const BAR_HEIGHT =
     : StatusBarNative.currentHeight;
 
 // @@@ PREPARO ANIMAZIONE DEL CAMBIO THEMA
-export default function AnimaTheme(theme) {
+export default function AnimaTheme(theme, { children }) {
   // Assegna un theme per leggere il contesto del tema corrente.
   // React troverà il provider del tema più vicino sopra e ne utilizzerà il valore.
   // il tema corrente.
@@ -28,26 +36,40 @@ export default function AnimaTheme(theme) {
   //console.log("myContext", myContext);
   theme = myContext.theme;
   //console.log("theme", theme);
+  const statoDelTema = theme.statoTheme;
+  const backLight = theme.colors.BACKGROUND_LIGHT;
+  const backDark = theme.colors.BACKGROUND_DARK;
+  const timingValue = statoDelTema === "dark" ? 1 : 0;
+  // console.log("statoDelTema", statoDelTema);
+  // console.log("backLight", backLight);
+  // console.log("backDark", backDark);
+  // console.log("timingValue", timingValue);
 
   // const progress = useDerivedValue(() => {
-  //   return withTiming(theme.statoTheme === "dark" ? 1 : 0);
+  //   "worklet";
+  //   return withTiming(timingValue);
   // });
 
   // const rStyle = useAnimatedStyle(() => {
+  //   // "worklet";
   //   const backgroundColor = interpolateColor(
   //     progress.value,
   //     [0, 1],
-  //     [theme.colors.BACKGROUND_LIGHT, theme.colors.BACKGROUND_DARK]
+  //     [backLight, backDark]
   //   );
 
   //   return {
   //     backgroundColor,
   //   };
   // });
-  // console.log(theme.colors.BACKGROUND);
 
   return (
-    <Animated.View style={[styles(theme).container]}>
+    <Animated.View
+      entering={LightSpeedInLeft}
+      exiting={LightSpeedOutRight}
+      layout={Layout.damping}
+      style={[styles(theme).container]}
+    >
       <Text
         style={{
           color: theme.colors.FOREGROUND,
@@ -55,7 +77,7 @@ export default function AnimaTheme(theme) {
           fontSize: theme.typography.fontSize.XXL,
         }}
       >
-        THEME TEST 0
+        ANIMA THEME
       </Text>
       <SwitchTheme />
       <StatusBar
@@ -69,7 +91,7 @@ export default function AnimaTheme(theme) {
 const styles = (theme) =>
   StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 0,
       backgroundColor: theme.colors.BACKGROUND,
       paddingLeft: 20,
       paddingRight: 20,

@@ -12,7 +12,7 @@ import ThemeContext from "@contexts/ThemeContext";
 // Crea un contesto per il tema corrente (con oggetti dello style e DARK come impostazione predefinita).
 
 // @@@ PREPARO IL THEME PROVIDER E CONTEXT
-const ThemeProvider = () => {
+const ThemeProvider = ({ children }) => {
   const [isLightTheme, setLightTheme] = useState(false);
   const [statoTheme, setStatoTheme] = useState("dark");
 
@@ -40,7 +40,7 @@ const ThemeProvider = () => {
     //  In questo esempio, stiamo passando l'oggetto theme come valore corrente. */}
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         {/* @@@ PREPARO ANIMAZIONE DEL CAMBIO THEMA */}
-        <AnimaTheme></AnimaTheme>
+        <AnimaTheme>{children}</AnimaTheme>
       </ThemeContext.Provider>
     </ThemeProviderStyled>
   );
