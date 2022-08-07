@@ -70,7 +70,7 @@ export default function AnimaTheme(theme, { children }) {
       layout={Layout.damping}
       style={[styles(theme).container]}
     >
-      <Text
+      {/* <Text
         style={{
           color: theme.colors.FOREGROUND,
           fontFamily: theme.typography.fontFamily.CANTARELL,
@@ -79,7 +79,8 @@ export default function AnimaTheme(theme, { children }) {
       >
         ANIMA THEME
       </Text>
-      <SwitchTheme />
+      <SwitchTheme /> */}
+
       <StatusBar
         translucent={true}
         style={theme.isLightTheme ? "dark" : "light"}

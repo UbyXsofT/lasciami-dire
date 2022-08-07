@@ -5,7 +5,7 @@ import { colors, typography, components } from "@layout/";
 import { ThemeProvider as ThemeProviderStyled } from "styled-components";
 import { Dimensions } from "react-native";
 import AnimaTheme from "./AnimaTheme";
-
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from "@constants";
 import ThemeContext from "@contexts/ThemeContext";
 // Il contesto ci consente di passare un valore in profondità nell'albero dei componenti
 // senza infilarlo esplicitamente in ogni componente.
@@ -18,9 +18,6 @@ const ThemeProvider = ({ children }) => {
 
   const toggleTheme = () => setLightTheme((previousState) => !previousState);
 
-  let width = Dimensions.get("window").width; //full width
-  let height = Dimensions.get("window").height; //full height
-
   const theme = {
     colors: isLightTheme ? colors.light : colors.dark,
     colorsAll: colors,
@@ -28,8 +25,8 @@ const ThemeProvider = ({ children }) => {
     typography,
     isLightTheme,
     components,
-    fullWidth: width,
-    fullHeight: height,
+    fullWidth: WINDOW_WIDTH,
+    fullHeight: WINDOW_HEIGHT,
   };
 
   return (

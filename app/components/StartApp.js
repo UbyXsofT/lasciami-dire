@@ -2,15 +2,11 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import * as Font from "expo-font";
-import ThemeProvider from "@theme/ThemeProvider";
-
 //@@@ CARICO LE RISORSE NECESSARIE
 export default function StartApp({ children }) {
   const [appIsReady, setAppIsReady] = useState(false);
-
   useEffect(() => {
     let mounted = true;
-
     async function prepare() {
       await SplashScreen.preventAutoHideAsync();
       console.log(
@@ -21,28 +17,19 @@ export default function StartApp({ children }) {
       });
       setAppIsReady(true);
     }
-
     prepare();
-
     return function cleanup() {
       mounted = false;
     };
   }, []);
-
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
-
-  if (!appIsReady) {
-    return null;
-  }
-
-  return (
-    <View onLayout={onLayoutRootView}>
-      {/* @@@ PREPARO IL THEME PROVIDER E CONTEXT */}
-      <ThemeProvider>{children}</ThemeProvider>
-    </View>
-  );
+  onLayoutRootView();
+  // if (!appIsReady) {
+  //   return null;
+  // }
+  return <>{children}</>;
 }
