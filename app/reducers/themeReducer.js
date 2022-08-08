@@ -1,31 +1,38 @@
-import { base, darkTheme, lightTheme, colorOptions } from "@theme";
+import { colors } from "@theme/index";
 
-// light-blue
-//const initialState = {theme: { ...base, ...lightTheme, ...colorOptions.blue }};
-// light-orange
-//const initialState = {theme: { ...base, ...lightTheme, ...colorOptions.orange }};
-// dark-blue
-//const initialState = {theme: { ...base, ...darkTheme, ...colorOptions.blue }};
-//dark-orange
-const initialState = {
-  theme: { ...base, ...darkTheme, ...colorOptions.oranger },
+let tema = {
+  coloriTema: colors.darkTheme,
+  descTema: "dark",
+  isLightTheme: false,
 };
 
+const initialState = {
+  theme: tema,
+};
+// Usa initialState come valore predefinito
 const themeReducer = (state = initialState, action) => {
+  // Il riduttore normalmente esamina il campo del tipo di azione per decidere cosa succede
   switch (action.type) {
-    case "CHANGE_BASE_THEME":
+    // Fai qualcosa qui in base ai diversi tipi di azioni
+    case "CHANGE_THEME":
+      // Dobbiamo restituire un nuovo oggetto di stato
       let newState = {
+        //che ha tutti i dati di stato esistenti
         ...state,
-        theme: { ...state.theme, ...action.baseTheme },
+        // ma ha le nuove modifiche del tema
+        theme: {
+          coloriTema: action.IS_LIGHT_THEME
+            ? colors.lightTheme
+            : colors.darkTheme,
+          descTema: action.IS_LIGHT_THEME ? "light" : "dark",
+          isLightTheme: action.IS_LIGHT_THEME,
+        },
       };
+      // console.log("newState", newState);
       return newState;
-    case "CHANGE_COLOR_THEME":
-      let newStateTheme = {
-        ...state,
-        theme: { ...state.theme, ...action.colorTheme },
-      };
-      return newStateTheme;
     default:
+      //Se questo riduttore non riconosce il tipo di azione, oppure no
+      //interessa questa azione specifica, restituisce lo stato esistente invariato
       return state;
   }
 };

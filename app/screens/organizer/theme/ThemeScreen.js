@@ -1,79 +1,95 @@
 import React, { useState } from "react";
-import { View, Text, Picker, Switch } from "react-native";
-import { lightTheme, darkTheme, colorOptions } from "@theme/index";
+import {
+  LOGO_APP,
+  WINDOW_WIDTH,
+  WINDOW_HEIGHT,
+  STATUS_BAR_HEIGHT,
+} from "@constants";
+import { colors, typography, components } from "@theme";
+import { View, Picker, Switch, Text } from "react-native";
 import { connect } from "react-redux";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components/native";
 import { bindActionCreators } from "redux";
-import { changeBaseTheme, changeColorTheme } from "@actions/themeAction";
+import { changeTheme } from "@actions/themeAction";
 
-class ThemeScreen extends React.Component {
-  render() {
-    const ItemPicker = styled(Picker)`
-      color: ${(props) => props.theme.PRIMARY_TEXT_COLOR};
-      padding-top: 20;
-    `;
+const ThemeScreen = (theme) => {
+  console.log(theme);
+  let Theme = theme.theme;
 
-    const Body = styled(View)`
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: stretch;
-      background-color: ${(props) => props.theme.SECONDARY_BACKGROUND_COLOR};
-      padding-top: 30;
-      padding-bottom: 30;
-      padding-left: 30;
-      padding-right: 30;
-    `;
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState),
+      theme.changeTheme(isEnabled);
+    console.log(isEnabled);
+  };
 
-    console.log(this.props);
-    return (
-      <ThemeProvider theme={this.props.theme}>
-        <Body>
-          <Text
-            style={{
-              color: this.props.theme.PRIMARY_TEXT_COLOR,
-              backgroundColor: "red",
-              fontFamily: "Cantarell",
-              textAlign: "center",
-            }}
-          >
-            THEME SCREEN - prepare test{" "}
-          </Text>
+  const ContainerStyle = styled(View)`
+    flex-direction: column;
+    background-color: ${Theme.coloriTema.DEFAULT_BACKGROUND_COLOR};
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: ${typography.fontFamily.CANTARELL};
+    justify-content: space-between;
+    align-items: stretch;
+    width: ${Theme.coloriTema.DEFAULT_BACKGROUND_COLOR};
+    height: ${WINDOW_HEIGHT - STATUS_BAR_HEIGHT};
+  `;
 
-          <ItemPicker
+  const TextTitle = styled(Text)`
+    background-color: ${Theme.coloriTema.DEFAULT_BACKGROUND_COLOR};
+    font-family: ${typography.fontFamily.CANTARELL};
+    font-weight: ${typography.fontWeight.XXL};
+    font-size: ${typography.fontSize.XL};
+    padding: 5px;
+    color: ${Theme.coloriTema.PRIMARY_TEXT_COLOR};
+    text-align: center;
+  `;
+
+  // console.log(this.theme);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <ContainerStyle>
+        <TextTitle>THEME T1</TextTitle>
+
+        {/* <ItemPicker
             style={{}}
-            onValueChange={(itemValue, itemIndex) => {
-              this.props.changeColorTheme(itemValue);
-              // this.props.changeColorTheme("red");
-              console.log("itemValue", itemValue);
-              console.log("itemIndex", itemIndex);
+            onValueChange={(value) => {
+              console.log(value);
+              this.theme.changeTheme(value);
             }}
           >
             <Picker.Item label='Seleziona un tema colore' value='0' />
-            {Object.keys(colorOptions).map((option, i) => (
+            {Object.keys(this.theme.theme.coloriExtra).map((option, i) => (
               //create options for each color option in our theme.js file
               <Picker.Item
                 key={i}
                 label={option}
-                value={colorOptions[option]}
+                value={this.theme.theme.coloriExtra[option].itemValue}
               />
             ))}
-          </ItemPicker>
+          </ItemPicker> */}
 
-          {/* <Text>Switch Theme</Text>
-          <Switch onValueChange={this.props.changeBaseTheme("darkTheme")} /> */}
-        </Body>
-      </ThemeProvider>
-    );
-  }
-}
-//* REDUX - //---------------------------------------
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor='#3e3e3e'
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </ContainerStyle>
+    </ThemeProvider>
+  );
+};
+
+//* REDUX - //
 const mapStateToProps = (state) => ({
   theme: state.themeReducer.theme,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeBaseTheme: bindActionCreators(changeBaseTheme, dispatch),
-  changeColorTheme: bindActionCreators(changeColorTheme, dispatch),
+  changeTheme: bindActionCreators(changeTheme, dispatch),
 });
+/****** ************************ */
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThemeScreen);

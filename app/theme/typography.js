@@ -13,7 +13,7 @@ const fontSize = {
   XXXL: fontSizes[5],
 };
 
-// example lineHeights scale corrisponede all'indeci del font size
+// example lineHeights scale corrisponede all'indice del font size (fontSize=12 <> lineHeight_18)
 const lineHeights = [18, 21, 24, 30, 36, 48];
 const lineHeight = {
   S: lineHeights[0],
@@ -38,5 +38,17 @@ const letterSpacing = {
   XXXL: space[8],
 };
 
+const fontWeight = {
+  XXXS: 100,
+  XXS: 200,
+  XS: 300,
+  S: 400, // normal
+  M: 500,
+  L: 600,
+  XL: 700, // bold
+  XXL: 800,
+  XXXL: 900,
+};
+
 //export const typography = { lineHeight, fontSize, letterSpacing, fontFamily };
-export default { lineHeight, fontSize, letterSpacing, fontFamily };
+export default { lineHeight, fontSize, letterSpacing, fontFamily, fontWeight };
