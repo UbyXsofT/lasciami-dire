@@ -1,3 +1,3 @@
-import LoginScreen from "@organizer/login/LoginScreen";
+import LoginScreen from "./LoginScreen";
 
 export { LoginScreen };

@@ -1,26 +1,37 @@
+// ./navigation/StackNavigator.js
+
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ThemeScreen from "@organizer/theme/ThemeScreen";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const Stack = createNativeStackNavigator();
+import Home from "../screens/Home";
+import About from "../screens/About";
+import Contact from "../screens/Contact";
 
-export default function NavigationTheme() {
+const Stack = createStackNavigator();
+
+const screenOptionStyle = {
+  headerStyle: {
+    backgroundColor: "#9AC4F8",
+  },
+  headerTintColor: "white",
+  headerBackTitle: "Back",
+};
+
+const MainStackNavigator = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Theme'>
-        <Stack.Screen
-          name='Theme'
-          component={ThemeScreen}
-          options={{
-            title: "The Theme",
-            headerStyle: {
-              backgroundColor: "#f4511e",
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name='Home' component={Home} />
+      <Stack.Screen name='About' component={About} />
+    </Stack.Navigator>
   );
-}
+};
+
+const ContactStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name='Contact' component={Contact} />
+    </Stack.Navigator>
+  );
+};
+
+export { MainStackNavigator, ContactStackNavigator };

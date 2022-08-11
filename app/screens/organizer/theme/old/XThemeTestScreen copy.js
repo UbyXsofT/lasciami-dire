@@ -17,7 +17,7 @@ import {
   TextStyled,
   CardStyled,
   NotifyStyled,
-} from "../../../components/styled/IndexStyled";
+} from "../../../../components/styled/IndexStyled";
 
 const ThemeTestScreen = () => {
   const theme = useTheme();

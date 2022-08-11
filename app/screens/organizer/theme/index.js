@@ -1,3 +1,3 @@
-import ThemeScreen from "@organizer/theme/ThemeScreen";
+import ThemeScreen from "./ThemeScreen";
 
 export { ThemeScreen };

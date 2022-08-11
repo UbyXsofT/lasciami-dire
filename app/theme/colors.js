@@ -95,27 +95,31 @@ export const colorBase = {
   BLACK: "#000000",
 };
 
+/// ---------- coloriTema ----------------------
 export const darkTheme = {
   ...colorOptions,
   ...colorBase,
   DEFAULT_BACKGROUND_COLOR: colorBase.OXFORD_BLUE,
+  PRIMARY_BACKGROUND_COLOR: colorOptions.dark[4],
 
   PRIMARY_TEXT_COLOR: colorOptions.light[1],
-  SECONDARY_TEXT_COLOR: colorOptions.light[2],
+  SECONDARY_TEXT_COLOR: colorOptions.light[4],
 
-  PRIMARY_TEXT_BACKGROUND_COLOR: colorOptions.dark[1],
-  SECONDARY_TEXT_BACKGROUND_COLOR: colorOptions.dark[2],
+  PRIMARY_TEXT_BACKGROUND_COLOR: colorOptions.dark[2],
+  SECONDARY_TEXT_BACKGROUND_COLOR: colorOptions.dark[3],
 };
 export const lightTheme = {
   ...colorOptions,
   ...colorBase,
   DEFAULT_BACKGROUND_COLOR: colorBase.CULTURED,
+  PRIMARY_BACKGROUND_COLOR: colorOptions.dark[4],
 
-  PRIMARY_TEXT_COLOR: colorOptions.dark[1],
+  PRIMARY_TEXT_COLOR: colorOptions.dark[3],
   SECONDARY_TEXT_COLOR: colorOptions.dark[2],
 
   PRIMARY_TEXT_BACKGROUND_COLOR: colorOptions.light[3],
   SECONDARY_TEXT_BACKGROUND_COLOR: colorOptions.light[4],
 };
+/// ------------------------------------------------------------------
 
 export default { lightTheme, darkTheme, colorBase, colorOptions };

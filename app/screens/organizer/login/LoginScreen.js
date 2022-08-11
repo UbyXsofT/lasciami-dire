@@ -1,20 +1,42 @@
-import React from "react";
-import { StyleSheet, Text, View, Button, Switch } from "react-native";
-//import useTheme from "../components/oldtheme/useTheme";
-const LoginScreen = () => {
-  const theme = useTheme();
+///** DEFAULT */
+import React, { useContext } from "react";
+import styled, { ThemeProvider } from "styled-components/native";
+
+///** REDUX */
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { changeTheme } from "../../../actions/themeAction";
+
+///** CUSTOM */
+import {
+  BoxStl,
+  TitleStl,
+  ContainerStl,
+  TextStl,
+} from "../../../components/styled/index";
+
+const LoginScreen = (props) => {
+  console.log(props.THEME.coloriTema);
 
   return (
-    <View
-      style={{
-        backgroundColor: theme.colors.SUCCESS,
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      <Text>Login Screen</Text>
-    </View>
+    <ThemeProvider theme={props.THEME}>
+      <ContainerStl>
+        <TitleStl style={{ color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR }}>
+          Login Screen
+        </TitleStl>
+      </ContainerStl>
+    </ThemeProvider>
   );
 };
 
-export default LoginScreen;
+//* REDUX - //
+const mapStateToProps = (state) => ({
+  THEME: state.themeReducer.theme,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeTheme: bindActionCreators(changeTheme, dispatch),
+});
+/****** ************************ */
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

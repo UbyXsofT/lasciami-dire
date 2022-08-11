@@ -1,3 +1,3 @@
-import HomeScreen from "@organizer/home/HomeScreen";
+import HomeScreen from "./HomeScreen";
 
 export { HomeScreen };

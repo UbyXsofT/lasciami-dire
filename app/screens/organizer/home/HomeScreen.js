@@ -1,13 +1,42 @@
+///** DEFAULT */
 import React, { useContext } from "react";
-import ThemeContext from "@contexts/ThemeContext";
-import { View, Text } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import styled, { ThemeProvider } from "styled-components/native";
 
-export default function HomeScreen() {
+///** REDUX */
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { changeTheme } from "../../../actions/themeAction";
+
+///** CUSTOM */
+import {
+  BoxStl,
+  TitleStl,
+  ContainerStl,
+  TextStl,
+} from "../../../components/styled/index";
+
+const HomeScreen = (props) => {
+  console.log("props", props);
+
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
-    </View>
+    <ThemeProvider theme={props.THEME}>
+      <ContainerStl>
+        <TitleStl style={{ color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR }}>
+          Home Screen
+        </TitleStl>
+      </ContainerStl>
+    </ThemeProvider>
   );
-}
+};
+
+//* REDUX - //
+const mapStateToProps = (state) => ({
+  THEME: state.themeReducer.theme,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeTheme: bindActionCreators(changeTheme, dispatch),
+});
+/****** ************************ */
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

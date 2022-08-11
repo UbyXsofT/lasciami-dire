@@ -1,13 +1,11 @@
-import { colors } from "@theme/index";
-
-let tema = {
-  coloriTema: colors.darkTheme,
-  descTema: "dark",
-  isLightTheme: false,
-};
+import { colors } from "../theme/index";
 
 const initialState = {
-  theme: tema,
+  theme: {
+    coloriTema: colors.darkTheme,
+    descTema: "dark",
+    isLightTheme: false,
+  },
 };
 // Usa initialState come valore predefinito
 const themeReducer = (state = initialState, action) => {

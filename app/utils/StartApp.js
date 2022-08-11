@@ -13,7 +13,7 @@ export default function StartApp({ children }) {
         "Sono un'attività che viene eseguita prima che la schermata iniziale scompaia"
       );
       await Font.loadAsync({
-        Cantarell: require("@assets/fonts/Cantarell-VF.otf"),
+        Cantarell: require("../assets/fonts/Cantarell-VF.otf"),
       });
       setAppIsReady(true);
     }
@@ -22,14 +22,16 @@ export default function StartApp({ children }) {
       mounted = false;
     };
   }, []);
+
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
   onLayoutRootView();
-  // if (!appIsReady) {
-  //   return null;
-  // }
-  return <>{children}</>;
+  if (!appIsReady) {
+    return null;
+  } else {
+    return <>{children}</>;
+  }
 }

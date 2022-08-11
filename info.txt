@@ -448,3 +448,11 @@ const Parent = () => {
 
 l'oggetto definizione non verrà ricreato, React penserà che non ha bisogno di essere aggiornato e il rendering di Child non avverrà.
 ////*******************************
+
+TEMPLATE LITERAL
+
+const expressions = 'dynamic values';
+const example = `I can contain ${expressions}`;
+
+console.log(example);  // >> I can contain dynamic values
+///////////////////////////////////

@@ -1,58 +1,138 @@
-import React, { useState } from "react";
-import {
-  LOGO_APP,
-  WINDOW_WIDTH,
-  WINDOW_HEIGHT,
-  STATUS_BAR_HEIGHT,
-} from "@constants";
-import { colors, typography, components } from "@theme";
-import { View, Picker, Switch, Text } from "react-native";
-import { connect } from "react-redux";
+///** DEFAULT */
+import React, { useState, useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components/native";
+import { Text, TouchableOpacity } from "react-native";
+import * as Clipboard from "expo-clipboard";
+///** REANIMATED */
+import Animated, {
+  LightSpeedInLeft,
+  LightSpeedOutRight,
+  Layout,
+} from "react-native-reanimated";
+
+///** REDUX */
+import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeTheme } from "@actions/themeAction";
+import { changeTheme } from "../../../actions/themeAction";
 
-const ThemeScreen = (theme) => {
-  console.log(theme);
-  let Theme = theme.theme;
+///** CUSTOM */
+import {
+  BoxStl,
+  TitleStl,
+  ContainerStl,
+  TextStl,
+} from "../../../components/styled/index";
+import { StatusBarComp, LogoImg } from "../../../components/index";
+import { colors, typography, components } from "../../../theme/index";
 
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState),
-      theme.changeTheme(isEnabled);
-    console.log(isEnabled);
+const ThemeScreen = (props) => {
+  //console.log("props", props);
+
+  // let b = props.THEME.coloriTema.map((item) => item + 1);
+  // console.log(b);
+  // props.THEME.coloriTema.map((anObjectMapped, index) => {
+  //   console.log(`${anObjectMapped.name}`);
+  //   //return <p key={`${anObjectMapped.name}`}>{anObjectMapped.name}</p>;
+  // });
+
+  //console.log(colorArray);
+
+  const copyToClipboard = async (txt) => {
+    console.log(txt);
+    await Clipboard.setStringAsync(txt);
   };
 
-  const ContainerStyle = styled(View)`
-    flex-direction: column;
-    background-color: ${Theme.coloriTema.DEFAULT_BACKGROUND_COLOR};
-    padding-left: 20px;
-    padding-right: 20px;
-    font-family: ${typography.fontFamily.CANTARELL};
-    justify-content: space-between;
-    align-items: stretch;
-    width: ${Theme.coloriTema.DEFAULT_BACKGROUND_COLOR};
-    height: ${WINDOW_HEIGHT - STATUS_BAR_HEIGHT};
-  `;
+  useEffect(() => {
+    const colorArray = colors;
+    console.log("SampleFunction", colorArray.darkTheme);
 
-  const TextTitle = styled(Text)`
-    background-color: ${Theme.coloriTema.DEFAULT_BACKGROUND_COLOR};
-    font-family: ${typography.fontFamily.CANTARELL};
-    font-weight: ${typography.fontWeight.XXL};
-    font-size: ${typography.fontSize.XL};
-    padding: 5px;
-    color: ${Theme.coloriTema.PRIMARY_TEXT_COLOR};
-    text-align: center;
-  `;
+    Object.entries(colorArray).map(([key, v]) => {
+      console.log("key", key);
+      console.log("v", v);
 
-  // console.log(this.theme);
+      // return (
+      //   <BoxStl key={key}>
+      //     <Text>{v}</Text>
+      //   </BoxStl>
+      // );
+    });
 
+    // colorArray.map((v, index) => {
+    //   console.log("v", v);
+    //   console.log("index", index);
+    //   // return (
+    //   //   <BoxStl key={index}>
+    //   //     <Text>{v}</Text>
+    //   //   </BoxStl>
+    //   // );
+    // });
+  }, []);
   return (
-    <ThemeProvider theme={theme}>
-      <ContainerStyle>
-        <TextTitle>THEME T1</TextTitle>
+    <ThemeProvider theme={props.THEME}>
+      <ContainerStl>
+        <Animated.View
+          entering={LightSpeedInLeft}
+          exiting={LightSpeedOutRight}
+          layout={Layout.damping}
+        >
+          <TitleStl
+            style={{ color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR }}
+          >
+            Theme Screen
+          </TitleStl>
 
-        {/* <ItemPicker
+          <BoxStl
+            style={{
+              backgroundColor: props.THEME.coloriTema.PRIMARY_BACKGROUND_COLOR,
+              padding: 5,
+            }}
+          >
+            <TextStl
+              style={{ color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR }}
+              onPress={(props) => {
+                copyToClipboard(
+                  props.target.childNodes[0].nodeValue +
+                    " " +
+                    props.target.childNodes[1].nodeValue +
+                    " " +
+                    props.target.childNodes[2].nodeValue
+                );
+              }}
+            >
+              Color: green {"\n"} #1: "#8ff0a4"
+            </TextStl>
+          </BoxStl>
+
+          <BoxStl
+            style={{
+              backgroundColor: props.THEME.coloriTema.PRIMARY_BACKGROUND_COLOR,
+              padding: 5,
+            }}
+          >
+            {/* ESTRARRE ARRAY */}
+            {}
+            {/* Object .map */}
+            {/* {Object.entries(colorArray).map(([key, v]) => {
+              return (
+                <BoxStl key={key}>
+                  <Text>{v}</Text>
+                </BoxStl>
+              );
+            })} */}
+          </BoxStl>
+
+          {/* {colorArray.map((item, key) => (
+            <Text
+              key={key}
+              style={styles.TextStyle}
+              onPress={SampleFunction.bind(this, item)}
+            >
+              {" "}
+              {item}{" "}
+            </Text>
+          ))} */}
+
+          {/* <ItemPicker
             style={{}}
             onValueChange={(value) => {
               console.log(value);
@@ -61,7 +141,7 @@ const ThemeScreen = (theme) => {
           >
             <Picker.Item label='Seleziona un tema colore' value='0' />
             {Object.keys(this.theme.theme.coloriExtra).map((option, i) => (
-              //create options for each color option in our theme.js file
+              //create options for each color option in our theme file
               <Picker.Item
                 key={i}
                 label={option}
@@ -69,27 +149,20 @@ const ThemeScreen = (theme) => {
               />
             ))}
           </ItemPicker> */}
-
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor='#3e3e3e'
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />
-      </ContainerStyle>
+        </Animated.View>
+      </ContainerStl>
     </ThemeProvider>
   );
 };
 
-//* REDUX - //
+//* REDUX - ///////////
 const mapStateToProps = (state) => ({
-  theme: state.themeReducer.theme,
+  THEME: state.themeReducer.theme,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeTheme: bindActionCreators(changeTheme, dispatch),
 });
-/****** ************************ */
+/****** REDUX **************** */
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThemeScreen);

@@ -1,5 +1,5 @@
-import ThemeNavigation from "@organizer/theme/Navigation";
-import HomeNavigation from "@organizer/home/Navigation";
-import LoginNavigation from "@organizer/login/Navigation";
+import { ThemeScreen } from "./organizer/theme/index";
+import { HomeScreen } from "./organizer/home/index";
+import { LoginScreen } from "./organizer/login/index";
 
-export { ThemeNavigation, HomeNavigation, LoginNavigation };
+export { ThemeScreen, HomeScreen, LoginScreen };
