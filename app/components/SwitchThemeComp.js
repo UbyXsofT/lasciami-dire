@@ -12,6 +12,7 @@ const SwitchThemeComp = (props) => {
     console.log("isEnabled", isEnabled);
     setIsEnabled((previousState) => !previousState),
       props.changeTheme(isEnabled);
+    props.navigation.toggleDrawer();
   };
 
   return (
@@ -19,16 +20,17 @@ const SwitchThemeComp = (props) => {
       <CustomSwitch
         onSwitch={toggleSwitch}
         onSwitchReverse={toggleSwitch}
-        buttonColor={"transparent"}
-        buttonWidth={0}
+        buttonColor={"#CCCCCC"}
+        buttonWidth={20}
         switchBorderColor={"#CCCCCC"}
-        switchBorderWidth={2}
+        switchBorderWidth={1}
         buttonBorderColor={"#191919"}
+        buttonBorderWidth={1}
         switchBackgroundColor={"black"}
         onSwitchBackgroundColor={"black"}
         switchLeftText={"☀️"}
         switchRightText={"🌙"}
-        animationSpeed={1000}
+        animationSpeed={25}
         switchWidth={50}
         value={isEnabled}
         style={{ cursor: "pointer" }}

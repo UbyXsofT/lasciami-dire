@@ -100,14 +100,11 @@ export const ContainerStl = styled.View`
 `;
 
 ContainerStl.defaultProps = {
-  flexDirection: "column",
+  flexDirection: "row",
   pl: 20,
   pr: 20,
-  fontSize: typographys.fontSize.H6,
-  fontWeight: typographys.fontWeight.XL,
-  justifyContent: "space-between",
-  alignItems: "stretch",
-  fontFamily: typographys.fontFamily.CANTARELL,
+  justifyContent: "space-evenly",
+  alignItems: "center",
 };
 
 ///******** TextStl *********** */

@@ -456,3 +456,102 @@ const example = `I can contain ${expressions}`;
 
 console.log(example);  // >> I can contain dynamic values
 ///////////////////////////////////
+
+
+****>l'istruzione if...else... nella funzione di rendering di React?
+
+*****> C'è una sezione nei documenti di React sul rendering condizionale a cui dovresti dare un'occhiata. Ecco un esempio di cosa potresti fare usando inline if-else.
+
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  return (
+    <div>
+      {isLoggedIn ? (
+        <LogoutButton onClick={this.handleLogoutClick} />
+      ) : (
+        <LoginButton onClick={this.handleLoginClick} />
+      )}
+    </div>
+  );
+}
+
+*****> Puoi anche gestirlo all'interno della funzione di rendering, ma prima di restituire jsx.
+
+if (isLoggedIn) {
+  button = <LogoutButton onClick={this.handleLogoutClick} />;
+} else {
+  button = <LoginButton onClick={this.handleLoginClick} />;
+}
+
+return (
+  <div>
+    <Greeting isLoggedIn={isLoggedIn} />
+    {button}
+  </div>
+);
+
+
+****> Vale anche la pena menzionare ciò che ZekeDroid ha sollevato nei commenti. Se stai solo verificando una condizione e non vuoi eseguire il rendering di un particolare pezzo di codice che non è conforme, puoi utilizzare && operator.
+
+  return (
+    <div>
+      <h1>Hello!</h1>
+      {unreadMessages.length > 0 &&
+        <h2>
+          You have {unreadMessages.length} unread messages.
+        </h2>
+      }
+    </div>
+  );
+
+
+  *********
+  Rendering completo della funzione in REACT
+
+const renderbase = ({datalist}) => {
+        if(datalist){
+            return  Object.keys(datalist).map((item,index) => {
+                return(
+                  <option value={datalist[item].code} key={index}>
+                      {datalist[item].symbol}
+                  </option>
+                )
+            })
+        }  
+    }
+
+-------
+a = { 
+  a: 1,
+  b: 2,
+  c: 3
+}
+
+Object.entries(a).map(([key, value]) => {
+    // Abbastanza semplice: usa la chiave per la chiave e il valore per il valore.
+    // Giusto per chiarire: a differenza della destrutturazione degli oggetti, i nomi dei parametri non contano qui.
+})
+
+
+
+
+  // Object.entries(colorMe[1]).map((colorMe2, index2) => {
+                //   {
+                //     console.log(`colorMe2[1], ${colorMe2[1]}`);
+                //   }
+                //   <BoxStl
+                //     key={`2_BoxStl ${index}`}
+                //     style={{ backgroundColor: colorMe2[1] }}
+                //   >
+                //     <TextStl
+                //       key={`3_TextStl ${index}`}
+                //       style={{
+                //         fontSize: typography.fontSize.H6,
+                //         textAlign: "center",
+                //         color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR,
+                //       }}
+                //     >
+                //       {colorMe2[1]} BOOO
+                //     </TextStl>
+                //   </BoxStl>;
+                // })

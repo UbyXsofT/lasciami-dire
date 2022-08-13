@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "react-native-gesture-handler";
 import { ThemeProvider } from "styled-components/native";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 ///** CUSTOM */
 import {
   StatusBarComp,
@@ -42,12 +42,16 @@ const DRAWER = createDrawerNavigator();
 const TAB = createBottomTabNavigator();
 
 const App = (props) => {
-  console.log(props.THEME.coloriTema);
-  const MyTheme = {
-    ...DefaultTheme,
+  const NavTheme = {
+    //tema del componente di navigazione
+    dark: false,
     colors: {
-      ...DefaultTheme.colors,
+      primary: props.THEME.coloriTema.PRIMARY_TEXT_COLOR,
       background: props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR,
+      card: props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR,
+      text: props.THEME.coloriTema.SECONDARY_TEXT_COLOR,
+      border: props.THEME.coloriTema.SLATE_GRAY,
+      notification: props.THEME.coloriTema.ERROR,
     },
   };
 
@@ -55,19 +59,18 @@ const App = (props) => {
     headerStyle: {
       backgroundColor: props.THEME.coloriTema.PRIMARY_BACKGROUND_COLOR,
     },
-    headerTintColor: props.THEME.coloriTema.PRIMARY_TEXT_COLOR,
-    headerBackTitle: props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR,
+    headerTintColor: props.THEME.coloriTema.SECONDARY_TEXT_COLOR,
+    // headerBackTitle: props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR,
   };
 
   const colorTxtSwitch = {
-    color: props.THEME.coloriTema.PRIMARY_BACKGROUND_COLOR,
+    color: props.THEME.coloriTema.SECONDARY_TEXT_COLOR,
   };
 
   return (
-    // <View style={{ backgroundColor: "black" }}>
     <StartApp>
       <ThemeProvider theme={props.THEME}>
-        <NavigationContainer theme={MyTheme}>
+        <NavigationContainer theme={NavTheme}>
           <DRAWER.Navigator
             initialRouteName='Theme'
             drawerContent={(props) => {
@@ -89,12 +92,13 @@ const App = (props) => {
                       flexDirection: "row",
                       alignContent: "center",
                       justifyContent: "flex-end",
-                      marginRight: 10,
+                      marginRight: "auto",
+                      marginLeft: "auto",
+                      alignItems: "center",
                     }}
                   >
                     <TextStl style={colorTxtSwitch}>Switch theme</TextStl>
-                    {/* <LogoImg WH={30} Radius={5} /> */}
-                    <SwitchThemeComp />
+                    <SwitchThemeComp {...props} />
                   </View>
                 </DrawerContentScrollView>
               );
