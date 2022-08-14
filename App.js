@@ -33,9 +33,8 @@ import {
   DrawerItemList,
   DrawerItem,
 } from "@react-navigation/drawer";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { flex } from "styled-system";
 
 const STACK = createNativeStackNavigator();
 const DRAWER = createDrawerNavigator();
@@ -46,10 +45,10 @@ const App = (props) => {
     //tema del componente di navigazione
     dark: false,
     colors: {
-      primary: props.THEME.coloriTema.PRIMARY_TEXT_COLOR,
-      background: props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR,
-      card: props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR,
-      text: props.THEME.coloriTema.SECONDARY_TEXT_COLOR,
+      primary: props.THEME.coloriTema.TEXT_COLOR_1,
+      background: props.THEME.coloriTema.BACK_COLOR_1,
+      card: props.THEME.coloriTema.BACK_COLOR_2,
+      text: props.THEME.coloriTema.TEXT_COLOR_1,
       border: props.THEME.coloriTema.SLATE_GRAY,
       notification: props.THEME.coloriTema.ERROR,
     },
@@ -57,14 +56,14 @@ const App = (props) => {
 
   const screenOptionStyle = {
     headerStyle: {
-      backgroundColor: props.THEME.coloriTema.PRIMARY_BACKGROUND_COLOR,
+      backgroundColor: props.THEME.coloriTema.BACK_COLOR_2,
     },
-    headerTintColor: props.THEME.coloriTema.SECONDARY_TEXT_COLOR,
-    // headerBackTitle: props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR,
+    headerTintColor: props.THEME.coloriTema.TEXT_COLOR_2,
+    // headerBackTitle: props.THEME.coloriTema.BACK_COLOR_1,
   };
 
   const colorTxtSwitch = {
-    color: props.THEME.coloriTema.SECONDARY_TEXT_COLOR,
+    color: props.THEME.coloriTema.TEXT_COLOR_2,
   };
 
   return (
@@ -143,7 +142,7 @@ const App = (props) => {
                   <Button
                     onPress={() => alert("This is a button!")}
                     title='Info'THEME
-                    color={theme.theme.coloriTema.DEFAULT_BACKGROUND_COLOR}
+                    color={theme.theme.coloriTema.BACK_COLOR_1}
                     fontFamily='Cantarell'
                   />
                 ),
@@ -154,7 +153,7 @@ const App = (props) => {
 
         <StatusBarComp
           colorTheme={props.THEME.descTema}
-          backgroundColorTheme={props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR}
+          backgroundColorTheme={props.THEME.coloriTema.BACK_COLOR_1}
         />
       </ThemeProvider>
     </StartApp>

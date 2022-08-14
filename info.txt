@@ -533,25 +533,206 @@ Object.entries(a).map(([key, value]) => {
 })
 
 
+///////////////////////
+/////////// *******************************************
+Da genitore a figlio
+Dobbiamo solo scrivere una funzione globalmente e associarla al bambino. Questa funzione sarà responsabile dell'aggiornamento dello stato. Vediamo come:
+////////////>>>>
+
+//this is the function responsible to update the state
+function updateState(text){
+    this.setState({text})
+}
+
+//binding 'updateState' function with the child... 
+//now calling 'updateState' will update the child's state
+constructor(props) {
+    super(props)
+    this.state = {
+        text: "Initial State"
+    }
+    updateState = updateState.bind(this)
+}
+Il codice completo è il seguente:
+////////////>>>>
+
+import React, { Component } from 'react';
+import { style, primaryColor, secondaryColor } from '../style';
+
+function updateState(text){
+    this.setState({text})
+}
+
+//passing state from parent to child
+class Child1 extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            text: "Initial State"
+        }
+        updateState = updateState.bind(this)
+    }
+    render() {
+        return (
+            <div>
+                <div style={{ ...style.topLabel, color: primaryColor }}>I am Child</div>
+                <div style={style.label}>{this.state.text}</div>
+            </div>
+        )
+    }
+}
+
+class Parent extends Component {
+    constructor(props) {
+        super(props)
+    }
+    updateChild(text) {
+        updateState(text)
+    }
+    render() {
+        return (
+            <div>
+                <div style={{ ...style.topLabel, color: secondaryColor }}>I am Parent</div>
+                <input style={style.textBox} type="text" 
+                 placeholder="Write text" onChange={(e) => this.updateChild(e.target.value)} />
+                <Child1 />
+            </div>
+        )
+    }
+}
+
+export default Parent;
+
+/////////// *******************************************
+Da figlio a genitore
+È molto facile aggiornare lo stato del genitore da qualsiasi figlio, devi solo passare una funzione di callback come prop a quel figlio e ogni volta che è necessario aggiornare lo stato del genitore, verrà chiamata la funzione. Vediamo come funziona:
+////////////>>>>
+
+class Child extends Component {
+    render() {
+        return (
+            <div>
+                <div style={{ ...style.topLabel, color: primaryColor }}>I am Child</div>
+                <input style={style.textBox} type="text" 
+                 placeholder="Write text" onChange={(e) => this.props.updateTextCB(e.target.value)} />
+            </div>
+        )
+    }
+}
+
+class Parent extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {text: "Initial Text"}
+        this.updateText1 = this.updateText1
+    }
+    updateText1 = (text) => {this.setState({ text })}
+    render() {
+        return (
+            <div>
+                <div>I am Parent</div>
+                <div style={style.label}>{this.state.text}</div>
+                <Child updateTextCB={this.updateText1} />
+            </div>
+        )
+    }
+}
+
+/////////// *******************************************
+Metodo alternativo
+Possiamo creare una funzione al di fuori della parentclasse, associarla a parente chiamare la funzione dalla childclasse quando necessario, in modo simile al caso precedente (da genitore a figlio). Vediamo un esempio:
+////////////>>>>
+
+class Child extends Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        return (
+            <div>
+                <div>I am Child</div>
+                <input style={style.textBox} type="text" placeholder="Write text" 
+                 onChange={(e) => updateText2(e.target.value)} />
+            </div>
+        )
+    }
+}
+
+function updateText2(text) {
+    this.setState({ text })
+}
+
+class Parent extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            text: "Initial Text"
+        }
+        updateText2 = updateText2.bind(this)
+    }
+    updateText1 = (text) => {
+        this.setState({ text })
+    }
+
+    render() {
+        return (
+            <div>
+                <div>I am Parent</div>
+                <div style={style.label}>{this.state.text}</div>
+                <Child />
+             </div>
+        )
+    }
+}
+
+/////////// *******************************************
+Fratello-fratello
+Simile al caso "da genitore a figlio", creeremo una funzione e la legheremo alla classe interessata e, quando necessario, chiameremo quella funzione da qualsiasi altro componente. Diamo un'occhiata a un esempio:
+////////////>>>>
 
 
-  // Object.entries(colorMe[1]).map((colorMe2, index2) => {
-                //   {
-                //     console.log(`colorMe2[1], ${colorMe2[1]}`);
-                //   }
-                //   <BoxStl
-                //     key={`2_BoxStl ${index}`}
-                //     style={{ backgroundColor: colorMe2[1] }}
-                //   >
-                //     <TextStl
-                //       key={`3_TextStl ${index}`}
-                //       style={{
-                //         fontSize: typography.fontSize.H6,
-                //         textAlign: "center",
-                //         color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR,
-                //       }}
-                //     >
-                //       {colorMe2[1]} BOOO
-                //     </TextStl>
-                //   </BoxStl>;
-                // })
+class Sibling1 extends Component {
+    render() {
+        return (
+            <div>
+                <div style={{ ...style.topLabel, color: secondaryColor }}>I am Sibling 1</div>
+                <input style={style.textBox} type="text" 
+                 placeholder="Write text" onChange={(e) => updateText(e.target.value)} />
+            </div>
+        )
+    }
+}
+
+function updateText(text) {
+    this.setState({text})
+}
+
+class Sibling2 extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            text: "Initial State"
+        }
+        updateText = updateText.bind(this)
+    }
+    render() {
+        return (
+            <div>
+                <div style={{ ...style.topLabel, color: primaryColor }}>I am Sibling 2</div>
+                <div style={style.label}>{this.state.text}</div>
+            </div>
+        )
+    }
+}
+
+class Example3 extends Component {
+    render() {
+        return (
+            <div>
+                <Sibling1 />
+                <Sibling2 />
+            </div>
+        )
+    }
+}
+/////////// *******************************************

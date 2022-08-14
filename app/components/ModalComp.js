@@ -1,57 +1,42 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Button,
+} from "react-native";
 
-const ModalComp = ({ open, onClose }) => {
-  console.log("ciao");
+const ModalComp = (props) => {
+  //console.log("ModalComp-props", props);
+
   return (
-    <Modal
-      isVisible={open}
-      onBackButtonPress={onClose}
-      onBackdropPress={onClose}
-    >
-      <View>
-        <Text>HELLO TEXT</Text>{" "}
-      </View>
-    </Modal>
+    <View style={styles.centeredView}>
+      <Modal
+        animationType='slide'
+        transparent={true}
+        visible={props.isVisible}
+        onRequestClose={() => {
+          props.changeStateModal(!props.isVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>{props.txt1}</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => props.changeStateModal(!props.isVisible)}
+            >
+              <Text style={styles.textStyle}>Close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    </View>
   );
 };
-
-// const ModalComp = ({ visualizza, msg }) => {
-//   console.log("visualizza", visualizza);
-//   console.log("msg", msg);
-//   const [modalVisible, setModalVisible] = useState(false);
-//   return (
-//     <View style={styles.centeredView}>
-//       <Modal
-//         animationType='slide'
-//         transparent={true}
-//         visible={modalVisible}
-//         onRequestClose={() => {
-//           Alert.alert("Modal has been closed.");
-//           setModalVisible(!modalVisible);
-//         }}
-//       >
-//         <View style={styles.centeredView}>
-//           <View style={styles.modalView}>
-//             <Text style={styles.modalText}>Hello World!</Text>
-//             <Pressable
-//               style={[styles.button, styles.buttonClose]}
-//               onPress={() => setModalVisible(!modalVisible)}
-//             >
-//               <Text style={styles.textStyle}>Hide Modal</Text>
-//             </Pressable>
-//           </View>
-//         </View>
-//       </Modal>
-//       {/* <Pressable
-//         style={[styles.button, styles.buttonOpen]}
-//         onPress={() => setModalVisible(true)}
-//       >
-//         <Text style={styles.textStyle}>Show Modal</Text>
-//       </Pressable> */}
-//     </View>
-//   );
-// };
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -79,9 +64,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
   },
   buttonClose: {
     backgroundColor: "#2196F3",

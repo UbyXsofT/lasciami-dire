@@ -21,7 +21,7 @@ const LoginScreen = (props) => {
   return (
     <ThemeProvider theme={props.THEME}>
       <ContainerStl>
-        <TitleStl style={{ color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR }}>
+        <TitleStl style={{ color: props.THEME.coloriTema.TEXT_COLOR_1 }}>
           Login Screen
         </TitleStl>
       </ContainerStl>

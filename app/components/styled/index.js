@@ -100,11 +100,12 @@ export const ContainerStl = styled.View`
 `;
 
 ContainerStl.defaultProps = {
-  flexDirection: "row",
-  pl: 20,
-  pr: 20,
-  justifyContent: "space-evenly",
+  p: 20,
   alignItems: "center",
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "space-evenly",
 };
 
 ///******** TextStl *********** */

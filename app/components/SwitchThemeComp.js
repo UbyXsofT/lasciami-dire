@@ -30,7 +30,7 @@ const SwitchThemeComp = (props) => {
         onSwitchBackgroundColor={"black"}
         switchLeftText={"☀️"}
         switchRightText={"🌙"}
-        animationSpeed={25}
+        animationSpeed={5}
         switchWidth={50}
         value={isEnabled}
         style={{ cursor: "pointer" }}

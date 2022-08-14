@@ -43,11 +43,6 @@ import { colors, typography, components } from "../../../theme/index";
 
 const ThemeScreen = (props) => {
   //console.log("props", props);
-
-  // const openModal = () => {
-  //   return <ModalComp open={open} onClose={() => setOpen(false)} />;
-  // };
-
   const renderItem = (item, props) =>
     item.Case === "COLOR" ? (
       <BoxItemColor
@@ -73,86 +68,85 @@ const ThemeScreen = (props) => {
   return (
     <ScrollView>
       <ThemeProvider theme={props.THEME}>
-        <ContainerStl>
-          <Animated.View
+        <ContainerStl Key='ContainerStl_Theme'>
+          {/* <Animated.View
             entering={LightSpeedInLeft}
             exiting={LightSpeedOutRight}
             layout={Layout.damping}
+          > */}
+          <TitleStl style={{ color: props.THEME.coloriTema.TEXT_COLOR_1 }}>
+            Theme Screen
+          </TitleStl>
+
+          <TextStl
+            style={{
+              color: props.THEME.coloriTema.TEXT_COLOR_1,
+              fontSize: typography.fontSize.H3,
+              textAlign: "left",
+            }}
           >
-            <TitleStl
-              style={{ color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR }}
-            >
-              Theme Screen
-            </TitleStl>
+            COLOR PALETTE:
+          </TextStl>
 
-            <TextStl
-              style={{
-                color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR,
-                fontSize: typography.fontSize.H3,
-                textAlign: "left",
-              }}
-            >
-              COLOR PALETTE:
-            </TextStl>
+          <ContainerStl
+            Key='colorsContainer1'
+            style={{
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-evenly",
+              alignSelf: "flexStart",
+            }}
+          >
+            {/** CONTAINER */}
+            {Object.entries(props.THEME.coloriTema).map((colorMe, index) => {
+              return renderItem({
+                "Case": "COLOR",
+                "nameColor": colorMe[0],
+                "deskColorRgb": colorMe[1],
+              });
+            })}
+          </ContainerStl>
+          {/** TYPOGRAPHY */}
+          <TextStl
+            style={{
+              color: props.THEME.coloriTema.TEXT_COLOR_1,
+              fontSize: typography.fontSize.H3,
+              textAlign: "left",
+            }}
+          >
+            TYPOGRAPHY:
+          </TextStl>
 
-            <BoxStl
-              Key='colorsContainer1'
-              style={{
-                backgroundColor:
-                  props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR,
-                width: "auto",
-                height: "auto",
-                marginBottom: "50px",
-              }}
-            >
-              {/** CONTAINER */}
-              {Object.entries(props.THEME.coloriTema).map((colorMe, index) => {
+          <BoxStl
+            Key='typographyContainer1'
+            style={{
+              backgroundColor: props.THEME.coloriTema.BACK_COLOR_1,
+              width: "auto",
+              height: "auto",
+              marginBottom: "50px",
+            }}
+          >
+            {/** CONTAINER */}
+            {Object.entries(typography).map((val, index) => {
+              // console.log("NOME: ", val);
+              // console.log("index", index);
+
+              Object.entries(val[1]).map((val2, index2) => {
+                // console.log("NOME2: ", val2[0]);
+                // console.log("VALORE2: ", val2[1]);
                 return renderItem({
-                  "Case": "COLOR",
-                  "nameColor": colorMe[0],
-                  "deskColorRgb": colorMe[1],
+                  "Case": "TYPOGRAPHY",
+                  "rootTypo": val[0],
+                  "nameTypo": val2[0],
+                  "deskTypo": val2[1],
                 });
-              })}
-            </BoxStl>
-            {/** TYPOGRAPHY */}
-            <TextStl
-              style={{
-                color: props.THEME.coloriTema.PRIMARY_TEXT_COLOR,
-                fontSize: typography.fontSize.H3,
-                textAlign: "left",
-              }}
-            >
-              TYPOGRAPHY:
-            </TextStl>
+              });
+            })}
+          </BoxStl>
 
-            <BoxStl
-              Key='typographyContainer1'
-              style={{
-                backgroundColor:
-                  props.THEME.coloriTema.DEFAULT_BACKGROUND_COLOR,
-                width: "auto",
-                height: "auto",
-                marginBottom: "50px",
-              }}
-            >
-              {/** CONTAINER */}
-              {Object.entries(typography).map((val, index) => {
-                // console.log("NOME: ", val);
-                // console.log("index", index);
-
-                Object.entries(val[1]).map((val2, index2) => {
-                  // console.log("NOME2: ", val2[0]);
-                  // console.log("VALORE2: ", val2[1]);
-                  return renderItem({
-                    "Case": "TYPOGRAPHY",
-                    "rootTypo": val[0],
-                    "nameTypo": val2[0],
-                    "deskTypo": val2[1],
-                  });
-                });
-              })}
-            </BoxStl>
-          </Animated.View>
+          {/* </Animated.View> */}
         </ContainerStl>
       </ThemeProvider>
     </ScrollView>
