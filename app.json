@@ -8,17 +8,17 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "backgroundColor": "#001b33",
+    "backgroundColor": "#E5E5E5",
     "userInterfaceStyle": "automatic",
     "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#001b33",
+      "barStyle": "dark-content",
+      "backgroundColor": "#E5E5E5",
       "translucent": true
     },
     "splash": {
       "image": "./app/assets/image/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#001b33"
+      "backgroundColor": "#E5E5E5"
     },
     "ios": {
       "supportsTablet": true
@@ -26,11 +26,12 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/image/icon.png",
-        "backgroundColor": "#001b33"
+        "backgroundColor": "#E5E5E5"
       }
     },
     "web": {
-      "favicon": "./app/assets/image/favicon-96x96.png"
+      "favicon": "./app/assets/image/favicon-96x96.png",
+      "backgroundColor": "#E5E5E5"
     }
   },
   "name": "lasciami-dire"

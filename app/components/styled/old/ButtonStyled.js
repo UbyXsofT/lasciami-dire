@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 
 const ButtonContainer = styled.TouchableOpacity`
-  margin: 5px;
+  margin: 5;
   width: ${(props) => props.btnWidth};
   height: auto;
   padding: ${(props) => props.btnPadding};

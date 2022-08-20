@@ -1,6 +1,5 @@
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
-import { View } from "react-native";
 import * as Font from "expo-font";
 //@@@ CARICO LE RISORSE NECESSARIE
 export default function StartApp({ children }) {

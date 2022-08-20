@@ -32,12 +32,12 @@ const ThemeTestScreen = () => {
       {/* <Text style={style.title}>THEME TEST</Text> */}
 
       <TextStyled
-        fontSize={theme.typography.fontSize.M + "px"}
+        fontSize={theme.typography.fontSize.M}
         fontTextAlign='left'
         fontColor={theme.colors.PRIMARY}
         fontWeight='500'
         fontFamily={theme.typography.fontFamily.CANTARELL}
-        fontLetterSpacing={theme.typography.letterSpacing.S + "px"}
+        fontLetterSpacing={theme.typography.letterSpacing.S}
       >
         THEME TEST
       </TextStyled>
@@ -45,12 +45,12 @@ const ThemeTestScreen = () => {
       <SeparatorStyled />
 
       <TextStyled
-        fontSize={theme.typography.fontSize.M + "px"}
+        fontSize={theme.typography.fontSize.M}
         fontTextAlign='center'
         fontColor={theme.colors.SECONDARY}
         fontWeight='500'
         fontFamily={theme.typography.fontFamily.CANTARELL}
-        fontLetterSpacing={theme.typography.letterSpacing.S + "px"}
+        fontLetterSpacing={theme.typography.letterSpacing.S}
       >
         Buttons
       </TextStyled>
@@ -61,41 +61,41 @@ const ThemeTestScreen = () => {
         btnTitle='1ButtonStyled-use: GnomePalet Size:S open GOOGLE '
         btnBgColor={theme.colors.GNOME.purple[5]}
         btnTextColor={theme.colors.GNOME.orange[1]}
-        btnTextSize={theme.typography.fontSize.S + "px"}
+        btnTextSize={theme.typography.fontSize.S}
         btnPress={() => Linking.openURL("https://www.google.it/")}
-        btnPadding='5px'
+        btnPadding='5'
         btnWidth='auto'
-        btnRadius='5px'
+        btnRadius='5'
         btnTextAlign='center'
         btnFontWeight='500'
         btnFontFamily={theme.typography.fontFamily.CANTARELL}
-        btnLetterSpacing={theme.typography.letterSpacing.S + "px"}
+        btnLetterSpacing={theme.typography.letterSpacing.S}
       ></ButtonStyled>
 
       <ButtonStyled
         btnTitle='2ButtonStyled-use: GnomePalet Size:M call Function '
         btnBgColor={theme.colors.GNOME.yellow[1]}
         btnTextColor={theme.colors.GNOME.dark[1]}
-        btnTextSize={theme.typography.fontSize.M + "px"}
+        btnTextSize={theme.typography.fontSize.M}
         btnPress={() => _TestFunction("2ButtonStyled")}
-        btnPadding='5px'
+        btnPadding='5'
         btnWidth='auto'
-        btnRadius='5px'
+        btnRadius='5'
         btnTextAlign='right'
         btnFontWeight='500'
         btnFontFamily={theme.typography.fontFamily.CANTARELL}
-        btnLetterSpacing={theme.typography.letterSpacing.S + "px"}
+        btnLetterSpacing={theme.typography.letterSpacing.S}
       ></ButtonStyled>
 
       <SeparatorStyled />
 
       <TextStyled
-        fontSize={theme.typography.fontSize.M + "px"}
+        fontSize={theme.typography.fontSize.M}
         fontTextAlign='center'
         fontColor={theme.colors.SECONDARY}
         fontWeight='500'
         fontFamily={theme.typography.fontFamily.CANTARELL}
-        fontLetterSpacing={theme.typography.letterSpacing.S + "px"}
+        fontLetterSpacing={theme.typography.letterSpacing.S}
       >
         Colors
       </TextStyled>

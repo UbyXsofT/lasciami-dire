@@ -1,46 +1,21 @@
 ///** DEFAULT */
 import React, { useState, useEffect } from "react";
-import styled, { ThemeProvider } from "styled-components/native";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Pressable,
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Button,
-  SafeAreaView,
-} from "react-native";
+import { TouchableOpacity } from "react-native";
 import * as Clipboard from "expo-clipboard";
 ///** CUSTOM */
-import { BoxStl, TitleStl, ContainerStl, TextStl } from "./styled/index";
-import { colors, typography, components } from "../theme/index";
+import { BoxStl, ContainerStl, TextStl } from "./styled/index";
+import { typography } from "../theme/index";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { ModalComp } from "./index";
+import ModalComp from "./ModalComp";
+import getRGB from "../utils/getRGB";
+import isSimilarRGB from "../utils/isSimilarRGB";
 ///** REDUX */
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { changeTheme } from "../actions/themeAction";
+import { borderColor, borderStyle } from "styled-system";
 
-// const openModal = () => {
-//   return <ModalComp open={open} onClose={() => setOpen(false)} />;
-// };
-
-const getRGB = (color) => {
-  color = parseInt(color.substring(1), 16);
-  let r = color >> 16;
-  let g = (color - (r << 16)) >> 8;
-  let b = color - (r << 16) - (g << 8);
-  return [r, g, b];
-};
-
-const isSimilar = ([r1, g1, b1], [r2, g2, b2], tolerance) => {
-  return Math.abs(r1 - r2) + Math.abs(g1 - g2) + Math.abs(b1 - b2) < tolerance;
-};
-
-const BoxItemColor = (props) => {
+const BoxItemColorComp = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const nameColor = props.nameColor;
   const deskColorRgb = props.deskColorRgb;
@@ -53,24 +28,22 @@ const BoxItemColor = (props) => {
     changeStateModal(true);
     await Clipboard.setStringAsync(txt);
   };
-  const isSimilarChk = isSimilar(
+  const isSimilarChk = isSimilarRGB(
     getRGB(deskColorRgb),
     getRGB(props.THEME.coloriTema.DARK),
     200
   );
 
   return (
-    // <ThemeProvider theme={props.THEME}>
-    //<Child updateTextCB={this.updateText1} />
     <ContainerStl
-      Key='ContainerBoxItemColor'
+      Key='ContainerBoxItemColorComp'
       style={{
         alignItems: "center",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-between",
-        alignSelf: "flexStart",
+        alignSelf: "flex-start",
       }}
     >
       <ModalComp
@@ -86,15 +59,17 @@ const BoxItemColor = (props) => {
           }
           style={{
             backgroundColor: deskColorRgb,
-            width: "200px",
-            marginBottom: "10px",
-            paddingBottom: "5px",
+            width: 200,
+            marginBottom: 10,
+            paddingBottom: 5,
             cursor: "pointer",
-            borderRadius: "5px",
+            borderRadius: 5,
             height: "auto",
-            display: "inline-block",
-            paddingTop: "5px",
-            border: "1px solid black",
+            // display: "inline-block",
+            paddingTop: 5,
+            border: 1,
+            borderColor: "black",
+            borderStyle: "solid",
           }}
         >
           <Ionicons
@@ -105,7 +80,7 @@ const BoxItemColor = (props) => {
                 ? props.THEME.coloriTema.LIGHT
                 : props.THEME.coloriTema.DARK
             }
-            style={{ margin: "5px" }}
+            style={{ margin: 5 }}
           ></Ionicons>
 
           <TextStl
@@ -144,7 +119,6 @@ const BoxItemColor = (props) => {
         </BoxStl>
       </TouchableOpacity>
     </ContainerStl>
-    // </ThemeProvider>
   );
 };
 
@@ -155,4 +129,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeTheme: bindActionCreators(changeTheme, dispatch),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(BoxItemColor);
+export default connect(mapStateToProps, mapDispatchToProps)(BoxItemColorComp);

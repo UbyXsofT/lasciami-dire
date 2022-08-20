@@ -1,36 +1,36 @@
 import React, { useState } from "react";
-import CustomSwitch from "react-native-custom-switch";
+import CustomSwitchComp from "./CustomSwitchComp";
 ///** REDUX */
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeTheme } from "../actions/themeAction";
+import { changeTheme } from "../../actions/themeAction";
 
 const SwitchThemeComp = (props) => {
-  //console.log(props);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => {
+  const [isEnabled, setIsEnabled] = useState(true);
+
+  const toggleSwitch = async () => {
     console.log("isEnabled", isEnabled);
-    setIsEnabled((previousState) => !previousState),
-      props.changeTheme(isEnabled);
     props.navigation.toggleDrawer();
+    setIsEnabled((previousState) => !previousState);
+    await props.changeTheme(isEnabled);
   };
 
   return (
     <>
-      <CustomSwitch
+      <CustomSwitchComp
         onSwitch={toggleSwitch}
         onSwitchReverse={toggleSwitch}
-        buttonColor={"#CCCCCC"}
+        buttonColor={props.THEME.coloriTema.DAFAULT}
         buttonWidth={20}
-        switchBorderColor={"#CCCCCC"}
+        switchBorderColor={props.THEME.coloriTema.DAFAULT}
         switchBorderWidth={1}
-        buttonBorderColor={"#191919"}
+        buttonBorderColor={props.THEME.coloriTema.DAFAULT}
         buttonBorderWidth={1}
-        switchBackgroundColor={"black"}
-        onSwitchBackgroundColor={"black"}
+        switchBackgroundColor={props.THEME.coloriTema.BLACK}
+        onSwitchBackgroundColor={props.THEME.coloriTema.BLACK}
         switchLeftText={"☀️"}
         switchRightText={"🌙"}
-        animationSpeed={5}
+        animationSpeed={25}
         switchWidth={50}
         value={isEnabled}
         style={{ cursor: "pointer" }}

@@ -2,9 +2,9 @@ import { colors } from "../theme/index";
 
 const initialState = {
   theme: {
-    coloriTema: colors.darkTheme,
-    descTema: "dark",
-    isLightTheme: false,
+    coloriTema: colors.lightTheme,
+    descTema: "light",
+    isLightTheme: true,
   },
 };
 // Usa initialState come valore predefinito

@@ -736,3 +736,72 @@ class Example3 extends Component {
     }
 }
 /////////// *******************************************
+
+////////////>>>>
+Spinner loader and fatching data: 
+
+import React, { useState, useEffect } from "react"; // importing useEffect here
+import Layout from "@layouts/default";
+import ContentContainer from "@components/ContentContainer";
+import { request } from "graphql-request";
+
+async function fetchData() {
+   const endpoint = "https://localhost:3090/graphql"
+
+   const query = `
+     query getItems($id: ID) {
+       item(id: $id) {
+         title
+       }
+     }
+   `;
+
+   const variables = {
+      id: "123123123"
+   };
+
+   const data = await request(endpoint, query, variables);
+   // console.log(JSON.stringify(data, undefined, 2));
+
+   return data;
+}
+
+const TestingGraphQL = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
+  // useEffect con una matrice di dipendenza vuota funziona allo stesso modo di componentDidMount
+  useEffect(async () => {
+     try {
+       // imposta il caricamento su true prima di chiamare l'API
+       setLoading(true);
+       const data = await fetchData();
+       setData(data);
+       // imposta il caricamento su false al termine del recupero
+       setLoading(false);
+     } catch (error) {
+       // aggiungi qui la gestione degli errori
+       setLoading(false);
+       console.log(error);
+     }
+  }, []);
+
+  // restituisce uno Spinner quando il caricamento è vero
+  if(loading) return (
+    <span>Loading</span>
+  );
+
+  // i dati saranno nulli quando la chiamata di recupero non riesce
+  if (!data) return (
+    <span>Data not available</span>
+  );
+
+  // quando i dati sono disponibili, viene mostrato il titolo
+  return (
+    <Layout>
+      {data.item.title}
+    </Layout>
+  );
+};
+
+/////////// *******************************************

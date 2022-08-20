@@ -85,7 +85,7 @@ export const TitleStl = styled.Text`
 TitleStl.defaultProps = {
   p: 2,
   fontSize: typographys.fontSize.H1,
-  fontWeight: typographys.fontWeight.XL,
+  fontWeight: typographys.fontWeight.S,
   color: "white",
   verticalAlign: "center",
   textAlign: "center",

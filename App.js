@@ -6,9 +6,11 @@ import { View, ScrollView } from "react-native";
 ///** CUSTOM */
 import {
   StatusBarComp,
-  LogoImg,
-  SwitchThemeComp,
+  LogoImgComp,
+  ThemeChangeComp,
+  SeparatorComp,
 } from "./app/components/index";
+import { colors, typography, components } from "./app/theme/index";
 ///** CUSTOM */
 import {
   BoxStl,
@@ -47,7 +49,7 @@ const App = (props) => {
     colors: {
       primary: props.THEME.coloriTema.TEXT_COLOR_1,
       background: props.THEME.coloriTema.BACK_COLOR_1,
-      card: props.THEME.coloriTema.BACK_COLOR_2,
+      card: props.THEME.coloriTema.BACK_COLOR_1,
       text: props.THEME.coloriTema.TEXT_COLOR_1,
       border: props.THEME.coloriTema.SLATE_GRAY,
       notification: props.THEME.coloriTema.ERROR,
@@ -56,7 +58,7 @@ const App = (props) => {
 
   const screenOptionStyle = {
     headerStyle: {
-      backgroundColor: props.THEME.coloriTema.BACK_COLOR_2,
+      backgroundColor: props.THEME.coloriTema.BACK_COLOR_1,
     },
     headerTintColor: props.THEME.coloriTema.TEXT_COLOR_2,
     // headerBackTitle: props.THEME.coloriTema.BACK_COLOR_1,
@@ -64,6 +66,15 @@ const App = (props) => {
 
   const colorTxtSwitch = {
     color: props.THEME.coloriTema.TEXT_COLOR_2,
+    fontSize: typography.fontSize.H2,
+  };
+
+  const ViewStyle = {
+    alignItems: "center",
+    placeContent: "center",
+    display: "flex",
+    flexDirection: "row",
+    padding: 10,
   };
 
   return (
@@ -75,6 +86,12 @@ const App = (props) => {
             drawerContent={(props) => {
               return (
                 <DrawerContentScrollView {...props}>
+                  <View style={ViewStyle}>
+                    <LogoImgComp WH={50} Radius={5} />
+                    <TextStl style={colorTxtSwitch}>Lasciami Dire</TextStl>
+                    <ThemeChangeComp {...props} />
+                  </View>
+                  <SeparatorComp />
                   <DrawerItemList {...props} />
                   <DrawerItem
                     label='Setting'
@@ -84,21 +101,6 @@ const App = (props) => {
                     label='LogOut'
                     onPress={() => props.navigation.navigate("LogOut")}
                   />
-
-                  <View
-                    style={{
-                      display: "inline-flex",
-                      flexDirection: "row",
-                      alignContent: "center",
-                      justifyContent: "flex-end",
-                      marginRight: "auto",
-                      marginLeft: "auto",
-                      alignItems: "center",
-                    }}
-                  >
-                    <TextStl style={colorTxtSwitch}>Switch theme</TextStl>
-                    <SwitchThemeComp {...props} />
-                  </View>
                 </DrawerContentScrollView>
               );
             }}

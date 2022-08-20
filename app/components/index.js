@@ -1,7 +1,19 @@
 import StatusBarComp from "./StatusBarComp";
-import LogoImg from "./LogoImgComp";
-import SwitchThemeComp from "./SwitchThemeComp";
+import LogoImgComp from "./LogoImgComp";
 import ModalComp from "./ModalComp";
-import BoxItemColor from "./BoxItemColor";
+import BoxItemColorComp from "./BoxItemColorComp";
+import BoxItemTypographyComp from "./BoxItemTypographyComp";
+import OSpinnerComp from "./OSpinnerComp";
+import ThemeChangeComp from "./ThemeChangeComp";
+import SeparatorComp from "./SeparatorComp";
 
-export { StatusBarComp, LogoImg, SwitchThemeComp, ModalComp, BoxItemColor };
+export {
+  StatusBarComp,
+  LogoImgComp,
+  ModalComp,
+  BoxItemTypographyComp,
+  BoxItemColorComp,
+  OSpinnerComp,
+  ThemeChangeComp,
+  SeparatorComp,
+};

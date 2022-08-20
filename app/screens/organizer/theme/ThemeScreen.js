@@ -1,16 +1,7 @@
 ///** DEFAULT */
 import React, { useState, useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components/native";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Pressable,
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { ScrollView } from "react-native";
 import * as Clipboard from "expo-clipboard";
 import Ionicons from "@expo/vector-icons/Ionicons";
 ///** REANIMATED */
@@ -37,38 +28,51 @@ import {
   LogoImg,
   SwitchThemeComp,
   ModalComp,
-  BoxItemColor,
+  BoxItemColorComp,
+  BoxItemTypographyComp,
+  OSpinnerComp,
 } from "../../../components/index";
 import { colors, typography, components } from "../../../theme/index";
 
 const ThemeScreen = (props) => {
   //console.log("props", props);
-  const renderItem = (item, props) =>
-    item.Case === "COLOR" ? (
-      <BoxItemColor
+  const [isLoading, setIsLoading] = useState(false);
+  const closeOverlay = () => setIsLoading(false);
+  const [memRootTypo, setMemRootTypo] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, []);
+
+  const renderItem = (item, props) => {
+    return item.Case === "COLOR" ? (
+      <BoxItemColorComp
         key={item.nameColor + item.deskColorRgb}
         nameColor={item.nameColor}
         deskColorRgb={item.deskColorRgb}
         props={props}
       />
     ) : (
-      <></>
-      //TYPOGRAPHY
-      // (console.log("rootTypo", item.rootTypo),
-      // console.log("nameTypo", item.nameTypo),
-      // console.log("deskTypo", item.deskTypo))
-
-      // <BoxItemColor
-      //   key={item.nameColor + item.deskColorRgb}
-      //   nameColor={item.nameColor}
-      //   deskColorRgb={item.deskColorRgb}
-      // />
+      <BoxItemTypographyComp
+        key={item.rootTypo + item.nameTypo + item.deskTypo}
+        rootTypo={item.rootTypo}
+        nameTypo={item.nameTypo}
+        deskTypo={item.deskTypo}
+        props={props}
+      />
     );
+  };
 
   return (
     <ScrollView>
       <ThemeProvider theme={props.THEME}>
         <ContainerStl Key='ContainerStl_Theme'>
+          <OSpinnerComp
+            isLoading={isLoading}
+            closeOverlay={() => closeOverlay()}
+            message='Please wait ...'
+          />
+
           {/* <Animated.View
             entering={LightSpeedInLeft}
             exiting={LightSpeedOutRight}
@@ -87,7 +91,6 @@ const ThemeScreen = (props) => {
           >
             COLOR PALETTE:
           </TextStl>
-
           <ContainerStl
             Key='colorsContainer1'
             style={{
@@ -96,10 +99,11 @@ const ThemeScreen = (props) => {
               flexDirection: "row",
               flexWrap: "wrap",
               justifyContent: "space-evenly",
-              alignSelf: "flexStart",
+              alignSelf: "flex-start",
             }}
           >
             {/** CONTAINER */}
+
             {Object.entries(props.THEME.coloriTema).map((colorMe, index) => {
               return renderItem({
                 "Case": "COLOR",
@@ -125,17 +129,12 @@ const ThemeScreen = (props) => {
               backgroundColor: props.THEME.coloriTema.BACK_COLOR_1,
               width: "auto",
               height: "auto",
-              marginBottom: "50px",
+              marginBottom: 50,
             }}
           >
             {/** CONTAINER */}
             {Object.entries(typography).map((val, index) => {
-              // console.log("NOME: ", val);
-              // console.log("index", index);
-
-              Object.entries(val[1]).map((val2, index2) => {
-                // console.log("NOME2: ", val2[0]);
-                // console.log("VALORE2: ", val2[1]);
+              return Object.entries(val[1]).map((val2, index2) => {
                 return renderItem({
                   "Case": "TYPOGRAPHY",
                   "rootTypo": val[0],
