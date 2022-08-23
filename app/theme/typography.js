@@ -22,7 +22,7 @@ const fontSize = {
 };
 
 // example lineHeights scale corrisponede all'indice del font size (fontSize=12 <> lineHeight_18)
-const lineHeights = [18, 21, 24, 30, 36, 48];
+const lineHeights = ["18px", "21px", "24px", "30px", "36px", "48px"];
 const lineHeight = {
   S: lineHeights[0],
   M: lineHeights[1],

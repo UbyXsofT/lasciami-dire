@@ -1,24 +1,35 @@
 import { registerRootComponent } from "expo";
 import { Text, TextInput } from "react-native";
 import { createRoot } from "react-dom/client";
-import React from "react";
+import React, { StrictMode } from "react";
 Text.defaultProps = Text.defaultProps || {};
-Text.defaultProps.maxFontSizeMultiplier = 1; // the maximum amount the font size will scale.
+Text.defaultProps.maxFontSizeMultiplier = 1; //la quantità massima di ridimensionamento della dimensione del carattere.
 TextInput.defaultProps = Text.defaultProps || {};
-TextInput.defaultProps.maxFontSizeMultiplier = 1; // the maximum amount the font size will scale.
+TextInput.defaultProps.maxFontSizeMultiplier = 1; //la quantità massima di ridimensionamento della dimensione del carattere.
 
 import App from "./App";
 import { Provider } from "react-redux";
 import configureStore from "./app/store/configureStore.js";
 
 const store = configureStore();
-//const container = document.getElementById("root");
-//const root = createRoot(container);
+// const container = document.getElementById("root");
+// const root = createRoot(container);
+
+// root.render(
+//   <StrictMode>
+//     <Provider store={store}>
+//       {" "}
+//       <App />
+//     </Provider>
+//   </StrictMode>
+// );
 
 const RNRedux = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </StrictMode>
 );
 
 // root.render(

@@ -19,7 +19,12 @@ import {
   TextStl,
 } from "./app/components/styled/index";
 
-import { ThemeScreen, HomeScreen, LoginScreen } from "./app/screens/index";
+import {
+  ThemeScreen,
+  HomeScreen,
+  LoginScreen,
+  SignUpScreen,
+} from "./app/screens/index";
 import StartApp from "./app/utils/StartApp";
 
 ///** REDUX */
@@ -43,29 +48,31 @@ const DRAWER = createDrawerNavigator();
 const TAB = createBottomTabNavigator();
 
 const App = (props) => {
+  const ColorMe = props.THEME.coloriTema;
+
   const NavTheme = {
     //tema del componente di navigazione
     dark: false,
     colors: {
-      primary: props.THEME.coloriTema.TEXT_COLOR_1,
-      background: props.THEME.coloriTema.BACK_COLOR_1,
-      card: props.THEME.coloriTema.BACK_COLOR_1,
-      text: props.THEME.coloriTema.TEXT_COLOR_1,
-      border: props.THEME.coloriTema.SLATE_GRAY,
-      notification: props.THEME.coloriTema.ERROR,
+      primary: ColorMe.TEXT_COLOR_1,
+      background: ColorMe.BACK_COLOR_1,
+      card: ColorMe.BACK_COLOR_1,
+      text: ColorMe.TEXT_COLOR_1,
+      border: ColorMe.SLATE_GRAY,
+      notification: ColorMe.ERROR,
     },
   };
 
   const screenOptionStyle = {
     headerStyle: {
-      backgroundColor: props.THEME.coloriTema.BACK_COLOR_1,
+      backgroundColor: ColorMe.BACK_COLOR_1,
     },
-    headerTintColor: props.THEME.coloriTema.TEXT_COLOR_2,
-    // headerBackTitle: props.THEME.coloriTema.BACK_COLOR_1,
+    headerTintColor: ColorMe.TEXT_COLOR_2,
+    // headerBackTitle: ColorMe.BACK_COLOR_1,
   };
 
   const colorTxtSwitch = {
-    color: props.THEME.coloriTema.TEXT_COLOR_2,
+    color: ColorMe.TEXT_COLOR_2,
     fontSize: typography.fontSize.H2,
   };
 
@@ -79,15 +86,16 @@ const App = (props) => {
 
   return (
     <StartApp>
-      <ThemeProvider theme={props.THEME}>
-        <NavigationContainer theme={NavTheme}>
+      <ThemeProvider theme={ColorMe}>
+        <SignUpScreen color={ColorMe} />
+        {/* <NavigationContainer theme={NavTheme}>
           <DRAWER.Navigator
-            initialRouteName='Theme'
+            initialRouteName='SignIn'
             drawerContent={(props) => {
               return (
                 <DrawerContentScrollView {...props}>
                   <View style={ViewStyle}>
-                    <LogoImgComp WH={50} Radius={5} />
+                    <LogoImgComp W={40} H={40} Radius={5} />
                     <TextStl style={colorTxtSwitch}>Lasciami Dire</TextStl>
                     <ThemeChangeComp {...props} />
                   </View>
@@ -109,9 +117,10 @@ const App = (props) => {
             <DRAWER.Screen name='Theme Test' component={ThemeScreen} />
             <DRAWER.Screen name='Login' component={LoginScreen} />
             <DRAWER.Screen name='Home' component={HomeScreen} />
-          </DRAWER.Navigator>
+            <DRAWER.Screen name='SignIn' component={SignUpScreen} />
+          </DRAWER.Navigator> */}
 
-          {/* <STACK.Navigator
+        {/* <STACK.Navigator
             initialRouteName='Theme'
             screenOptions={screenOptionStyle}
           >
@@ -120,7 +129,7 @@ const App = (props) => {
             <STACK.Screen name='Home' component={HomeScreen} />
           </STACK.Navigator> */}
 
-          {/* <TAB.Navigator>
+        {/* <TAB.Navigator>
             <TAB.Screen
               name='Theme'
               component={ThemeScreen}
@@ -133,7 +142,7 @@ const App = (props) => {
             <TAB.Screen name='Home' component={HomeScreen} />
           </TAB.Navigator> */}
 
-          {/* <STACK.Navigator initialRouteName='Theme'>
+        {/* <STACK.Navigator initialRouteName='Theme'>
             <STACK.Screen
               name='Theme'
               component={ThemeScreen}
@@ -151,11 +160,11 @@ const App = (props) => {
               }}
             />
           </STACK.Navigator> */}
-        </NavigationContainer>
+        {/* </NavigationContainer> */}
 
         <StatusBarComp
           colorTheme={props.THEME.descTema}
-          backgroundColorTheme={props.THEME.coloriTema.BACK_COLOR_1}
+          backgroundColorTheme={ColorMe.BACK_COLOR_1}
         />
       </ThemeProvider>
     </StartApp>
