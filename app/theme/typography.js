@@ -2,18 +2,21 @@ const fontFamily = {
   CANTARELL: "Cantarell",
 };
 
-const unit_M = "px";
-
 // example fontSizes scale as an array
-const fontSizes = [12, 14, 16, 20, 24, 32];
+const fontSizes = [12, 14, 16, 20, 24, 32, 40, 48];
 const fontSize = {
-  S: fontSizes[0],
-  M: fontSizes[1],
-  L: fontSizes[2],
-  XL: fontSizes[3],
-  XXL: fontSizes[4],
-  XXXL: fontSizes[5],
-  H1: fontSizes[5],
+  XXS: fontSizes[0],
+  XS: fontSizes[1],
+  S: fontSizes[2],
+  M: fontSizes[3],
+  L: fontSizes[4],
+  XL: fontSizes[5],
+  XXL: fontSizes[6],
+  XXXL: fontSizes[7],
+
+  H1Max: fontSizes[7],
+  H1: fontSizes[6],
+  H2Max: fontSizes[5],
   H2: fontSizes[4],
   H3: fontSizes[3],
   H4: fontSizes[2],
@@ -22,14 +25,25 @@ const fontSize = {
 };
 
 // example lineHeights scale corrisponede all'indice del font size (fontSize=12 <> lineHeight_18)
-const lineHeights = ["18px", "21px", "24px", "30px", "36px", "48px"];
+const lineHeights = [
+  "18px",
+  "21px",
+  "24px",
+  "30px",
+  "36px",
+  "48px",
+  "56px",
+  "72px",
+];
 const lineHeight = {
-  S: lineHeights[0],
-  M: lineHeights[1],
-  L: lineHeights[2],
-  XL: lineHeights[3],
-  XXL: lineHeights[4],
-  XXXL: lineHeights[5],
+  XXS: lineHeights[0],
+  XS: lineHeights[1],
+  S: lineHeights[2],
+  M: lineHeights[3],
+  L: lineHeights[4],
+  XL: lineHeights[5],
+  XXL: lineHeights[6],
+  XXXL: lineHeights[7],
 };
 
 // example space scale with aliases

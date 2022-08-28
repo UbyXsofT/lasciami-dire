@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-function MaterialButtonShareComp(props) {
+function BtnShareComp(props) {
   return (
     <TouchableOpacity style={[styles.container, props.style]}>
       <Icon name={props.icon || "share-variant"} style={styles.icon}></Icon>
@@ -12,7 +12,6 @@ function MaterialButtonShareComp(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#3F51B5",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
@@ -29,10 +28,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: "#fff",
-    fontSize: 46,
+    fontSize: 36,
     alignSelf: "center",
     margin: 0,
   },
 });
 
-export default MaterialButtonShareComp;
+export default BtnShareComp;

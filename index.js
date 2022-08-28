@@ -25,11 +25,9 @@ const store = configureStore();
 // );
 
 const RNRedux = () => (
-  <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
 
 // root.render(

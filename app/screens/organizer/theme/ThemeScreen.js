@@ -35,7 +35,7 @@ import {
 import { colors, typography, components } from "../../../theme/index";
 
 const ThemeScreen = (props) => {
-  //console.log("props", props);
+  console.log("props", props);
   const [isLoading, setIsLoading] = useState(false);
   const closeOverlay = () => setIsLoading(false);
   const [memRootTypo, setMemRootTypo] = useState(false);

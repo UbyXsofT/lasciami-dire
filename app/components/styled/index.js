@@ -59,7 +59,6 @@ export const BoxStl = styled.View`
   ${background}
   ${color}
   ${display}
-  ${background}
   ${borders}
   ${position}
   ${shadow}
@@ -80,14 +79,24 @@ export const TitleStl = styled.Text`
   ${color}
   ${space}
   ${typography}
+  ${layout}
+  ${flexbox}
+  ${border}
+  ${background}
+  ${color}
+  ${display}
+  ${borders}
+  ${position}
+  ${shadow}
+  ${colorStyle}
 `;
 
 TitleStl.defaultProps = {
   p: 2,
   fontSize: typographys.fontSize.H1,
-  fontWeight: typographys.fontWeight.S,
+  fontWeight: typographys.fontWeight.XXXL,
   color: "white",
-  verticalAlign: "center",
+  textAlignVertical: "center",
   textAlign: "center",
   fontFamily: typographys.fontFamily.CANTARELL,
 };
@@ -121,7 +130,7 @@ TextStl.defaultProps = {
   fontWeight: typographys.fontWeight.XXXS,
   lineHeight: typographys.lineHeight.S,
   color: "white",
-  verticalAlign: "center",
+  textAlignVertical: "center",
   textAlign: "left",
   fontFamily: typographys.fontFamily.CANTARELL,
 };

@@ -6,11 +6,11 @@ import BoxItemTypographyComp from "./BoxItemTypographyComp";
 import OSpinnerComp from "./OSpinnerComp";
 import ThemeChangeComp from "./ThemeChangeComp";
 import SeparatorComp from "./SeparatorComp";
-import CustomInputComp from "./CustomInputComp";
-import MaterialIconTextboxComp from "./MaterialIconTextboxComp";
-import MaterialButtonVioletComp from "./MaterialButtonVioletComp";
-import MaterialButtonShareComp from "./MaterialButtonShareComp";
-
+import ButtonComp from "./ButtonComp";
+import BtnShareComp from "./BtnShareComp";
+import SeparatorXTxtComp from "./SeparatorXTxtComp";
+import InputIconComp from "./InputIconComp";
+import AvatarComp from "./AvatarComp";
 export {
   StatusBarComp,
   LogoImgComp,
@@ -20,8 +20,9 @@ export {
   OSpinnerComp,
   ThemeChangeComp,
   SeparatorComp,
-  CustomInputComp,
-  MaterialIconTextboxComp,
-  MaterialButtonVioletComp,
-  MaterialButtonShareComp,
+  ButtonComp,
+  BtnShareComp,
+  SeparatorXTxtComp,
+  InputIconComp,
+  AvatarComp,
 };
