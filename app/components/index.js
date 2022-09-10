@@ -11,6 +11,9 @@ import BtnShareComp from "./BtnShareComp";
 import SeparatorXTxtComp from "./SeparatorXTxtComp";
 import InputIconComp from "./InputIconComp";
 import AvatarComp from "./AvatarComp";
+import LoadingImageComp from "./LoadingImageComp";
+import LogoAnimComp from "./LogoAnimComp";
+
 export {
   StatusBarComp,
   LogoImgComp,
@@ -25,4 +28,6 @@ export {
   SeparatorXTxtComp,
   InputIconComp,
   AvatarComp,
+  LoadingImageComp,
+  LogoAnimComp,
 };

@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 ///** REDUX */
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeTheme } from "../actions/themeAction";
+import { RDX_InfoTheme } from "../store/actions/themeAction";
 
 const ThemeChangeComp = (props) => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -14,7 +14,7 @@ const ThemeChangeComp = (props) => {
     // console.log("isEnabled", isEnabled);
     // props.navigation.toggleDrawer();
     setIsEnabled((previousState) => !previousState);
-    await props.changeTheme(isEnabled);
+    await props.RDX_InfoTheme(isEnabled);
   };
 
   return (
@@ -44,7 +44,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeTheme: bindActionCreators(changeTheme, dispatch),
+  RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
 });
 /****** REDUX **************** */
 

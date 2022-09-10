@@ -11,11 +11,17 @@ import {
 ///** REDUX */
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeTheme } from "../actions/themeAction";
+import { RDX_InfoTheme } from "../store/actions/themeAction";
+import { ButtonComp } from "./index";
 
 const ModalComp = (props) => {
   //console.log("ModalComp-props", props);
-
+  const onPressOK = () => {
+    console.log("onPressOK");
+  };
+  const onPressAnnulla = () => {
+    console.log("onPressAnnulla");
+  };
   return (
     <View style={styles(props).centeredView}>
       <Modal
@@ -29,12 +35,33 @@ const ModalComp = (props) => {
         <View style={styles(props).centeredView}>
           <View style={styles(props).modalView}>
             <Text style={styles(props).modalText}>{props.txt1}</Text>
-            <Pressable
-              style={[styles(props).button, styles(props).buttonClose]}
-              onPress={() => props.changeStateModal(!props.isVisible)}
-            >
-              <Text style={styles(props).textStyle}>Close</Text>
-            </Pressable>
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <ButtonComp
+                caption='OK'
+                style={{
+                  height: 45,
+                  width: 40,
+                  borderRadius: 5,
+                  margin: 20,
+                  backgroundColor: props.THEME.colorsTheme.GREEN_5,
+                  color: "white",
+                }}
+                onPress={props.modalOnPressOK}
+              ></ButtonComp>
+              <ButtonComp
+                caption='NO'
+                style={{
+                  height: 45,
+                  width: 40,
+                  borderRadius: 5,
+                  margin: 20,
+                  backgroundColor: props.THEME.colorsTheme.RED_5,
+                  color: "white",
+                }}
+                onPress={props.modalOnPressNO}
+                //onPress={handleSubmit(onSignInPressed)}
+              ></ButtonComp>
+            </View>
           </View>
         </View>
       </Modal>
@@ -52,7 +79,7 @@ const styles = (props) =>
     },
     modalView: {
       margin: 20,
-      backgroundColor: props.THEME.coloriTema.WHITE,
+      backgroundColor: props.THEME.colorsTheme.WHITE,
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
@@ -70,8 +97,14 @@ const styles = (props) =>
       padding: 10,
       elevation: 2,
     },
-    buttonClose: {
-      backgroundColor: props.THEME.coloriTema.INFO,
+    buttonOk: {
+      backgroundColor: props.THEME.colorsTheme.GREEN_1,
+      color: props.THEME.colorsTheme.TEXT_COLOR_1,
+      marginRight: 15,
+    },
+    buttonNo: {
+      backgroundColor: props.THEME.colorsTheme.RED_1,
+      color: props.THEME.colorsTheme.TEXT_COLOR_1,
     },
     textStyle: {
       color: "white",
@@ -90,7 +123,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeTheme: bindActionCreators(changeTheme, dispatch),
+  RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
 });
 /****** REDUX **************** */
 

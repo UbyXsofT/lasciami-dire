@@ -1,9 +1,9 @@
-import { colors } from "../theme/index";
+import { colors } from "../../theme/index";
 
 const initialState = {
   theme: {
-    coloriTema: colors.lightTheme,
-    descTema: "light",
+    colorsTheme: colors.lightTheme,
+    descTheme: "light",
     isLightTheme: true,
   },
 };
@@ -12,17 +12,17 @@ const themeReducer = (state = initialState, action) => {
   // Il riduttore normalmente esamina il campo del tipo di azione per decidere cosa succede
   switch (action.type) {
     // Fai qualcosa qui in base ai diversi tipi di azioni
-    case "CHANGE_THEME":
+    case "INFO_THEME":
       // Dobbiamo restituire un nuovo oggetto di stato
       let newState = {
         //che ha tutti i dati di stato esistenti
         ...state,
         // ma ha le nuove modifiche del tema
         theme: {
-          coloriTema: action.IS_LIGHT_THEME
+          colorsTheme: action.IS_LIGHT_THEME
             ? colors.lightTheme
             : colors.darkTheme,
-          descTema: action.IS_LIGHT_THEME ? "light" : "dark",
+          descTheme: action.IS_LIGHT_THEME ? "light" : "dark",
           isLightTheme: action.IS_LIGHT_THEME,
         },
       };

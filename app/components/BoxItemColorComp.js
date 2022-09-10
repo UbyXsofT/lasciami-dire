@@ -12,7 +12,7 @@ import isSimilarRGB from "../utils/isSimilarRGB";
 ///** REDUX */
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeTheme } from "../actions/themeAction";
+import { RDX_InfoTheme } from "../store/actions/themeAction";
 import { borderColor, borderStyle } from "styled-system";
 
 const BoxItemColorComp = (props) => {
@@ -30,7 +30,7 @@ const BoxItemColorComp = (props) => {
   };
   const isSimilarChk = isSimilarRGB(
     getRGB(deskColorRgb),
-    getRGB(props.THEME.coloriTema.DARK),
+    getRGB(props.THEME.colorsTheme.DARK),
     200
   );
 
@@ -77,8 +77,8 @@ const BoxItemColorComp = (props) => {
             size={16}
             color={
               isSimilarChk === true
-                ? props.THEME.coloriTema.LIGHT
-                : props.THEME.coloriTema.DARK
+                ? props.THEME.colorsTheme.LIGHT
+                : props.THEME.colorsTheme.DARK
             }
             style={{ margin: 5 }}
           ></Ionicons>
@@ -90,8 +90,8 @@ const BoxItemColorComp = (props) => {
               textAlign: "left",
               color:
                 isSimilarChk === true
-                  ? props.THEME.coloriTema.LIGHT
-                  : props.THEME.coloriTema.DARK,
+                  ? props.THEME.colorsTheme.LIGHT
+                  : props.THEME.colorsTheme.DARK,
             }}
           >
             {nameColor}
@@ -109,8 +109,8 @@ const BoxItemColorComp = (props) => {
                 textAlign: "center",
                 color:
                   isSimilarChk === true
-                    ? props.THEME.coloriTema.LIGHT
-                    : props.THEME.coloriTema.DARK,
+                    ? props.THEME.colorsTheme.LIGHT
+                    : props.THEME.colorsTheme.DARK,
               }}
             >
               {deskColorRgb}
@@ -127,6 +127,6 @@ const mapStateToProps = (state) => ({
   THEME: state.themeReducer.theme,
 });
 const mapDispatchToProps = (dispatch) => ({
-  changeTheme: bindActionCreators(changeTheme, dispatch),
+  RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(BoxItemColorComp);

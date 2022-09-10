@@ -1,7 +1,7 @@
 
 
 ********* SPACE  UTILITY
-L' spaceutilità può essere aggiunta a qualsiasi componente che accetti il className​​prop.
+L' spaceu tilità può essere aggiunta a qualsiasi componente che accetti il className​​prop.
 
 // example
 import styled from 'styled-component'
@@ -805,3 +805,45 @@ const TestingGraphQL = () => {
 };
 
 /////////// *******************************************
+node query db mongo
+const collection = client.db("sample_mflix").collection("movies");
+const favorite_movies = await collection.find({genres : ["Drama", "Fantasy"]});
+
+
+//stringa di connessione
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://UbyXsoft:LasciamiDire2022@lasciamidire.toce9lz.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
+
+///// users collection struttura
+
+{
+  "_id": {
+    "$oid": "6313e714670b825a7c7f62bd"
+  },
+  "TypeUser": "Parents",
+  "UserName": "UbyXsofT",
+  "Password": "UbyXsofT2022?",
+  "firstName": "Ubaldo",
+  "lastName": "Formichetti",
+  "BirthDate": "16/02/1971",
+  "Email": "info_Uby@yahoo.it",
+  "Phone": "3295722875",
+  "Street": "Principe di Piemonte",
+  "Number": "28",
+  "Cap": "02010",
+  "City": "Colli sul Velino",
+  "Nation": "Italy",
+  "Level": "Basic"
+  "RegistrationDate": "04/09/2022"
+}
+
+
+https://blog.logrocket.com/comparing-react-native-ui-libraries/#:~:text=React%20Native%20Paper%20is%20fairly,the%20UI%20library%20for%20you.

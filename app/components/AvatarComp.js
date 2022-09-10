@@ -1,20 +1,19 @@
-import React, { Component } from "react";
-import { StyleSheet, TouchableOpacity, Text, Image } from "react-native";
-import { colors, typography, components } from "../theme/index";
-import { WINDOW_WIDTH } from "../constants/index";
+import React from "react";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import { typography } from "../theme/index";
+import LoadingImageComp from "./LoadingImageComp";
 
-function AvatarComp({
+const AvatarComp = ({
   onPress,
   styleImg,
   caption,
   textColor,
-  resizeMode,
   source,
   contBackColor,
   contWidth,
   contFlexDirection,
   contBorderRadius,
-}) {
+}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -28,7 +27,7 @@ function AvatarComp({
         },
       ]}
     >
-      <Image source={source} resizeMode={resizeMode} style={styleImg}></Image>
+      <LoadingImageComp source={source} style={styleImg} />
 
       <Text
         style={{
@@ -41,7 +40,7 @@ function AvatarComp({
       </Text>
     </TouchableOpacity>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

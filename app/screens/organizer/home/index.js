@@ -1,3 +1,2 @@
-import HomeScreen from "./HomeScreen";
-
-export { HomeScreen };
+import HomeNavigation from "./HomeNavigation";
+export { HomeNavigation };

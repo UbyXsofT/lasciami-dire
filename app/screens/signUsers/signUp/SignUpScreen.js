@@ -4,32 +4,32 @@ import {
   TitleStl,
   ContainerStl,
   TextStl,
-} from "../../../../components/styled/index";
+} from "../../../components/styled/index";
 import {
   ButtonComp,
   SeparatorXTxtComp,
   InputIconComp,
   AvatarComp,
   ModalComp,
-} from "../../../../components/index";
+} from "../../../components/index";
 import {
   LOGO_APP,
-  PASSWORD_REQUIREDS,
-  PASSWORD_REQUIREDS_MSG,
-  MAXLENGTH_INPUT_USER,
-  MINLENGTH_INPUT_USER,
+  PASSWORD_REQUIRED,
+  PASSWORD_REQUIRED_MSG,
+  MAX_LENGTH_INPUT_USER,
+  MIN_LENGTH_INPUT_USER,
   AVATAR_STUDENTS,
   AVATAR_PARENTS,
   AVATAR_TEACHERS,
-} from "../../../../constants";
-import { typography } from "../../../../theme/index";
+} from "../../../constants";
+import { typography } from "../../../theme/index";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 
 const SignUpScreen = (props) => {
   console.log("SignUpScreen", props);
 
-  const ColorMe = props.THEME.coloriTema;
+  const ColorMe = props.THEME.colorsTheme;
   const NavigateMe = props.navigation;
 
   const {
@@ -41,13 +41,51 @@ const SignUpScreen = (props) => {
   //console.log(errors);
 
   const onGroupPressed = (props) => {
-    //NavigateMe.navigate("SignUp");
-    console.log("onGroupPressed", props.target.textContent);
+    NavigateMe.navigate("SignUpGroup", {
+      Group: props,
+    });
+
+    console.log("onGroupPressed", props);
   };
 
   const onSignInPressed = () => {
     console.log("onSignInPressed");
     NavigateMe.navigate("SignIn");
+  };
+
+  const createListComp = (meNum) => {
+    //demo creazione lista componenti
+    const rows = [];
+    for (let i = 0; i < meNum; i++) {
+      // note: we are adding a key prop here to allow react to uniquely identify each
+      // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
+      rows
+        .push
+        // <AvatarComp
+        //   source={AVATAR_TEACHERS}
+        //   onPress={() => onGroupPressed("Teachers")}
+        //   caption={"Teachers"}
+        //   textColor={ColorMe.TEXT_COLOR_1}
+        //   contBackColor={ColorMe.GREEN_1}
+        //   contWidth='100%'
+        //   contFlexDirection='row'
+        //   contBorderRadius={5}
+        //   styleImg={{
+        //     backgroundColor: ColorMe.BACK_COLOR_1,
+        //     width: 100,
+        //     height: 100,
+        //     borderRadius: 100,
+        //     borderWidth: 4,
+        //     borderColor: ColorMe.TEXT_COLOR_1,
+        //     backgroundColor: ColorMe.GREEN_1,
+        //     marginRight: 20,
+        //     objectFit: "contain",
+        //     position: "relative",
+        //   }}
+        // />
+        ();
+    }
+    return <>{rows}</>;
   };
 
   return (
@@ -68,54 +106,14 @@ const SignUpScreen = (props) => {
                 fontSize: typography.fontSize.H3,
               }}
             >
-              Please select your access type:
+              Select membership group:
             </TextStl>
           </View>
 
           <View style={styles.groupAvatars}>
             <AvatarComp
-              source={AVATAR_STUDENTS}
-              onPress={onGroupPressed}
-              caption={"Students"}
-              textColor={ColorMe.TEXT_COLOR_1}
-              contBackColor={ColorMe.BLUE_1}
-              contWidth='100%'
-              contFlexDirection='row'
-              contBorderRadius={5}
-              styleImg={{
-                backgroundColor: ColorMe.BACK_COLOR_1,
-                width: 100,
-                height: 100,
-                borderRadius: 100,
-                borderWidth: 4,
-                borderColor: ColorMe.TEXT_COLOR_1,
-                backgroundColor: ColorMe.BLUE_1,
-                marginRight: 20,
-              }}
-            />
-            <AvatarComp
-              source={AVATAR_PARENTS}
-              onPress={onGroupPressed}
-              caption={"Parents"}
-              textColor={ColorMe.TEXT_COLOR_1}
-              contBackColor={ColorMe.YELLOW_1}
-              contWidth='100%'
-              contFlexDirection='row'
-              contBorderRadius={5}
-              styleImg={{
-                backgroundColor: ColorMe.BACK_COLOR_1,
-                width: 100,
-                height: 100,
-                borderRadius: 100,
-                borderWidth: 4,
-                borderColor: ColorMe.TEXT_COLOR_1,
-                backgroundColor: ColorMe.YELLOW_1,
-                marginRight: 20,
-              }}
-            />
-            <AvatarComp
               source={AVATAR_TEACHERS}
-              onPress={onGroupPressed}
+              onPress={() => onGroupPressed("Teachers")}
               caption={"Teachers"}
               textColor={ColorMe.TEXT_COLOR_1}
               contBackColor={ColorMe.GREEN_1}
@@ -124,30 +122,65 @@ const SignUpScreen = (props) => {
               contBorderRadius={5}
               styleImg={{
                 backgroundColor: ColorMe.BACK_COLOR_1,
-                width: 100,
-                height: 100,
+                width: 75,
+                height: 75,
                 borderRadius: 100,
                 borderWidth: 4,
                 borderColor: ColorMe.TEXT_COLOR_1,
                 backgroundColor: ColorMe.GREEN_1,
                 marginRight: 20,
+                objectFit: "contain",
+                position: "relative",
+              }}
+            />
+
+            <AvatarComp
+              source={AVATAR_PARENTS}
+              onPress={() => onGroupPressed("Parents")}
+              caption={"Parents"}
+              textColor={ColorMe.TEXT_COLOR_1}
+              contBackColor={ColorMe.YELLOW_1}
+              contWidth='100%'
+              contFlexDirection='row'
+              contBorderRadius={5}
+              resizeMode='contain'
+              styleImg={{
+                backgroundColor: ColorMe.BACK_COLOR_1,
+                width: 75,
+                height: 75,
+                borderRadius: 100,
+                borderWidth: 4,
+                borderColor: ColorMe.TEXT_COLOR_1,
+                backgroundColor: ColorMe.YELLOW_1,
+                marginRight: 20,
+                objectFit: "contain",
+                position: "relative",
               }}
             />
           </View>
 
           <SeparatorXTxtComp color={ColorMe} txt='Or' />
-          <ButtonComp
-            caption='Sign In'
+
+          <View
             style={{
-              height: 45,
-              width: "100%",
-              borderRadius: 5,
-              marginTop: 20,
-              backgroundColor: ColorMe.DARK_1,
-              color: "white",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 10,
             }}
-            onPress={onSignInPressed}
-          ></ButtonComp>
+          >
+            <Text
+              style={{
+                fontFamily: typography.fontFamily.CANTARELL,
+                color: ColorMe.TEXT_COLOR_1,
+                fontSize: typography.fontSize.H4,
+                fontWeight: typography.fontWeight.XXL,
+              }}
+              onPress={() => onSignInPressed()}
+            >
+              Log-In
+            </Text>
+          </View>
         </View>
       </ContainerStl>
     </ScrollView>

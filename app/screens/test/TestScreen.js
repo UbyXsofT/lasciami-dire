@@ -1,22 +1,22 @@
 import * as React from "react";
 import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
-import { TitleStl, ContainerStl } from "../../../components/styled/index";
+import { TitleStl, ContainerStl } from "../../components/styled/index";
 import {
   ButtonComp,
   SeparatorXTxtComp,
   InputIconComp,
-} from "../../../components/index";
+} from "../../components/index";
 import {
   LOGO_APP,
-  PASSWORD_REQUIREDS,
-  PASSWORD_REQUIREDS_MSG,
-} from "../../../constants";
-import { typography } from "../../../theme/index";
+  PASSWORD_REQUIRED,
+  PASSWORD_REQUIRED_MSG,
+} from "../../constants";
+import { typography } from "../../theme/index";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 
 const TestScreen = (props) => {
-  const ColorMe = props.THEME.coloriTema;
+  const ColorMe = props.THEME.colorsTheme;
   return (
     <ScrollView style={{ backgroundColor: ColorMe.BACK_COLOR_1 }}>
       <ContainerStl>
@@ -40,15 +40,31 @@ const TestScreen = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    container: {
-      flex: 1,
-      alignItems: "center",
-      paddingBottom: 40,
-      maxWidth: 800,
-      width: "100%",
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
+    flex: 1,
+    alignItems: "center",
+    paddingBottom: 40,
+    maxWidth: 800,
+    width: "100%",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  image: {
+    width: 200,
+    height: 200,
+  },
+  wrapHeader: {
+    width: "100%",
+    height: "auto",
+    marginLeft: "auto",
+    marginRight: "auto",
+    textAlign: "center",
+    alignItems: "center",
+    textAlignVertical: "center",
+  },
+  groupInputText: {
+    marginTop: 0,
+    width: "100%",
+    padding: 10,
   },
 });
 

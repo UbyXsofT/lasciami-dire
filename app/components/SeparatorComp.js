@@ -4,13 +4,13 @@ import { StyleSheet, View } from "react-native";
 ///** REDUX */
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeTheme } from "../actions/themeAction";
+import { RDX_InfoTheme } from "../store/actions/themeAction";
 
 const SeparatorComp = (props) => {
   return (
     <View
       style={{
-        borderBottomColor: props.THEME.coloriTema.TEXT_COLOR_1,
+        borderBottomColor: props.THEME.colorsTheme.TEXT_COLOR_1,
         borderBottomWidth: StyleSheet.hairlineWidth,
         marginLeft: 5,
         marginRight: 5,
@@ -24,6 +24,6 @@ const mapStateToProps = (state) => ({
   THEME: state.themeReducer.theme,
 });
 const mapDispatchToProps = (dispatch) => ({
-  changeTheme: bindActionCreators(changeTheme, dispatch),
+  RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SeparatorComp);

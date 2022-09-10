@@ -14,7 +14,7 @@ import Animated, {
 ///** REDUX */
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changeTheme } from "../../../actions/themeAction";
+import { RDX_InfoTheme } from "../../store/actions/themeAction";
 
 ///** CUSTOM */
 import {
@@ -22,7 +22,7 @@ import {
   TitleStl,
   ContainerStl,
   TextStl,
-} from "../../../components/styled/index";
+} from "../../components/styled/index";
 import {
   StatusBarComp,
   LogoImg,
@@ -31,8 +31,8 @@ import {
   BoxItemColorComp,
   BoxItemTypographyComp,
   OSpinnerComp,
-} from "../../../components/index";
-import { colors, typography, components } from "../../../theme/index";
+} from "../../components/index";
+import { colors, typography, components } from "../../theme/index";
 
 const ThemeScreen = (props) => {
   console.log("props", props);
@@ -78,13 +78,13 @@ const ThemeScreen = (props) => {
             exiting={LightSpeedOutRight}
             layout={Layout.damping}
           > */}
-          <TitleStl style={{ color: props.THEME.coloriTema.TEXT_COLOR_1 }}>
+          <TitleStl style={{ color: props.THEME.colorsTheme.TEXT_COLOR_1 }}>
             Theme Screen
           </TitleStl>
 
           <TextStl
             style={{
-              color: props.THEME.coloriTema.TEXT_COLOR_1,
+              color: props.THEME.colorsTheme.TEXT_COLOR_1,
               fontSize: typography.fontSize.H3,
               textAlign: "left",
             }}
@@ -102,9 +102,7 @@ const ThemeScreen = (props) => {
               alignSelf: "flex-start",
             }}
           >
-            {/** CONTAINER */}
-
-            {Object.entries(props.THEME.coloriTema).map((colorMe, index) => {
+            {Object.entries(props.THEME.colorsTheme).map((colorMe, index) => {
               return renderItem({
                 "Case": "COLOR",
                 "nameColor": colorMe[0],
@@ -115,7 +113,7 @@ const ThemeScreen = (props) => {
           {/** TYPOGRAPHY */}
           <TextStl
             style={{
-              color: props.THEME.coloriTema.TEXT_COLOR_1,
+              color: props.THEME.colorsTheme.TEXT_COLOR_1,
               fontSize: typography.fontSize.H3,
               textAlign: "left",
             }}
@@ -126,13 +124,12 @@ const ThemeScreen = (props) => {
           <BoxStl
             Key='typographyContainer1'
             style={{
-              backgroundColor: props.THEME.coloriTema.BACK_COLOR_1,
+              backgroundColor: props.THEME.colorsTheme.BACK_COLOR_1,
               width: "auto",
               height: "auto",
               marginBottom: 50,
             }}
           >
-            {/** CONTAINER */}
             {Object.entries(typography).map((val, index) => {
               return Object.entries(val[1]).map((val2, index2) => {
                 return renderItem({
@@ -158,7 +155,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeTheme: bindActionCreators(changeTheme, dispatch),
+  RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
 });
 /****** REDUX **************** */
 

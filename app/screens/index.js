@@ -1,9 +1,11 @@
-import { ThemeScreen } from "./organizer/theme";
-import { HomeScreen } from "./organizer/home";
-import { SignInScreen } from "./organizer/signUsers/signIn";
-import { SignUpScreen } from "./organizer/signUsers/signUp";
-import { ForgotPasswordScreen } from "./organizer/signUsers/password";
-import { TestScreen } from "./organizer/test";
+import { ThemeScreen } from "./theme";
+import { HomeScreen } from "./home";
+import { SignInScreen } from "./signUsers/signIn";
+import { SignUpScreen } from "./signUsers/signUp";
+import { ForgotPasswordScreen } from "./signUsers/password";
+import { TestScreen } from "./test";
+import { LogoutScreen } from "./message/logout";
+import { SignUpGroupScreen } from "./signUsers/signUp";
 
 export {
   ThemeScreen,
@@ -12,4 +14,6 @@ export {
   SignInScreen,
   ForgotPasswordScreen,
   TestScreen,
+  LogoutScreen,
+  SignUpGroupScreen,
 };

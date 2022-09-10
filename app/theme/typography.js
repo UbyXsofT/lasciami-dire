@@ -25,25 +25,26 @@ const fontSize = {
 };
 
 // example lineHeights scale corrisponede all'indice del font size (fontSize=12 <> lineHeight_18)
-const lineHeights = [
-  "18px",
-  "21px",
-  "24px",
-  "30px",
-  "36px",
-  "48px",
-  "56px",
-  "72px",
-];
+// const lineHeights = [
+//   "18px",
+//   "21px",
+//   "24px",
+//   "30px",
+//   "36px",
+//   "48px",
+//   "56px",
+//   "72px",
+// ];
+const lineHeights = [18, 21, 24, 30, 36, 48, 56, 72];
 const lineHeight = {
-  XXS: lineHeights[0],
-  XS: lineHeights[1],
-  S: lineHeights[2],
-  M: lineHeights[3],
-  L: lineHeights[4],
-  XL: lineHeights[5],
-  XXL: lineHeights[6],
-  XXXL: lineHeights[7],
+  XXS: lineHeights[0] + "px",
+  XS: lineHeights[1] + "px",
+  S: lineHeights[2] + "px",
+  M: lineHeights[3] + "px",
+  L: lineHeights[4] + "px",
+  XL: lineHeights[5] + "px",
+  XXL: lineHeights[6] + "px",
+  XXXL: lineHeights[7] + "px",
 };
 
 // example space scale with aliases
@@ -72,5 +73,4 @@ const fontWeight = {
   XXXL: "900",
 };
 
-//export const typography = { lineHeight, fontSize, letterSpacing, fontFamily };
 export default { lineHeight, fontSize, letterSpacing, fontFamily, fontWeight };
