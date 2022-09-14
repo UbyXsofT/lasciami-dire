@@ -78,9 +78,10 @@ const ForgotPasswordScreen = (props) => {
 								},
 							}}
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
 
 						<ButtonComp

@@ -1,19 +1,36 @@
 import React, {useState, useEffect} from "react";
-import {View, Text, StyleSheet, TextInput} from "react-native";
+import {View, Text, StyleSheet, TextInput, Button} from "react-native";
 import {typography} from "../theme/index";
-import {PHONE_MASK, DATE_MASK, PROVIDERS_ICONS} from "../constants";
+import {PHONE_MASK, DATE_MASK, PROVIDERS_ICONS, PLATFORM_OS} from "../constants";
 import {Controller} from "react-hook-form";
+import {MaskedTextInput} from "react-native-mask-text";
 import InputMask from "react-input-mask";
 
-const InputIconComp = ({control, name, rules = {}, iconName, iconProvider, placeholder, secureTextEntry, iconColor, inputColor, inputBorderColor, maskType, maskChar, alwaysShowMask, permanents}) => {
+const InputIconComp = ({
+	control,
+	name,
+	rules = {},
+	iconName,
+	iconProvider,
+	placeholder,
+	secureTextEntry,
+	iconColor,
+	inputColor,
+	inputBorderColor,
+	maskType,
+	maskChar,
+	alwaysShowMask,
+	permanents,
+	backgroundColor,
+}) => {
 	const [useThisMask, setUseThisMask] = useState();
 	const [valueMaskInput, setValueMaskInput] = useState("");
 	const handleInput = ({target: {value}}) => {
 		setValueMaskInput(value);
-		//console.log("value", value);
+		console.log("value", value);
 	};
 	function ProviderIcon(props) {
-		console.log("providerIcon", props);
+		//console.log("providerIcon", props);
 		// Correct! JSX type can be a capitalized variable.
 		const SpecificProviderIcon = PROVIDERS_ICONS[props.type.iconProvider];
 		return (
@@ -27,7 +44,7 @@ const InputIconComp = ({control, name, rules = {}, iconName, iconProvider, place
 	useEffect(() => {
 		maskType === PHONE_MASK ? setUseThisMask(PHONE_MASK) : "";
 		maskType === DATE_MASK ? setUseThisMask(DATE_MASK) : "";
-		console.log("useThisMask", useThisMask);
+		//console.log("useThisMask", useThisMask);
 	}, []);
 
 	return (
@@ -39,21 +56,24 @@ const InputIconComp = ({control, name, rules = {}, iconName, iconProvider, place
 				<>
 					<View
 						style={{
-							backgroundColor: "#00000000",
-							borderBottomWidth: StyleSheet.hairlineWidth,
+							backgroundColor: backgroundColor,
+							borderWidth: 0.2,
 
+							borderRadius: 5,
 							// borderBottomWidth: maskType === null || undefined ? 1 : 0,
 							marginBottom: 0,
 							borderColor: error ? "red" : inputBorderColor,
 							height: 30,
 							padding: 3,
+							paddingRight: 10,
+							width: "100%",
 						}}
 					>
 						<View style={{flexDirection: "row"}}>
 							<ProviderIcon
 								type={{iconProvider}}
 								name={iconName}
-								style={{fontFamily: typography.fontFamily.CANTARELL, fontSize: 20, paddingLeft: 8, marginTop: 2, color: iconColor}}
+								style={[styles.elevatedElement, {fontFamily: typography.fontFamily.CANTARELL, fontSize: 20, paddingLeft: 8, marginTop: 2, color: iconColor}]}
 							/>
 
 							{/* {console.log(`${name} : ${maskType}`)} */}
@@ -65,15 +85,17 @@ const InputIconComp = ({control, name, rules = {}, iconName, iconProvider, place
 									placeholder={placeholder}
 									secureTextEntry={secureTextEntry || null}
 									placeholderTextColor={inputBorderColor}
+									maxLength={60}
 									style={[
 										styles.input,
 										{
 											color: inputColor,
-											backgroundColor: "#00000000",
+											backgroundColor: {backgroundColor},
+											outlineStyle: "none",
 										},
 									]}
 								/>
-							) : (
+							) : PLATFORM_OS === "web" ? (
 								<InputMask
 									mask={useThisMask} //'999 999 9999'
 									alwaysShowMask={alwaysShowMask}
@@ -99,13 +121,40 @@ const InputIconComp = ({control, name, rules = {}, iconName, iconProvider, place
 										backgroundColor: "#00000000",
 										border: "none",
 										fontSize: 14,
-										// paddingTop: 14,
 										paddingBottom: 0,
 										marginLeft: -30,
 										paddingLeft: 40,
 										marginRight: -15,
 										height: 25,
 										flex: 1,
+										outlineStyle: "none",
+									}}
+								/>
+							) : (
+								<MaskedTextInput
+									mask={useThisMask} //'999 999 9999'
+									//value={valueMaskInput}
+									onChangeText={(text, rawText) => {
+										console.log(text);
+										console.log(rawText);
+										//value = valueMaskInput;
+										onChange(text);
+									}}
+									placeholder={placeholder}
+									keyboardType={useThisMask === PHONE_MASK || useThisMask === DATE_MASK ? "numeric" : "default"}
+									onBlur={onBlur}
+									style={{
+										color: inputColor,
+										backgroundColor: {backgroundColor},
+										border: "none",
+										fontSize: 14,
+										paddingBottom: 0,
+										// marginLeft: -30,
+										paddingLeft: 10,
+										// marginRight: 80,
+										height: 25,
+										flex: 1,
+										outlineStyle: "none",
 									}}
 								/>
 							)}
@@ -121,14 +170,14 @@ const InputIconComp = ({control, name, rules = {}, iconName, iconProvider, place
 							)}
 						</View>
 					</View>
-					{console.log(rules)}
+					{/* {console.log(rules)} */}
 					<Text
 						style={{
 							color: "red",
 							alignSelf: "stretch",
 							height: "auto",
 							opacity: error ? 1 : 0,
-							marginBottom: -5,
+							marginBottom: 0,
 						}}
 					>
 						{error ? error.message : "Error"}
@@ -149,6 +198,10 @@ const styles = StyleSheet.create({
 		paddingBottom: 0,
 		marginRight: -30,
 		height: 25,
+	},
+	elevatedElement: {
+		zIndex: 3, // works on ios
+		elevation: 3, // works on android
 	},
 });
 

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {View, ScrollView, Text, StyleSheet, Image, Switch} from "react-native";
+import {View, ScrollView, Text, Image, Switch} from "react-native";
 import {TitleStl, ContainerStl, TextStl} from "../../../components/styled/index";
 import {ButtonComp, SeparatorXTxtComp, InputIconComp, LoadingImageComp} from "../../../components/index";
 import {
@@ -30,6 +30,7 @@ import {useForm} from "react-hook-form";
 import SelectDropdown from "react-native-select-dropdown";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {RadioButton} from "react-native-paper";
+import StyleSheet from "react-native-stylesheet-extension";
 
 const SignUpGroupScreen = (props) => {
 	console.log("SignInScreen", props);
@@ -62,27 +63,11 @@ const SignUpGroupScreen = (props) => {
 	return (
 		<ScrollView style={{backgroundColor: ColorMe.BACK_COLOR_1}}>
 			<ContainerStl>
-				<View style={[styles.container]}>
-					<View style={styles.wrapHeader}>
-						{/* <Image
-              source={LOGO_APP}
-              resizeMode='contain'
-              style={styles.image}
-            ></Image> */}
+				<View style={styles.get("container", {ColorMe, typography})}>
+					<View style={styles.get("wrapHeader", {ColorMe, typography})}>
 						<LoadingImageComp
 							source={sourceImageGroup}
-							style={{
-								backgroundColor: ColorMe.BACK_COLOR_1,
-								width: 75,
-								height: 75,
-								borderRadius: 100,
-								borderWidth: 4,
-								borderColor: ColorMe.TEXT_COLOR_1,
-								backgroundColor: ColorMe.GREEN_1,
-								objectFit: "contain",
-								position: "relative",
-								marginTop: 40,
-							}}
+							style={styles.get("loadingImageComp", {ColorMe, typography})}
 						/>
 						<TextStl
 							style={{
@@ -94,7 +79,7 @@ const SignUpGroupScreen = (props) => {
 						</TextStl>
 					</View>
 
-					<View style={styles.groupInputText}>
+					<View style={styles.get("groupInputText", {ColorMe, typography})}>
 						<SeparatorXTxtComp
 							color={ColorMe}
 							txt='Login information'
@@ -124,9 +109,10 @@ const SignUpGroupScreen = (props) => {
 								},
 							}}
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
 
 						<InputIconComp
@@ -146,9 +132,10 @@ const SignUpGroupScreen = (props) => {
 								},
 							}}
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
 
 						<InputIconComp
@@ -164,9 +151,10 @@ const SignUpGroupScreen = (props) => {
 								validate: (value) => value === pwd || "Password do not match",
 							}}
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
 						<SeparatorXTxtComp
 							color={ColorMe}
@@ -197,9 +185,10 @@ const SignUpGroupScreen = (props) => {
 								},
 							}}
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
 
 						<InputIconComp
@@ -225,100 +214,11 @@ const SignUpGroupScreen = (props) => {
 								},
 							}}
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
-
-						<RadioButton.Group
-							onValueChange={(newValue) => setTeachersValue(newValue)}
-							value={teachersValue}
-						>
-							<View
-								style={{
-									fontFamily: typography.fontFamily.CANTARELL,
-									color: ColorMe.TEXT_COLOR_1,
-									fontSize: typography.fontSize.H5,
-									display: "flex",
-									flexDirection: "row",
-									alignItems: "center",
-									justifyContent: "space-evenly",
-								}}
-							>
-								<View>
-									<Text>LEVEL: </Text>
-								</View>
-								<View>
-									<Text>{TEACHERS_LEVELS[0]}</Text>
-									<RadioButton value={TEACHERS_LEVELS[0]} />
-								</View>
-								<View>
-									<Text>{TEACHERS_LEVELS[1]}</Text>
-									<RadioButton value={TEACHERS_LEVELS[1]} />
-								</View>
-								<View>
-									<Text>{TEACHERS_LEVELS[2]}</Text>
-									<RadioButton value={TEACHERS_LEVELS[2]} />
-								</View>
-							</View>
-						</RadioButton.Group>
-
-						<InputIconComp
-							name='Birthday'
-							//find icon: https://icons.expo.fyi
-							iconName='calendar-alt'
-							iconProvider='fontAwesome5'
-							//Option iconProvider: AntDesign,Entypo,EvilIcons,Feather,FontAwesome,FontAwesome5,Fontisto,Foundation,Ionicons,MaterialCommunityIcons,MaterialIcons,Octicons,SimpleLineIcons,Zocial
-							placeholder='Birthday'
-							secureTextEntry={false}
-							maskType={DATE_MASK}
-							maskChar='-'
-							alwaysShowMask={false}
-							rules={{
-								required: "Birthday is required!",
-								pattern: {
-									value: DATE_REQUIRED,
-									message: "Birthday is required!",
-								},
-							}}
-							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
-							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
-						/>
-
-						<RadioButton.Group
-							onValueChange={(newValue) => setGenderValue(newValue)}
-							value={genderValue}
-						>
-							<View
-								style={{
-									fontFamily: typography.fontFamily.CANTARELL,
-									color: ColorMe.TEXT_COLOR_1,
-									fontSize: typography.fontSize.H5,
-									display: "flex",
-									flexDirection: "row",
-									alignItems: "center",
-									justifyContent: "space-evenly",
-								}}
-							>
-								<View>
-									<Text>GENDER: </Text>
-								</View>
-								<View>
-									<Text>{GENDER_USER[0]}</Text>
-									<RadioButton value={GENDER_USER[0]} />
-								</View>
-								<View>
-									<Text>{GENDER_USER[1]}</Text>
-									<RadioButton value={GENDER_USER[1]} />
-								</View>
-								<View>
-									<Text>{GENDER_USER[2]}</Text>
-									<RadioButton value={GENDER_USER[2]} />
-								</View>
-							</View>
-						</RadioButton.Group>
 
 						<InputIconComp
 							name='email'
@@ -339,10 +239,59 @@ const SignUpGroupScreen = (props) => {
 								},
 							}}
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
+
+						<InputIconComp
+							name='Birthday'
+							//find icon: https://icons.expo.fyi
+							iconName='calendar-alt'
+							iconProvider='fontAwesome5'
+							//Option iconProvider: AntDesign,Entypo,EvilIcons,Feather,FontAwesome,FontAwesome5,Fontisto,Foundation,Ionicons,MaterialCommunityIcons,MaterialIcons,Octicons,SimpleLineIcons,Zocial
+							placeholder='Birthday'
+							secureTextEntry={false}
+							maskType={DATE_MASK}
+							maskChar='-'
+							alwaysShowMask={false}
+							rules={{
+								required: "Birthday is required!",
+								pattern: {
+									value: DATE_REQUIRED,
+									message: "Birthday is required!",
+								},
+							}}
+							control={control}
+							inputColor={ColorMe.DARK}
+							inputBorderColor={ColorMe.LINE_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
+						/>
+
+						<RadioButton.Group
+							onValueChange={(newValue) => setGenderValue(newValue)}
+							value={genderValue}
+						>
+							<View style={styles.get("radioGroup", {ColorMe, typography})}>
+								<View>
+									<Text>GENDER: </Text>
+								</View>
+								<View>
+									<Text>{GENDER_USER[0]}</Text>
+									<RadioButton value={GENDER_USER[0]} />
+								</View>
+								<View>
+									<Text>{GENDER_USER[1]}</Text>
+									<RadioButton value={GENDER_USER[1]} />
+								</View>
+								<View>
+									<Text>{GENDER_USER[2]}</Text>
+									<RadioButton value={GENDER_USER[2]} />
+								</View>
+							</View>
+						</RadioButton.Group>
 
 						<InputIconComp
 							name='phone'
@@ -363,9 +312,10 @@ const SignUpGroupScreen = (props) => {
 								},
 							}}
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
 
 						<InputIconComp
@@ -381,9 +331,10 @@ const SignUpGroupScreen = (props) => {
 							alwaysShowMask={false}
 							rules
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
 						<InputIconComp
 							name='Zipcode'
@@ -398,9 +349,10 @@ const SignUpGroupScreen = (props) => {
 							alwaysShowMask={false}
 							rules
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
 
 						<InputIconComp
@@ -416,9 +368,10 @@ const SignUpGroupScreen = (props) => {
 							alwaysShowMask={false}
 							rules
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
 
 						<InputIconComp
@@ -434,39 +387,33 @@ const SignUpGroupScreen = (props) => {
 							alwaysShowMask={false}
 							rules
 							control={control}
-							inputColor={ColorMe.TEXT_COLOR_2}
+							inputColor={ColorMe.DARK}
 							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.TEXT_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
 						/>
-
-						{/* <SelectDropdown
-							data={genderUser}
-							onSelect={(selectedItem, index) => {
-								console.log(selectedItem, index);
-							}}
-							buttonTextAfterSelection={(selectedItem, index) => {
-								return selectedItem;
-							}}
-							rowTextForSelection={(item, index) => {
-								return item;
-							}}
-						/>
-						<SelectDropdown
-							data={teachersLevels}
-							onSelect={(selectedItem, index) => {
-								console.log(selectedItem, index);
-							}}
-							buttonTextAfterSelection={(selectedItem, index) => {
-								// text represented after item is selected
-								// if data array is an array of objects then return selectedItem.property to render after item is selected
-								return selectedItem;
-							}}
-							rowTextForSelection={(item, index) => {
-								// text represented for each item in dropdown
-								// if data array is an array of objects then return item.property to represent item in dropdown
-								return item;
-							}}
-						/> */}
+						<RadioButton.Group
+							onValueChange={(newValue) => setTeachersValue(newValue)}
+							value={teachersValue}
+						>
+							<View style={styles.get("radioGroup", {ColorMe, typography})}>
+								<View>
+									<Text>LEVEL: </Text>
+								</View>
+								<View>
+									<Text>{TEACHERS_LEVELS[0]}</Text>
+									<RadioButton value={TEACHERS_LEVELS[0]} />
+								</View>
+								<View>
+									<Text>{TEACHERS_LEVELS[1]}</Text>
+									<RadioButton value={TEACHERS_LEVELS[1]} />
+								</View>
+								<View>
+									<Text>{TEACHERS_LEVELS[2]}</Text>
+									<RadioButton value={TEACHERS_LEVELS[2]} />
+								</View>
+							</View>
+						</RadioButton.Group>
 
 						<ButtonComp
 							caption='Sign-Up'
@@ -561,7 +508,7 @@ const SignUpGroupScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-	container: {
+	container: (params) => ({
 		flex: 1,
 		alignItems: "center",
 		paddingBottom: 40,
@@ -569,12 +516,12 @@ const styles = StyleSheet.create({
 		width: "100%",
 		marginLeft: "auto",
 		marginRight: "auto",
-	},
-	image: {
+	}),
+	image: (params) => ({
 		width: 200,
 		height: 200,
-	},
-	wrapHeader: {
+	}),
+	wrapHeader: (params) => ({
 		width: "100%",
 		height: "auto",
 		marginLeft: "auto",
@@ -582,12 +529,42 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		alignItems: "center",
 		textAlignVertical: "center",
-	},
-	groupInputText: {
+	}),
+	groupInputText: (params) => ({
 		marginTop: 0,
 		width: "100%",
 		padding: 10,
-	},
+		// backgroundColor: params.ColorMe.DARK_1,
+	}),
+
+	radioGroup: (params) => ({
+		fontFamily: params.typography.fontFamily.CANTARELL,
+		color: params.ColorMe.TEXT_COLOR_1,
+		backgroundColor: params.ColorMe.LIGHT,
+		borderRadius: 5,
+		fontSize: params.typography.fontSize.H5,
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-evenly",
+		marginBottom: 20,
+		padding: 5,
+		borderWidth: 0.2,
+		borderColor: params.ColorMe.LINE_COLOR_1,
+	}),
+
+	loadingImageComp: (params) => ({
+		backgroundColor: params.ColorMe.BACK_COLOR_1,
+		width: 75,
+		height: 75,
+		borderRadius: 100,
+		borderWidth: 4,
+		borderColor: params.ColorMe.TEXT_COLOR_1,
+		backgroundColor: params.ColorMe.GREEN_1,
+		objectFit: "contain",
+		position: "relative",
+		marginTop: 40,
+	}),
 });
 
 //* REDUX - //

@@ -27,7 +27,8 @@ const StartApp = ({children}) => {
 			const rememberMe = parseJsonVal.DATI_UTENTE[0].USER_LOGIN_OPTIONS.REMEMBER_ME;
 			const userName = parseJsonVal.DATI_UTENTE[0].USER_LOGIN_OPTIONS.USER_NAME;
 			const psw = parseJsonVal.DATI_UTENTE[0].USER_LOGIN_OPTIONS.PASSWORD;
-
+			// const myEncryptData = MyCrypto("encryptData", "la mia password", "username");
+			// const myRESTEncryptData = MyCrypto("dencryptData", myEncryptData, "username");
 			dispatch(RDX_InfoUser(rememberMe, userName));
 
 			console.log("rememberMe:", rememberMe, "userName:", userName, "psw:", psw);
@@ -45,9 +46,6 @@ const StartApp = ({children}) => {
 			await Font.loadAsync({
 				Cantarell: require("../assets/fonts/Cantarell-VF.otf"),
 			});
-
-			const myEncryptData = MyCrypto("encryptData", "la mia password", "username");
-			const myRESTEncryptData = MyCrypto("dencryptData", myEncryptData, "username");
 
 			//VERIFICO i DATI SALVATI IN LOCALSTORAGE
 			await getRememberedUser();
