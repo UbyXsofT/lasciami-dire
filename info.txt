@@ -810,15 +810,7 @@ const collection = client.db("sample_mflix").collection("movies");
 const favorite_movies = await collection.find({genres : ["Drama", "Fantasy"]});
 
 
-//stringa di connessione
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://UbyXsoft:LasciamiDire2022@lasciamidire.toce9lz.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+
 
 
 
