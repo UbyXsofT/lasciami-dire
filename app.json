@@ -27,12 +27,24 @@
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/image/icon.png",
         "backgroundColor": "#E5E5E5"
-      }
+      },
+      "package": "lasciamidire.com"
     },
     "web": {
       "favicon": "./app/assets/image/favicon-96x96.png",
       "backgroundColor": "#E5E5E5"
+    },
+    "extra": {
+      "oneSignalAppId": "da67671f-c3de-416d-9af3-6fa01529210b"
     }
   },
-  "name": "lasciami-dire"
+  "name": "lasciami-dire",
+  "plugins": [
+    [
+      "onesignal-expo-plugin",
+      {
+        "mode": "development"
+      }
+    ]
+  ]
 }

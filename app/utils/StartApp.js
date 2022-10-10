@@ -9,13 +9,9 @@ import {RDX_InfoTheme} from "../store/actions/themeAction";
 import {RDX_InfoUser} from "../store/actions/userAction";
 import MyCrypto from "./MyCrypto";
 //@@@ CARICO LE RISORSE NECESSARIE
-
 const StartApp = ({children}) => {
 	const [appIsReady, setAppIsReady] = useState(false);
-
 	const dispatch = useDispatch();
-	//const user = useSelector((store) => store.userReducer.user);
-	//console.log("userReducer", user);
 
 	const getRememberedUser = async () => {
 		try {
@@ -23,15 +19,21 @@ const StartApp = ({children}) => {
 			const jsonValue = await AsyncStorage.getItem("USER-OPTION-KEY");
 			jsonValue != null ? (parseJsonVal = JSON.parse(jsonValue)) : null;
 			console.log("getRememberedUser RETURN:", parseJsonVal);
-
 			const rememberMe = parseJsonVal.DATI_UTENTE[0].USER_LOGIN_OPTIONS.REMEMBER_ME;
 			const userName = parseJsonVal.DATI_UTENTE[0].USER_LOGIN_OPTIONS.USER_NAME;
 			const psw = parseJsonVal.DATI_UTENTE[0].USER_LOGIN_OPTIONS.PASSWORD;
 			// const myEncryptData = MyCrypto("encryptData", "la mia password", "username");
-			// const myRESTEncryptData = MyCrypto("dencryptData", myEncryptData, "username");
+			const myRESTEncryptData = MyCrypto("dencryptData", psw, userName);
 			dispatch(RDX_InfoUser(rememberMe, userName));
 
-			console.log("rememberMe:", rememberMe, "userName:", userName, "psw:", psw);
+			console.log(
+				"rememberMe:",
+				rememberMe,
+				"userName:",
+				userName,
+				"psw dencryptData:",
+				myRESTEncryptData
+			);
 		} catch (error) {
 			console.log("getRememberedUser error:", error);
 		}
@@ -62,7 +64,9 @@ const StartApp = ({children}) => {
 			await SplashScreen.hideAsync();
 		}
 	}, [appIsReady]);
+
 	onLayoutRootView();
+
 	if (!appIsReady) {
 		return null;
 	} else {
@@ -80,5 +84,6 @@ const mapDispatchToProps = (dispatch) => ({
 	RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
 	RDX_InfoUser: bindActionCreators(RDX_InfoUser, dispatch),
 });
+
 /****** REDUX **************** */
 export default connect(mapStateToProps, mapDispatchToProps)(StartApp);

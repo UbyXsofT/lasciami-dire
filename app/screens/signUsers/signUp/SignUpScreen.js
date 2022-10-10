@@ -1,8 +1,23 @@
 import React from "react";
 import {View, ScrollView, Text, StyleSheet, Image} from "react-native";
 import {TitleStl, ContainerStl, TextStl} from "../../../components/styled/index";
-import {ButtonComp, SeparatorXTxtComp, InputIconComp, AvatarComp, ModalComp} from "../../../components/index";
-import {LOGO_APP, PASSWORD_REQUIRED, PASSWORD_REQUIRED_MSG, MAX_LENGTH_INPUT_USER, MIN_LENGTH_INPUT_USER, AVATAR_STUDENTS, AVATAR_PARENTS, AVATAR_TEACHERS} from "../../../constants";
+import {
+	ButtonComp,
+	SeparatorXTxtComp,
+	InputIconComp,
+	AvatarComp,
+	ModalComp,
+} from "../../../components/index";
+import {
+	LOGO_APP,
+	PASSWORD_REQUIRED,
+	PASSWORD_REQUIRED_MSG,
+	MAX_LENGTH_INPUT_USER,
+	MIN_LENGTH_INPUT_USER,
+	AVATAR_STUDENTS,
+	AVATAR_PARENTS,
+	AVATAR_TEACHERS,
+} from "../../../constants";
 import {typography} from "../../../theme/index";
 import {connect} from "react-redux";
 import {useForm} from "react-hook-form";
@@ -159,6 +174,9 @@ const SignUpScreen = (props) => {
 								color: ColorMe.TEXT_COLOR_1,
 								fontSize: typography.fontSize.H4,
 								fontWeight: typography.fontWeight.XXL,
+								borderBottom: 1,
+								borderBottomStyle: "solid",
+								borderBottomColor: ColorMe.TEXT_COLOR_1,
 							}}
 							onPress={() => onSignInPressed()}
 						>

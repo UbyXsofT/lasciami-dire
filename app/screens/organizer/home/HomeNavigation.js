@@ -4,7 +4,13 @@ import "react-native-gesture-handler";
 import {ThemeProvider} from "styled-components/native";
 import {View, ScrollView, SafeAreaView} from "react-native";
 ///** CUSTOM */
-import {StatusBarComp, LogoImgComp, ThemeChangeComp, SeparatorComp, ModalComp} from "../../../components/index";
+import {
+	StatusBarComp,
+	LogoImgComp,
+	ThemeChangeComp,
+	SeparatorComp,
+	ModalComp,
+} from "../../../components/index";
 import {colors, typography, components} from "../../../theme/index";
 ///** CUSTOM */
 import {BoxStl, TitleStl, ContainerStl, TextStl} from "../../../components/styled/index";
@@ -14,10 +20,16 @@ import {connect, useSelector, useDispatch} from "react-redux";
 import {RDX_InfoUser} from "../../../store/actions/userAction";
 ///** NAVIGATION */
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem} from "@react-navigation/drawer";
+import {
+	createDrawerNavigator,
+	DrawerContentScrollView,
+	DrawerItemList,
+	DrawerItem,
+} from "@react-navigation/drawer";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {HomeScreen} from "../../index";
+import {HomeScreen, ThemeScreen, PolicyScreen} from "../../index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {PROVIDERS_ICONS} from "../../../constants";
 
 const STACK = createNativeStackNavigator();
 const DRAWER = createDrawerNavigator();
@@ -28,6 +40,7 @@ const HomeNavigation = (props) => {
 
 	const ColorMe = props.THEME.colorsTheme;
 	const NavigateMe = props.navigation;
+	const isLoggedIn = props.USER.isLoggedIn;
 
 	const dispatch = useDispatch();
 
@@ -92,52 +105,122 @@ const HomeNavigation = (props) => {
 		flexDirection: "row",
 		padding: 10,
 	};
-
+	const SpecificProviderIcon = PROVIDERS_ICONS["fontAwesome"];
 	return (
 		<>
-			<DRAWER.Navigator
-				drawerContent={(props) => {
-					return (
-						<DrawerContentScrollView {...props}>
-							<View style={ViewStyle}>
-								<LogoImgComp
-									W={40}
-									H={40}
-									Radius={5}
+			{isLoggedIn === true && props.USER.userName !== "Anonymous" ? (
+				// content for logged in users
+				<DRAWER.Navigator
+					drawerContent={(props) => {
+						return (
+							<DrawerContentScrollView {...props}>
+								<View style={ViewStyle}>
+									<LogoImgComp
+										W={40}
+										H={40}
+										Radius={5}
+									/>
+									<TextStl style={colorTxtSwitch}>Lasciami Dire</TextStl>
+									<ThemeChangeComp {...props} />
+								</View>
+								<SeparatorComp />
+								<DrawerItemList {...props} />
+								<DrawerItem
+									label='Logout'
+									onPress={() => logOut_Me()}
 								/>
-								<TextStl style={colorTxtSwitch}>Lasciami Dire</TextStl>
-								<ThemeChangeComp {...props} />
-							</View>
-							<SeparatorComp />
-							<DrawerItemList {...props} />
-							<DrawerItem
-								label='Logout'
-								onPress={() => logOut_Me()}
-							/>
-						</DrawerContentScrollView>
-					);
-				}}
-				screenOptions={screenOptionStyle}
-			>
-				<DRAWER.Screen
-					name='Home'
-					component={HomeScreen}
-				/>
-				{/* <DRAWER.Screen name='Test' component={TestScreen} /> */}
-				{/* <DRAWER.Screen name='Theme' component={ThemeScreen} /> */}
-				{/* <DRAWER.Screen
-          name='Logout'
-          component={
-            <ModalComp
-              modalOnPressOK={modalOnPressOK}
-              modalOnPressNO={modalOnPressNO}
-              isVisible={modalVisible}
-              txt1={"Are you sure you want to log out?"}
-            />
-          }
-        /> */}
-			</DRAWER.Navigator>
+								<SpecificProviderIcon
+									name='sign-out'
+									size={24}
+									color='black'
+								/>
+							</DrawerContentScrollView>
+						);
+					}}
+					screenOptions={screenOptionStyle}
+				>
+					<DRAWER.Screen
+						name={`Hi ${props.USER.userName}`}
+						component={HomeScreen}
+					/>
 
+					{/* <DRAWER.Screen name='Test' component={TestScreen} /> */}
+					{/* <DRAWER.Screen name='Theme' component={ThemeScreen} /> */}
+					{/* <DRAWER.Screen
+						name='Logout'
+						component={
+							<ModalComp
+							modalOnPressOK={modalOnPressOK}
+							modalOnPressNO={modalOnPressNO}
+							isVisible={modalVisible}
+							txt1={"Are you sure you want to log out?"}
+							/>
+						}
+						 /> */}
+				</DRAWER.Navigator>
+			) : (
+				<DRAWER.Navigator
+					drawerContent={(props) => {
+						return (
+							<DrawerContentScrollView {...props}>
+								<View style={ViewStyle}>
+									<LogoImgComp
+										W={40}
+										H={40}
+										Radius={5}
+									/>
+									<TextStl style={colorTxtSwitch}>Lasciami Dire</TextStl>
+									<ThemeChangeComp {...props} />
+								</View>
+								<SeparatorComp />
+								<DrawerItemList {...props} />
+								<DrawerItem
+									label='Logout'
+									onPress={() => logOut_Me()}
+									icon={({focused, size}) => (
+										<SpecificProviderIcon
+											name='sign-out'
+											size={size}
+											color={ColorMe.TEXT_COLOR_1}
+										/>
+									)}
+									style={{bottom: 0}}
+								/>
+							</DrawerContentScrollView>
+						);
+					}}
+					screenOptions={screenOptionStyle}
+				>
+					<DRAWER.Screen
+						name='Home'
+						component={HomeScreen}
+						options={{
+							title: "Home",
+							drawerIcon: ({focused, size}) => (
+								<SpecificProviderIcon
+									name='home'
+									size={size}
+									color={ColorMe.TEXT_COLOR_1}
+								/>
+							),
+						}}
+					/>
+					{/* <DRAWER.Screen
+						name='Policy'
+						component={PolicyScreen}
+						options={{
+							title: "Terms of Use and Privacy Policy",
+							drawerIcon: ({focused, size}) => (
+								<SpecificProviderIcon
+									name='home'
+									size={size}
+									color={ColorMe.TEXT_COLOR_1}
+								/>
+							),
+						}}
+					/> */}
+				</DRAWER.Navigator>
+			)}
 			<StatusBarComp
 				colorTheme={props.THEME.descTheme}
 				backgroundColorTheme={ColorMe.BACK_COLOR_1}

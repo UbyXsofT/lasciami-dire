@@ -1,8 +1,18 @@
 import React, {useState, useEffect} from "react";
 import {View, ScrollView, Text, StyleSheet, Image, Switch, input} from "react-native";
 import {TitleStl, ContainerStl} from "../../../components/styled/index";
-import {ButtonComp, SeparatorXTxtComp, InputIconComp, LogoAnimComp} from "../../../components/index";
-import {PASSWORD_REQUIRED, PASSWORD_REQUIRED_MSG, MAX_LENGTH_INPUT_USER, MIN_LENGTH_INPUT_USER} from "../../../constants";
+import {
+	ButtonComp,
+	SeparatorXTxtComp,
+	InputIconComp,
+	LogoAnimComp,
+} from "../../../components/index";
+import {
+	PASSWORD_REQUIRED,
+	PASSWORD_REQUIRED_MSG,
+	MAX_LENGTH_INPUT_USER,
+	MIN_LENGTH_INPUT_USER,
+} from "../../../constants";
 import {typography} from "../../../theme/index";
 //REDUX
 import {connect} from "react-redux";
@@ -12,6 +22,7 @@ import {RDX_InfoUser} from "../../../store/actions/userAction";
 
 import {useForm} from "react-hook-form";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import MyCrypto from "../../../utils/MyCrypto";
 
 const SignInScreen = (props) => {
 	console.log("SignInScreen", props);
@@ -25,6 +36,17 @@ const SignInScreen = (props) => {
 		formState: {errors},
 	} = useForm();
 	//console.log(errors);
+	const onSignInAnonymPressed = (data) => {
+		console.log("onSignInAnonymPressed");
+		rememberMe === true
+			? //SI memorizzo i dati
+			  rememberUser(data)
+			: //NON memorizzo e quindi rimuovo eventuali vecchi dati
+			  forgetUser();
+
+		props.RDX_InfoUser(true, "Anonymous");
+		NavigateMe.navigate("HomeNavigation");
+	};
 
 	const onSignInPressed = (data) => {
 		console.log("onSignInPressed", JSON.stringify(data));
@@ -40,9 +62,21 @@ const SignInScreen = (props) => {
 		NavigateMe.navigate("HomeNavigation");
 	};
 
+	const onPrivacyPressed = () => {
+		console.log("onPravacyPressed");
+		NavigateMe.navigate("PrivacyScreen"); //onPolicyThermsPressed
+	};
+	const onTermsPressed = () => {
+		console.log("onTermsScreenPressed");
+		NavigateMe.navigate("TermsScreen"); //onPolicyThermsPressed
+	};
+
 	const rememberUser = async (data) => {
 		console.log("rememberUser", data);
 		console.log(" ColorMe.descTheme", ColorMe.descTheme);
+
+		const myEncryptData = MyCrypto("encryptData", data.password, data.username);
+		//const myRESTEncryptData = MyCrypto("dencryptData", myEncryptData, "username");
 		try {
 			const jsonOby = {
 				"DATI_UTENTE": [
@@ -50,7 +84,7 @@ const SignInScreen = (props) => {
 						"USER_LOGIN_OPTIONS": {
 							"REMEMBER_ME": rememberMe,
 							"USER_NAME": data.username,
-							"PASSWORD": data.password,
+							"PASSWORD": myEncryptData,
 							"COLOR_THEME": props.THEME.isLightTheme,
 						},
 					},
@@ -156,7 +190,7 @@ const SignInScreen = (props) => {
 								flexDirection: "row-reverse",
 								justifyContent: "flex-start",
 								alignItems: "center",
-								marginTop: 10,
+								marginTop: 5,
 							}}
 						>
 							<Switch
@@ -189,6 +223,60 @@ const SignInScreen = (props) => {
 							type='submit'
 							onPress={handleSubmit(onSignInPressed)}
 						></ButtonComp>
+						<ButtonComp
+							caption='Log-In anonymously'
+							style={{
+								height: 45,
+								width: "100%",
+								borderRadius: 5,
+								marginTop: 10,
+								backgroundColor: ColorMe.DARK_5,
+								color: "white",
+							}}
+							type='submit'
+							onPress={() => onSignInAnonymPressed()}
+						></ButtonComp>
+
+						<Text
+							style={{
+								fontFamily: typography.fontFamily.CANTARELL,
+								color: ColorMe.TEXT_COLOR_1,
+								fontSize: typography.fontSize.H6,
+								marginTop: 10,
+							}}
+							onPress={() => onSignInPressed()}
+						>
+							By log-in, you confirm that you accept our{" "}
+							<Text
+								style={{
+									fontFamily: typography.fontFamily.CANTARELL,
+									color: ColorMe.TEXT_COLOR_1,
+									fontSize: typography.fontSize.H5,
+									fontWeight: typography.fontWeight.XXL,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
+								}}
+								onPress={() => onTermsPressed()}
+							>
+								Terms of Use
+							</Text>{" "}
+							and{" "}
+							<Text
+								style={{
+									fontFamily: typography.fontFamily.CANTARELL,
+									color: ColorMe.TEXT_COLOR_1,
+									fontSize: typography.fontSize.H5,
+									fontWeight: typography.fontWeight.XXL,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
+								}}
+								onPress={() => onPrivacyPressed()}
+							>
+								Privacy Policy
+							</Text>
+						</Text>
 
 						<SeparatorXTxtComp
 							color={ColorMe}
@@ -200,7 +288,7 @@ const SignInScreen = (props) => {
 								display: "flex",
 								flexDirection: "row",
 								justifyContent: "space-evenly",
-								marginTop: 10,
+								marginTop: 5,
 							}}
 						>
 							<Text
@@ -209,6 +297,9 @@ const SignInScreen = (props) => {
 									color: ColorMe.TEXT_COLOR_1,
 									fontSize: typography.fontSize.H4,
 									fontWeight: typography.fontWeight.XXL,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
 								onPress={() => onForgotPasswordPressed()}
 							>
@@ -221,7 +312,7 @@ const SignInScreen = (props) => {
 								display: "flex",
 								flexDirection: "row",
 								justifyContent: "center",
-								marginTop: 30,
+								marginTop: 10,
 							}}
 						>
 							<Text
@@ -240,6 +331,9 @@ const SignInScreen = (props) => {
 									fontSize: typography.fontSize.H4,
 									fontWeight: typography.fontWeight.XXL,
 									marginLeft: 5,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
 								onPress={() => onSignUpPressed()}
 							>

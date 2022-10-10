@@ -177,7 +177,7 @@ const InputIconComp = ({
 							alignSelf: "stretch",
 							height: "auto",
 							opacity: error ? 1 : 0,
-							marginBottom: 0,
+							marginBottom: 5,
 						}}
 					>
 						{error ? error.message : "Error"}

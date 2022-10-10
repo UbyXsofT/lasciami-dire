@@ -1,7 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {View, ScrollView, Text, Image, Switch} from "react-native";
 import {TitleStl, ContainerStl, TextStl} from "../../../components/styled/index";
-import {ButtonComp, SeparatorXTxtComp, InputIconComp, LoadingImageComp} from "../../../components/index";
+import {
+	ButtonComp,
+	SeparatorXTxtComp,
+	InputIconComp,
+	LoadingImageComp,
+} from "../../../components/index";
 import {
 	LOGO_APP,
 	PASSWORD_REQUIRED,
@@ -50,7 +55,9 @@ const SignUpGroupScreen = (props) => {
 	const [teachersValue, setTeachersValue] = React.useState(TEACHERS_LEVELS[2]);
 
 	let sourceImageGroup = "";
-	props.route.params.Group == "Teachers" ? (sourceImageGroup = AVATAR_TEACHERS) : (sourceImageGroup = AVATAR_PARENTS);
+	props.route.params.Group == "Teachers"
+		? (sourceImageGroup = AVATAR_TEACHERS)
+		: (sourceImageGroup = AVATAR_PARENTS);
 
 	const onSignInPressed = (data) => {
 		NavigateMe.navigate("SignIn");
@@ -59,7 +66,14 @@ const SignUpGroupScreen = (props) => {
 	const onSignUpPressed = () => {
 		NavigateMe.navigate("SignUp");
 	};
-
+	const onPrivacyPressed = () => {
+		console.log("onPravacyPressed");
+		NavigateMe.navigate("PrivacyScreen"); //onPolicyThermsPressed
+	};
+	const onTermsPressed = () => {
+		console.log("onTermsScreenPressed");
+		NavigateMe.navigate("TermsScreen"); //onPolicyThermsPressed
+	};
 	return (
 		<ScrollView style={{backgroundColor: ColorMe.BACK_COLOR_1}}>
 			<ContainerStl>
@@ -219,32 +233,6 @@ const SignUpGroupScreen = (props) => {
 							iconColor={ColorMe.DARK}
 							backgroundColor={ColorMe.LIGHT_1}
 						/>
-
-						<InputIconComp
-							name='email'
-							//find icon: https://icons.expo.fyi
-							iconName='mail'
-							iconProvider='entypo'
-							//Option iconProvider: AntDesign,Entypo,EvilIcons,Feather,FontAwesome,FontAwesome5,Fontisto,Foundation,Ionicons,MaterialCommunityIcons,MaterialIcons,Octicons,SimpleLineIcons,Zocial
-							placeholder='youremail@email.com'
-							secureTextEntry={false}
-							maskType={false}
-							maskChar='_'
-							alwaysShowMask={true}
-							rules={{
-								required: "Email is required!",
-								pattern: {
-									value: EMAIL_REQUIRED,
-									message: EMAIL_REQUIRED_MSG,
-								},
-							}}
-							control={control}
-							inputColor={ColorMe.DARK}
-							inputBorderColor={ColorMe.LINE_COLOR_1}
-							iconColor={ColorMe.DARK}
-							backgroundColor={ColorMe.LIGHT_1}
-						/>
-
 						<InputIconComp
 							name='Birthday'
 							//find icon: https://icons.expo.fyi
@@ -261,6 +249,30 @@ const SignUpGroupScreen = (props) => {
 								pattern: {
 									value: DATE_REQUIRED,
 									message: "Birthday is required!",
+								},
+							}}
+							control={control}
+							inputColor={ColorMe.DARK}
+							inputBorderColor={ColorMe.LINE_COLOR_1}
+							iconColor={ColorMe.DARK}
+							backgroundColor={ColorMe.LIGHT_1}
+						/>
+						<InputIconComp
+							name='email'
+							//find icon: https://icons.expo.fyi
+							iconName='mail'
+							iconProvider='entypo'
+							//Option iconProvider: AntDesign,Entypo,EvilIcons,Feather,FontAwesome,FontAwesome5,Fontisto,Foundation,Ionicons,MaterialCommunityIcons,MaterialIcons,Octicons,SimpleLineIcons,Zocial
+							placeholder='youremail@email.com'
+							secureTextEntry={false}
+							maskType={false}
+							maskChar='_'
+							alwaysShowMask={true}
+							rules={{
+								required: "Email is required!",
+								pattern: {
+									value: EMAIL_REQUIRED,
+									message: EMAIL_REQUIRED_MSG,
 								},
 							}}
 							control={control}
@@ -433,7 +445,7 @@ const SignUpGroupScreen = (props) => {
 							style={{
 								fontFamily: typography.fontFamily.CANTARELL,
 								color: ColorMe.TEXT_COLOR_1,
-								fontSize: typography.fontSize.H5,
+								fontSize: typography.fontSize.H6,
 								marginTop: 10,
 							}}
 							onPress={() => onSignInPressed()}
@@ -443,10 +455,13 @@ const SignUpGroupScreen = (props) => {
 								style={{
 									fontFamily: typography.fontFamily.CANTARELL,
 									color: ColorMe.TEXT_COLOR_1,
-									fontSize: typography.fontSize.H4,
+									fontSize: typography.fontSize.H5,
 									fontWeight: typography.fontWeight.XXL,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
-								onPress={() => onSignInPressed()}
+								onPress={() => onTermsPressed()}
 							>
 								Terms of Use
 							</Text>{" "}
@@ -455,10 +470,13 @@ const SignUpGroupScreen = (props) => {
 								style={{
 									fontFamily: typography.fontFamily.CANTARELL,
 									color: ColorMe.TEXT_COLOR_1,
-									fontSize: typography.fontSize.H4,
+									fontSize: typography.fontSize.H5,
 									fontWeight: typography.fontWeight.XXL,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
-								onPress={() => onSignInPressed()}
+								onPress={() => onPrivacyPressed()}
 							>
 								Privacy Policy
 							</Text>
@@ -483,6 +501,9 @@ const SignUpGroupScreen = (props) => {
 									color: ColorMe.TEXT_COLOR_1,
 									fontSize: typography.fontSize.H4,
 									fontWeight: typography.fontWeight.XXL,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
 								onPress={() => onSignInPressed()}
 							>
@@ -494,6 +515,9 @@ const SignUpGroupScreen = (props) => {
 									color: ColorMe.TEXT_COLOR_1,
 									fontSize: typography.fontSize.H4,
 									fontWeight: typography.fontWeight.XXL,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
 								onPress={() => onSignUpPressed()}
 							>

@@ -49,6 +49,7 @@ const ThemeChangeComp = (props) => {
 		await props.RDX_InfoTheme(isEnabled);
 		rememberColorTheme(isEnabled);
 	};
+
 	const getStato = async () => {
 		//console.log("@@@ getStato @@@");
 		try {
@@ -59,6 +60,7 @@ const ThemeChangeComp = (props) => {
 			const COLOR_THEME = parseJsonVal.DATI_UTENTE[0].USER_LOGIN_OPTIONS.COLOR_THEME;
 			//console.log("@@@ COLOR_THEME", COLOR_THEME);
 			props.RDX_InfoTheme(COLOR_THEME ? true : false);
+
 			//console.log("@@@ COLOR_THEME isEnabled", isEnabled);
 		} catch (error) {
 			//console.log("@@@ COLOR_THEME error", error);

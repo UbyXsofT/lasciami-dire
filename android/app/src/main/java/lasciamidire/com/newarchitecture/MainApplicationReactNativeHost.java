@@ -1,4 +1,4 @@
-package com.lasciamidire.newarchitecture;
+package lasciamidire.com.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -18,10 +18,11 @@ import com.facebook.react.fabric.ComponentFactory;
 import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
+import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.lasciamidire.BuildConfig;
-import com.lasciamidire.newarchitecture.components.MainComponentsRegistry;
-import com.lasciamidire.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import lasciamidire.com.BuildConfig;
+import lasciamidire.com.newarchitecture.components.MainComponentsRegistry;
+import lasciamidire.com.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,7 +106,7 @@ public class MainApplicationReactNativeHost extends ReactNativeHost {
                 return new FabricJSIModuleProvider(
                     reactApplicationContext,
                     componentFactory,
-                    new EmptyReactNativeConfig(),
+                    ReactNativeConfig.DEFAULT_CONFIG,
                     viewManagerRegistry);
               }
             });

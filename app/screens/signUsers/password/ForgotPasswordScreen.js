@@ -2,7 +2,15 @@ import React from "react";
 import {View, ScrollView, Text, StyleSheet, Image} from "react-native";
 import {TitleStl, TextStl, ContainerStl} from "../../../components/styled/index";
 import {ButtonComp, SeparatorXTxtComp, InputIconComp} from "../../../components/index";
-import {LOGO_APP, PASSWORD_REQUIRED, PASSWORD_REQUIRED_MSG, MAX_LENGTH_INPUT_USER, MIN_LENGTH_INPUT_USER, EMAIL_REQUIRED, EMAIL_REQUIRED_MSG} from "../../../constants";
+import {
+	LOGO_APP,
+	PASSWORD_REQUIRED,
+	PASSWORD_REQUIRED_MSG,
+	MAX_LENGTH_INPUT_USER,
+	MIN_LENGTH_INPUT_USER,
+	EMAIL_REQUIRED,
+	EMAIL_REQUIRED_MSG,
+} from "../../../constants";
 import {typography} from "../../../theme/index";
 import {connect} from "react-redux";
 import {useForm} from "react-hook-form";
@@ -57,7 +65,17 @@ const ForgotPasswordScreen = (props) => {
 							Recover password
 						</TextStl>
 					</View>
-
+					<Text
+						style={{
+							fontFamily: typography.fontFamily.CANTARELL,
+							color: ColorMe.TEXT_COLOR_1,
+							fontSize: typography.fontSize.H6,
+							marginTop: 10,
+						}}
+						onPress={() => onSignInPressed()}
+					>
+						Use the same e-mail address indicated during registration
+					</Text>
 					<View style={styles.groupInputText}>
 						<InputIconComp
 							name='email'
@@ -116,6 +134,9 @@ const ForgotPasswordScreen = (props) => {
 									color: ColorMe.TEXT_COLOR_1,
 									fontSize: typography.fontSize.H4,
 									fontWeight: typography.fontWeight.XXL,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
 								onPress={() => onSignInPressed()}
 							>
@@ -127,6 +148,9 @@ const ForgotPasswordScreen = (props) => {
 									color: ColorMe.TEXT_COLOR_1,
 									fontSize: typography.fontSize.H4,
 									fontWeight: typography.fontWeight.XXL,
+									borderBottom: 1,
+									borderBottomStyle: "solid",
+									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
 								onPress={() => onSignUpPressed()}
 							>
