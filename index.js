@@ -1,7 +1,7 @@
 import {registerRootComponent} from "expo";
 import {Text, TextInput} from "react-native";
-import {createRoot} from "react-dom/client";
-import React, {StrictMode} from "react";
+
+import React from "react";
 import Constants from "expo-constants";
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.maxFontSizeMultiplier = 1; //la quantità massima di ridimensionamento della dimensione del carattere.
@@ -42,29 +42,12 @@ OneSignal.setNotificationOpenedHandler((notification) => {
 //one signal ****
 
 const store = configureStore();
-// const container = document.getElementById("root");
-// const root = createRoot(container);
-
-// root.render(
-//   <StrictMode>
-//     <Provider store={store}>
-//       {" "}
-//       <App />
-//     </Provider>
-//   </StrictMode>
-// );
 
 const RNRedux = () => (
 	<Provider store={store}>
 		<App />
 	</Provider>
 );
-
-// root.render(
-//   <Provider store={store}>
-//     <App />
-//   </Provider>
-// );
 
 // registerRootComponent chiama AppRegistry.registerComponent('main', () => App);
 // Garantisce inoltre che, indipendentemente dal caricamento dell'app in Expo Go o in una build nativa,

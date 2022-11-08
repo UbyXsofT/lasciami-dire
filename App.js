@@ -10,8 +10,6 @@ import {
 	SignUpScreen,
 	ForgotPasswordScreen,
 	SignUpGroupScreen,
-	PrivacyScreen,
-	TermsScreen,
 } from "./app/screens/index";
 import {HomeNavigation} from "./app/screens/organizer/home";
 import StartApp from "./app/utils/StartApp";
@@ -35,7 +33,7 @@ const App = (props) => {
 	const fetchApi = async () => {
 		console.log("@@@ fetchApi: 1");
 		try {
-			const res = await axios.get("http://lasciamidire.com:8000/api/");
+			const res = await axios.get("https://lasciamidire.com/api/");
 			console.log("@@@ fetchApi: " + res.data);
 		} catch (error) {
 			console.log("@@@ fetchApi: " + error.message);
@@ -121,21 +119,6 @@ const App = (props) => {
 											headerTitle: "SignUp GROUP",
 										}}
 										component={SignUpGroupScreen}
-									/>
-
-									<STACK.Screen
-										name='PrivacyScreen'
-										options={{
-											headerTitle: "Privacy policy",
-										}}
-										component={PrivacyScreen}
-									/>
-									<STACK.Screen
-										name='TermsScreen'
-										options={{
-											headerTitle: "Terms of Use",
-										}}
-										component={TermsScreen}
 									/>
 								</>
 								//</STACK.Group>

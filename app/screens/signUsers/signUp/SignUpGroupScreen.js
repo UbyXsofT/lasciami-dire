@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {View, ScrollView, Text, Image, Switch} from "react-native";
+import React, {useState, useEffect, useCallback} from "react";
+import {View, ScrollView, Text, Image, Switch, Linking, Button} from "react-native";
 import {TitleStl, ContainerStl, TextStl} from "../../../components/styled/index";
 import {
 	ButtonComp,
@@ -66,13 +66,29 @@ const SignUpGroupScreen = (props) => {
 	const onSignUpPressed = () => {
 		NavigateMe.navigate("SignUp");
 	};
-	const onPrivacyPressed = () => {
-		console.log("onPravacyPressed");
-		NavigateMe.navigate("PrivacyScreen"); //onPolicyThermsPressed
-	};
-	const onTermsPressed = () => {
-		console.log("onTermsScreenPressed");
-		NavigateMe.navigate("TermsScreen"); //onPolicyThermsPressed
+
+	const onPrivacyUrl = "https://lasciamidire.com/terms/privacypolicy.html"; //onPolicyThermsPressed
+	const onTermsUrl = "https://lasciamidire.com/terms/termsconditions.html"; //onPolicyThermsPressed
+	const OpenURLButton = ({url, children}) => {
+		const handlePress = useCallback(async () => {
+			// Checking if the link is supported for links with custom URL scheme.
+			const supported = await Linking.canOpenURL(url);
+
+			if (supported) {
+				// Opening the link with some app, if the URL scheme is "http" the web link should be opened
+				// by some browser in the mobile
+				await Linking.openURL(url);
+			} else {
+				Alert.alert(`Don't know how to open this URL: ${url}`);
+			}
+		}, [url]);
+
+		return (
+			<Button
+				title={children}
+				onPress={handlePress}
+			/>
+		);
 	};
 	return (
 		<ScrollView style={{backgroundColor: ColorMe.BACK_COLOR_1}}>
@@ -451,7 +467,7 @@ const SignUpGroupScreen = (props) => {
 							onPress={() => onSignInPressed()}
 						>
 							By registering, you confirm that you accept our{" "}
-							<Text
+							{/* <Text
 								style={{
 									fontFamily: typography.fontFamily.CANTARELL,
 									color: ColorMe.TEXT_COLOR_1,
@@ -479,7 +495,9 @@ const SignUpGroupScreen = (props) => {
 								onPress={() => onPrivacyPressed()}
 							>
 								Privacy Policy
-							</Text>
+							</Text> */}
+							<OpenURLButton url={onTermsUrl}> Terms of Use </OpenURLButton>
+							and <OpenURLButton url={onPrivacyUrl}> Privacy Policy </OpenURLButton>
 						</Text>
 
 						<SeparatorXTxtComp

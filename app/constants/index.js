@@ -66,3 +66,5 @@ export const DATE_MASK = "99/99/9999";
 export const TEACHERS_LEVELS = ["Technician", "Supervisor", "Base"];
 export const GENDER_USER = ["Female", "Male", "other"];
 //export const ONESIGNAL_APP_ID = "da67671f-c3de-416d-9af3-6fa01529210b";
+export const PRIVACY_URL = "https://lasciamidire.com/terms/privacypolicy.html"; //onPolicyThermsPressed
+export const TERMS_URL = "https://lasciamidire.com/terms/termsconditions.html"; //onPolicyThermsPressed

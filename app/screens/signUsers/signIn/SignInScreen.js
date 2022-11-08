@@ -1,5 +1,15 @@
-import React, {useState, useEffect} from "react";
-import {View, ScrollView, Text, StyleSheet, Image, Switch, input} from "react-native";
+import React, {useState, useEffect, useCallback} from "react";
+import {
+	View,
+	ScrollView,
+	Text,
+	StyleSheet,
+	Image,
+	Switch,
+	input,
+	Linking,
+	Button,
+} from "react-native";
 import {TitleStl, ContainerStl} from "../../../components/styled/index";
 import {
 	ButtonComp,
@@ -24,6 +34,9 @@ import {useForm} from "react-hook-form";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MyCrypto from "../../../utils/MyCrypto";
 
+import {PRIVACY_URL} from "../../../constants";
+import {TERMS_URL} from "../../../constants";
+
 const SignInScreen = (props) => {
 	console.log("SignInScreen", props);
 	const ColorMe = props.THEME.colorsTheme;
@@ -36,6 +49,27 @@ const SignInScreen = (props) => {
 		formState: {errors},
 	} = useForm();
 	//console.log(errors);
+
+	const onMyUrlPressed = (OpenLink) => {
+		console.log("TERMS_URL: ", TERMS_URL);
+		console.log("PRIVACY_URL: ", PRIVACY_URL);
+
+		let url = "";
+		switch (OpenLink) {
+			case "TermsOfUse":
+				url = TERMS_URL;
+				break;
+
+			case "PrivacyPolicy":
+				url = PRIVACY_URL;
+				break;
+
+			default:
+				url = "";
+		}
+		Linking.openURL(url);
+	};
+
 	const onSignInAnonymPressed = (data) => {
 		console.log("onSignInAnonymPressed");
 		rememberMe === true
@@ -60,15 +94,6 @@ const SignInScreen = (props) => {
 
 		props.RDX_InfoUser(true, data.username);
 		NavigateMe.navigate("HomeNavigation");
-	};
-
-	const onPrivacyPressed = () => {
-		console.log("onPravacyPressed");
-		NavigateMe.navigate("PrivacyScreen"); //onPolicyThermsPressed
-	};
-	const onTermsPressed = () => {
-		console.log("onTermsScreenPressed");
-		NavigateMe.navigate("TermsScreen"); //onPolicyThermsPressed
 	};
 
 	const rememberUser = async (data) => {
@@ -244,7 +269,6 @@ const SignInScreen = (props) => {
 								fontSize: typography.fontSize.H6,
 								marginTop: 10,
 							}}
-							onPress={() => onSignInPressed()}
 						>
 							By log-in, you confirm that you accept our{" "}
 							<Text
@@ -257,7 +281,7 @@ const SignInScreen = (props) => {
 									borderBottomStyle: "solid",
 									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
-								onPress={() => onTermsPressed()}
+								onPress={() => onMyUrlPressed("TermsOfUse")}
 							>
 								Terms of Use
 							</Text>{" "}
@@ -272,7 +296,7 @@ const SignInScreen = (props) => {
 									borderBottomStyle: "solid",
 									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
-								onPress={() => onPrivacyPressed()}
+								onPress={() => onMyUrlPressed("PrivacyPolicy")}
 							>
 								Privacy Policy
 							</Text>
