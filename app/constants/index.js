@@ -47,10 +47,10 @@ export const STATUS_BAR_HEIGHT = Constants.statusBarHeight;
 // (?=.*[a-z])- Contiene una lettera minuscola
 // (?=.*[^A-Za-z0-9])- Un carattere non alfanumerico.
 export const PASSWORD_REQUIRED_MSG =
-	"Requires minimum: 6 characters, one digit, one uppercase letter, one lowercase letter, one special character";
+	"Requires minimum: 6 and max: 20 characters, one digit, one uppercase letter, one lowercase letter, one special character";
 export const EMAIL_REQUIRED_MSG = "Invalid email address";
 export const PASSWORD_REQUIRED =
-	/(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/i;
+	/(?=^.{6,20}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/i;
 export const EMAIL_REQUIRED = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 export const MAX_LENGTH_INPUT_USER = 80;
 export const MIN_LENGTH_INPUT_USER = 3;

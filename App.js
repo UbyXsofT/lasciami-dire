@@ -10,6 +10,7 @@ import {
 	SignUpScreen,
 	ForgotPasswordScreen,
 	SignUpGroupScreen,
+	DialogBoxScreen,
 } from "./app/screens/index";
 import {HomeNavigation} from "./app/screens/organizer/home";
 import StartApp from "./app/utils/StartApp";
@@ -18,32 +19,18 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {RDX_InfoTheme} from "./app/store/actions/themeAction";
 import {RDX_InfoUser} from "./app/store/actions/userAction";
+import {RDX_InfoModal} from "./app/store/actions/modalAction";
 ///** NAVIGATION */
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {NavigationContainer} from "@react-navigation/native";
 import {TransitionPresets} from "@react-navigation/stack";
-import axios from "axios";
+//import axios from "axios";
 const STACK = createNativeStackNavigator();
 
 const App = (props) => {
 	console.log("App", props);
 	const isLoggedIn = props.USER.isLoggedIn;
 	const ColorMe = props.THEME.colorsTheme;
-
-	const fetchApi = async () => {
-		console.log("@@@ fetchApi: 1");
-		try {
-			const res = await axios.get("https://lasciamidire.com/api/");
-			console.log("@@@ fetchApi: " + res.data);
-		} catch (error) {
-			console.log("@@@ fetchApi: " + error.message);
-		}
-	};
-
-	useEffect(() => {
-		fetchApi();
-	}, []);
-
 	const NavTheme = {
 		//theme component navigation
 		dark: false,
@@ -120,6 +107,13 @@ const App = (props) => {
 										}}
 										component={SignUpGroupScreen}
 									/>
+									<STACK.Screen
+										name='DialogBoxScreen'
+										options={{
+											headerTitle: "DialogBoxScreen",
+										}}
+										component={DialogBoxScreen}
+									/>
 								</>
 								//</STACK.Group>
 							)}
@@ -144,11 +138,13 @@ const App = (props) => {
 const mapStateToProps = (state) => ({
 	THEME: state.themeReducer.theme,
 	USER: state.userReducer.user,
+	MODAL: state.modalReducer.modalMe,
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
 	RDX_InfoUser: bindActionCreators(RDX_InfoUser, dispatch),
+	RDX_InfoModal: bindActionCreators(RDX_InfoModal, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

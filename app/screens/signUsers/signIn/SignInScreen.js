@@ -16,6 +16,7 @@ import {
 	SeparatorXTxtComp,
 	InputIconComp,
 	LogoAnimComp,
+	ModalComp,
 } from "../../../components/index";
 import {
 	PASSWORD_REQUIRED,
@@ -24,18 +25,18 @@ import {
 	MIN_LENGTH_INPUT_USER,
 } from "../../../constants";
 import {typography} from "../../../theme/index";
-//REDUX
+///** REDUX */
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {RDX_InfoTheme} from "../../../store/actions/themeAction";
 import {RDX_InfoUser} from "../../../store/actions/userAction";
+import {RDX_InfoModal} from "../../../store/actions/modalAction";
 
 import {useForm} from "react-hook-form";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MyCrypto from "../../../utils/MyCrypto";
 
-import {PRIVACY_URL} from "../../../constants";
-import {TERMS_URL} from "../../../constants";
+import {TERMS_URL, PRIVACY_URL} from "../../../constants";
 
 const SignInScreen = (props) => {
 	console.log("SignInScreen", props);
@@ -91,7 +92,7 @@ const SignInScreen = (props) => {
 			  rememberUser(data)
 			: //NON memorizzo e quindi rimuovo eventuali vecchi dati
 			  forgetUser();
-
+		//  https://lasciamidire.com/api/sign-in
 		props.RDX_InfoUser(true, data.username);
 		NavigateMe.navigate("HomeNavigation");
 	};
@@ -149,10 +150,11 @@ const SignInScreen = (props) => {
 		<ScrollView style={{backgroundColor: ColorMe.BACK_COLOR_1}}>
 			<ContainerStl>
 				<View style={[styles.container]}>
+					<ModalComp />
 					<View style={styles.wrapHeader}>
 						<LogoAnimComp
-							W={200}
-							H={200}
+							W={225}
+							H={225}
 							Radius={0}
 							animationMe='zoomIn'
 						/>
@@ -248,8 +250,9 @@ const SignInScreen = (props) => {
 							type='submit'
 							onPress={handleSubmit(onSignInPressed)}
 						></ButtonComp>
+
 						<ButtonComp
-							caption='Log-In anonymously'
+							caption='TEST MODAL'
 							style={{
 								height: 45,
 								width: "100%",
@@ -259,7 +262,17 @@ const SignInScreen = (props) => {
 								color: "white",
 							}}
 							type='submit'
-							onPress={() => onSignInAnonymPressed()}
+							onPress={() =>
+								props.RDX_InfoModal(
+									true,
+									"error",
+									"null",
+									"null",
+									"null",
+									"IL MIO TITOLO E UN PO LUNGO",
+									"Benissimo ora mi puoi chiudere"
+								)
+							}
 						></ButtonComp>
 
 						<Text
@@ -364,6 +377,20 @@ const SignInScreen = (props) => {
 								Create one
 							</Text>
 						</View>
+
+						<ButtonComp
+							caption='Log-In anonymously'
+							style={{
+								height: 45,
+								width: "100%",
+								borderRadius: 5,
+								marginTop: 10,
+								backgroundColor: ColorMe.DARK_5,
+								color: "white",
+							}}
+							type='submit'
+							onPress={() => onSignInAnonymPressed()}
+						></ButtonComp>
 					</View>
 				</View>
 			</ContainerStl>
@@ -382,8 +409,8 @@ const styles = StyleSheet.create({
 		marginRight: "auto",
 	},
 	image: {
-		width: 200,
-		height: 200,
+		width: 225,
+		height: 225,
 	},
 	wrapHeader: {
 		width: "100%",
@@ -405,11 +432,12 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
 	THEME: state.themeReducer.theme,
 	USER: state.userReducer.user,
+	MODAL: state.modalReducer.modalMe,
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
 	RDX_InfoUser: bindActionCreators(RDX_InfoUser, dispatch),
+	RDX_InfoModal: bindActionCreators(RDX_InfoModal, dispatch),
 });
-/****** REDUX **************** */
 export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);

@@ -6,7 +6,7 @@ import {ForgotPasswordScreen} from "./signUsers/password";
 import {TestScreen} from "./test";
 import {LogoutScreen} from "./message/logout";
 import {SignUpGroupScreen} from "./signUsers/signUp";
-
+import {DialogBoxScreen} from "./dialogBox";
 export {
 	ThemeScreen,
 	HomeScreen,
@@ -16,4 +16,5 @@ export {
 	TestScreen,
 	LogoutScreen,
 	SignUpGroupScreen,
+	DialogBoxScreen,
 };

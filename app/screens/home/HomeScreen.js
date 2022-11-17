@@ -17,6 +17,10 @@ import {BoxStl, TitleStl, ContainerStl, TextStl} from "../../components/styled/i
 import {PROVIDERS_ICONS} from "../../constants";
 ///** REDUX */
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {RDX_InfoTheme} from "../../store/actions/themeAction";
+import {RDX_InfoUser} from "../../store/actions/userAction";
+import {RDX_InfoModal} from "../../store/actions/modalAction";
 
 const HomeScreen = (props) => {
 	console.log("HomeScreen", props);
@@ -38,11 +42,17 @@ const HomeScreen = (props) => {
 	);
 };
 
-//* REDUX - *****************//
+//* REDUX - //
 const mapStateToProps = (state) => ({
 	THEME: state.themeReducer.theme,
 	USER: state.userReducer.user,
+	MODAL: state.modalReducer.modalMe,
 });
-/****** REDUX **************** */
 
-export default connect(mapStateToProps)(HomeScreen);
+const mapDispatchToProps = (dispatch) => ({
+	RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
+	RDX_InfoUser: bindActionCreators(RDX_InfoUser, dispatch),
+	RDX_InfoModal: bindActionCreators(RDX_InfoModal, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

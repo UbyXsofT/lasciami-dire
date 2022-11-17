@@ -25,20 +25,32 @@ import {
 	GENDER_USER,
 } from "../../../constants";
 import {typography} from "../../../theme/index";
-//REDUX
+////** REDUX */
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {RDX_InfoTheme} from "../../../store/actions/themeAction";
 import {RDX_InfoUser} from "../../../store/actions/userAction";
+import {RDX_InfoModal} from "../../../store/actions/modalAction";
 
 import {useForm} from "react-hook-form";
 import SelectDropdown from "react-native-select-dropdown";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {RadioButton} from "react-native-paper";
 import StyleSheet from "react-native-stylesheet-extension";
+import {TERMS_URL, PRIVACY_URL} from "../../../constants";
+import client from "../../../api/client";
 
 const SignUpGroupScreen = (props) => {
 	console.log("SignInScreen", props);
+
+	const signUp = async (data) => {
+		const res = await client.post("/create-user", {
+			...data,
+		});
+
+		console.log("res: ", res.data);
+	};
+
 	const ColorMe = props.THEME.colorsTheme;
 	const NavigateMe = props.navigation;
 	const {
@@ -67,29 +79,26 @@ const SignUpGroupScreen = (props) => {
 		NavigateMe.navigate("SignUp");
 	};
 
-	const onPrivacyUrl = "https://lasciamidire.com/terms/privacypolicy.html"; //onPolicyThermsPressed
-	const onTermsUrl = "https://lasciamidire.com/terms/termsconditions.html"; //onPolicyThermsPressed
-	const OpenURLButton = ({url, children}) => {
-		const handlePress = useCallback(async () => {
-			// Checking if the link is supported for links with custom URL scheme.
-			const supported = await Linking.canOpenURL(url);
+	const onMyUrlPressed = (OpenLink) => {
+		console.log("TERMS_URL: ", TERMS_URL);
+		console.log("PRIVACY_URL: ", PRIVACY_URL);
 
-			if (supported) {
-				// Opening the link with some app, if the URL scheme is "http" the web link should be opened
-				// by some browser in the mobile
-				await Linking.openURL(url);
-			} else {
-				Alert.alert(`Don't know how to open this URL: ${url}`);
-			}
-		}, [url]);
+		let url = "";
+		switch (OpenLink) {
+			case "TermsOfUse":
+				url = TERMS_URL;
+				break;
 
-		return (
-			<Button
-				title={children}
-				onPress={handlePress}
-			/>
-		);
+			case "PrivacyPolicy":
+				url = PRIVACY_URL;
+				break;
+
+			default:
+				url = "";
+		}
+		Linking.openURL(url);
 	};
+
 	return (
 		<ScrollView style={{backgroundColor: ColorMe.BACK_COLOR_1}}>
 			<ContainerStl>
@@ -454,7 +463,7 @@ const SignUpGroupScreen = (props) => {
 								color: "white",
 							}}
 							type='submit'
-							onPress={handleSubmit(onSignUpPressed)}
+							onPress={handleSubmit(signUp)}
 						></ButtonComp>
 
 						<Text
@@ -467,7 +476,7 @@ const SignUpGroupScreen = (props) => {
 							onPress={() => onSignInPressed()}
 						>
 							By registering, you confirm that you accept our{" "}
-							{/* <Text
+							<Text
 								style={{
 									fontFamily: typography.fontFamily.CANTARELL,
 									color: ColorMe.TEXT_COLOR_1,
@@ -477,7 +486,7 @@ const SignUpGroupScreen = (props) => {
 									borderBottomStyle: "solid",
 									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
-								onPress={() => onTermsPressed()}
+								onPress={() => onMyUrlPressed("TermsOfUse")}
 							>
 								Terms of Use
 							</Text>{" "}
@@ -492,12 +501,10 @@ const SignUpGroupScreen = (props) => {
 									borderBottomStyle: "solid",
 									borderBottomColor: ColorMe.TEXT_COLOR_1,
 								}}
-								onPress={() => onPrivacyPressed()}
+								onPress={() => onMyUrlPressed("PrivacyPolicy")}
 							>
 								Privacy Policy
-							</Text> */}
-							<OpenURLButton url={onTermsUrl}> Terms of Use </OpenURLButton>
-							and <OpenURLButton url={onPrivacyUrl}> Privacy Policy </OpenURLButton>
+							</Text>
 						</Text>
 
 						<SeparatorXTxtComp
@@ -613,11 +620,12 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
 	THEME: state.themeReducer.theme,
 	USER: state.userReducer.user,
+	MODAL: state.modalReducer.modalMe,
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
 	RDX_InfoUser: bindActionCreators(RDX_InfoUser, dispatch),
+	RDX_InfoModal: bindActionCreators(RDX_InfoModal, dispatch),
 });
-/****** REDUX **************** */
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpGroupScreen);

@@ -12,8 +12,16 @@ import {
 	EMAIL_REQUIRED_MSG,
 } from "../../../constants";
 import {typography} from "../../../theme/index";
+///** REDUX */
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {RDX_InfoTheme} from "../../../store/actions/themeAction";
+import {RDX_InfoUser} from "../../../store/actions/userAction";
+import {RDX_InfoModal} from "../../../store/actions/modalAction";
+
 import {useForm} from "react-hook-form";
+
+import client from "../../../api/client";
 
 const ForgotPasswordScreen = (props) => {
 	console.log("ForgotPasswordScreen", props);
@@ -33,10 +41,14 @@ const ForgotPasswordScreen = (props) => {
 		NavigateMe.navigate("SignIn");
 	};
 
-	const onOkPressed = (data) => {
+	const onOkPressed = async (data) => {
 		console.log(JSON.stringify(data));
 		//------> SEND EMAIL
-		NavigateMe.navigate("ForgotPassword");
+		const res = await client.post("/request-password-reset", {
+			...data,
+		});
+		console.log(res.data);
+		//NavigateMe.navigate("ForgotPassword");
 	};
 
 	const onSignUpPressed = () => {
@@ -175,8 +187,8 @@ const styles = StyleSheet.create({
 		marginRight: "auto",
 	},
 	image: {
-		width: 200,
-		height: 200,
+		width: 225,
+		height: 225,
 	},
 	wrapHeader: {
 		width: "100%",
@@ -194,9 +206,17 @@ const styles = StyleSheet.create({
 	},
 });
 
-//* REDUX - *****************//
+//* REDUX - //
 const mapStateToProps = (state) => ({
 	THEME: state.themeReducer.theme,
+	USER: state.userReducer.user,
+	MODAL: state.modalReducer.modalMe,
 });
-/****** REDUX **************** */
-export default connect(mapStateToProps)(ForgotPasswordScreen);
+
+const mapDispatchToProps = (dispatch) => ({
+	RDX_InfoTheme: bindActionCreators(RDX_InfoTheme, dispatch),
+	RDX_InfoUser: bindActionCreators(RDX_InfoUser, dispatch),
+	RDX_InfoModal: bindActionCreators(RDX_InfoModal, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPasswordScreen);

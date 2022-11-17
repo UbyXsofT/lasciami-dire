@@ -200,8 +200,8 @@ const styles = StyleSheet.create({
 		marginRight: "auto",
 	},
 	imageLogo: {
-		width: 200,
-		height: 200,
+		width: 225,
+		height: 225,
 	},
 	wrapHeader: {
 		width: "100%",
